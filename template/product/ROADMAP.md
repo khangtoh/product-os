@@ -4,6 +4,8 @@ Updated: unknown — set when adopted or changed.
 
 This is the canonical priority order. No outcomes or delivery commitments are supplied by the template. Link real records as they are selected. A priority slot does not itself authorize spending or release.
 
+During onboarding, organize supported priorities as Now / Next / Later. Link relevant [requirements](REQUIREMENTS.md) and existing outcome records, explaining rationale and dependencies. Leave a horizon empty when no priority is established; record an explicit deferral rather than inventing a backlog. Add dates only for actual commitments.
+
 ## Now
 
 | Rank | Outcome / record | State | Next step |

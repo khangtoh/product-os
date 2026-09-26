@@ -18,9 +18,19 @@ No active records are supplied by the template. Link actual work here when adopt
 
 Active cycle: none recorded.
 
+## Onboarding checkpoint
+
+No onboarding session recorded. Use [ONBOARDING.md](ONBOARDING.md) and the completion rules in [MODEL.md](MODEL.md).
+
+- Required-area coverage and links to saved answers: unknown.
+- Remaining questions and next interview topic: unknown.
+- Explicit deferrals and discovery actions: none recorded.
+- Initial brief completion and any unsaved changes: unknown.
+- Readiness and dependencies for the proposed first action: unknown.
+
 ## Next action
 
-Read supplied project context, fill the known parts of [PRODUCT.md](PRODUCT.md), and identify one real outcome or bounded discovery action. Record existing capabilities and authority in [operations](operations/README.md). Ask for missing direction only if it blocks the next meaningful action.
+For setup, use [ONBOARDING.md](ONBOARDING.md) to establish the initial brief and roadmap. For ongoing product work, resume its actual next action. Record existing capabilities and authority in [operations](operations/README.md); optional missing fields alone do not require onboarding again.
 
 ## Dependencies
 

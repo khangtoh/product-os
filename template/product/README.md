@@ -10,15 +10,17 @@ This is a bare instance. No project facts, live records, measurements, or operat
 
 - Read [PRODUCT.md](PRODUCT.md) for product intent and [STATE.md](STATE.md) for current work.
 - Agents also read [AGENTS.md](AGENTS.md). Humans can use [WORKING_TOGETHER.md](WORKING_TOGETHER.md).
-- Fill known product facts, choose one outcome, and record the next action. Keep uncertainty explicit.
+- Use [guided onboarding](ONBOARDING.md) to establish an initial product brief, requirements, and roadmap, or follow the same guide manually. Keep uncertainty explicit.
 - Connect the project root's existing agent instructions to this folder; a nested context file may not be automatically loaded when working elsewhere.
 
 ## Map
 
 | Location | Purpose |
 | --- | --- |
-| [PRODUCT.md](PRODUCT.md) | Shared product contract and canonical product identity |
+| [ONBOARDING.md](ONBOARDING.md) | Guided setup or orientation for a new contributor |
+| [PRODUCT.md](PRODUCT.md) | Contract blueprint; after onboarding, entry point to the canonical contract |
 | [VISION.md](VISION.md) | Durable ambition and boundaries |
+| [REQUIREMENTS.md](REQUIREMENTS.md) | Core workflows, initial requirements, acceptance criteria, and open decisions |
 | [STRATEGY.md](STRATEGY.md) | Current thesis, bets, and uncertainties |
 | [ROADMAP.md](ROADMAP.md) | Outcome priority order |
 | [STATE.md](STATE.md) | Current truth and resumable handoff |
@@ -33,5 +35,7 @@ This is a bare instance. No project facts, live records, measurements, or operat
 | `evidence/`, `decisions/`, `cycles/` | Observations, choices, and execution history |
 
 Create record directories with their first real record. Use only the types needed for the work. Keep one canonical home for each fact and link existing tools where appropriate.
+
+New-project onboarding places the canonical PRODUCT.md at the target project root and replaces the local contract with a relative navigation pointer. Existing established contracts stay in place. Before adoption, this folder remains self-contained; see [MODEL.md](MODEL.md) for the boundary and completion rules.
 
 This folder supplies memory and protocol. Record actual execution, observation, and scheduling capabilities in operations; documentation alone does not run a product loop.

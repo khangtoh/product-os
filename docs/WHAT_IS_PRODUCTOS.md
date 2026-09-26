@@ -16,7 +16,7 @@ ProductOS connects the reason for work, the work itself, its observed result, an
 | --- | --- | --- |
 | Intent | What should this product become, for whom, and why? | PRODUCT, VISION, STRATEGY |
 | Priority | What outcome matters next? | ROADMAP, outcomes, opportunities |
-| Execution | What are we doing, and how will we verify it? | STATE, features, experiments, cycles |
+| Execution | What are we doing, and how will we verify it? | REQUIREMENTS, STATE, features, experiments, cycles |
 | Operation and evidence | What is happening in use, and what do we actually know? | operations, METRICS, evidence |
 | Learning | What decision changes because of the result? | decisions, LEARNINGS, updated intent and priority |
 
@@ -41,6 +41,8 @@ A release can be complete while its outcome is still unknown. An inconclusive ex
 ## Start small
 
 Start with a product contract, one outcome, one action, and a handoff. Create supporting records when the decision needs them. The template offers a full vocabulary so the model can grow; it does not require every record type for every change.
+
+[Onboarding](QUICKSTART.md) helps establish a complete initial brief through questions about vision, users, requirements, success, and priorities. It saves explicit uncertainties alongside the answers. Once setup is complete, ordinary work resumes from current state without repeating the interview.
 
 Unknown facts remain unknown. The template supplies structure, not a product strategy, customer evidence, targets, or permissions.
 
