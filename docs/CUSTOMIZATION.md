@@ -45,6 +45,22 @@ To upgrade an applied instance:
 
 Do not recopy the blank template over an applied instance. There is no automatic migration in this release. Template release version and per-record `schema_version` are separate: a documentation revision need not change record schema.
 
+### Adding guided onboarding to a 0.1.0 instance
+
+The unreleased onboarding addition leaves typed-record metadata and lifecycle unchanged. Merge the model's canonical-home and completion guidance, then add ONBOARDING and REQUIREMENTS where absent. Link them from README and agent instructions, and add STATE's onboarding checkpoint without erasing current work. If requirements already live in a PRD or tracker, make the new entry point link to them. Preserve local adaptations and record IDs.
+
+New-project onboarding defaults to a root PRODUCT.md. Applied 0.1.0 instances retain their current canonical contract. If the owner chooses to consolidate at the root, first check for an existing contract, move or merge the real content without overwriting another source, rewrite its relative links, replace the local entry with a navigation pointer, and update root instructions together. If the product folder is already the project root, no move is needed. Verify both entry points resolve to the same facts.
+
+Do not label an older brief complete merely because its files exist. During a requested revisit, reuse known answers and check coverage against MODEL; otherwise leave ordinary work uninterrupted. Keep the recorded release version at 0.1.0 until adopting a released upgrade and note the onboarding addition as a local change.
+
+### Update the installed skill
+
+The installer refuses an existing `.agents/skills/product-os/` destination, including an empty directory or symlink. To replace it deliberately, preserve local skill edits, move only that skill folder to a backup outside the skill-discovery directory, and rerun the installer from the desired framework checkout. Compare and reapply intentional local skill changes; start a new Codex session if needed.
+
+Skill assets are bundled blank templates. Updating them does not update project-owned PRODUCT, requirements, roadmap, state, or agent instructions. Merge improvements into applied context using the migration guidance above, never by recopying the blank asset folder. No automatic updater or project migration is included.
+
 ## Improve the framework
 
 When repeated project friction suggests a reusable improvement, describe the problem and proposed convention here, without copying private product history. Keep fictional examples separate from the template. A proposed framework improvement does not automatically change every applied project.
+
+For installer changes, run `python3 -m unittest discover -s scripts -p 'test_*.py' -v`. For onboarding changes, exercise the installed skill in temporary projects covering new and existing products, explicit deferrals, interrupted setup, contributor orientation, ambiguous scope, and read-only access. Inspect the resulting context and handoff; prose matching alone does not validate an interview. Check repository links and an isolated template copy before publishing.

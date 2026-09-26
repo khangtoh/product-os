@@ -1,0 +1,79 @@
+# Onboarding: decisions and implementation
+
+This record explains the onboarding addition to the ProductOS framework. It records the implemented design and its rationale; the [development plan](DEVELOPMENT_PLAN.md) tracks the remaining operating workflows.
+
+Status snapshot: **2026-09-26**. Onboarding is implemented and validated locally, but its changes are uncommitted and unreleased at this snapshot. The recorded framework release remains 0.1.0. This is not a claim of merge, publication, or validation on an actual customer product.
+
+## Intent and decisions
+
+The requested inspiration was Impeccable's conversational context-onboarding approach: help a user establish context by asking for what is missing and save it for later agent work. ProductOS applies that approach to product intent, requirements, priorities, and a resumable starting point.
+
+| Decision | Rationale and resulting behavior |
+| --- | --- |
+| Offer a Codex skill and a portable prompt | Provide a discoverable entry point while retaining a workflow usable without a particular runtime. Both use the same onboarding procedure. |
+| Establish a complete initial brief | Cover the product's vision, users, experience, requirements, boundaries, success, priorities, and starting point, rather than collecting only enough detail for one immediate task. Applicable detail and explicit deferrals keep this practical. |
+| Inspect first and ask two or three related questions per round | Reuse reliable project context and previous answers. Adapt the conversation instead of repeating settled questions or presenting one large questionnaire. |
+| Help users make unresolved decisions | Present options and tradeoffs. A user-selected hypothesis is direction, not validated evidence. Explicit deferrals retain consequences and a discovery action; silence is not agreement. |
+| Save between answered rounds | Store supported answers in their canonical homes and coverage in STATE so interrupted setup can resume without reconstructing the chat. |
+| Use a root product contract for new projects | Give contributors a shared entry point, with supporting context under `product/` and a local PRODUCT pointer. Preserve established contracts and the standalone-context exception. |
+| Keep requirements separate from durable vision | Save initial workflows and acceptance criteria in REQUIREMENTS; keep the product contract concise and link detailed specifications instead of duplicating them. |
+| Use Now / Next / Later outcome priorities | Connect the brief to a proposed first action without inventing deadlines, commitments, or a feature backlog. |
+| Distinguish onboarding from contributor orientation | A person joining an initialized project needs current context and a contribution path, not a reset of ownership, priorities, or the interview. |
+| Offer the first loop after setup | Make the handoff useful while keeping onboarding completion separate from implementation, release, scheduling, and evidence of an achieved outcome. |
+
+These decisions are implemented through the canonical [onboarding coverage and completion rules](../template/product/MODEL.md#onboarding-completion) and [onboarding procedure](../template/product/ONBOARDING.md). Those sources govern behavior; this record explains it rather than introducing additional rules.
+
+## Implementation
+
+### Entry points and installation
+
+The [skill](../skills/product-os/SKILL.md) handles `$product-os init`, natural-language setup requests, resuming an interview, and contributor orientation. A bare invocation reports readiness and offers the appropriate next step. Advice requests remain advice; execution and scheduling requests are directed to the existing loop and operations guidance without claiming unsupported subcommands.
+
+The [installer](../scripts/install_skill.py) accepts an existing target directory through `--project` and creates `.agents/skills/product-os/`. It bundles the skill entry point and the canonical blank template under `assets/product/`, using only Python's standard library. The source skill alone is not a complete installed package.
+
+Installation does not initialize product context or edit root agent instructions. It rejects a target inside the framework checkout, refuses an existing skill destination or unsafe symlinked parents, and removes its newly created partial package if copying fails. Replacement is deliberate; it does not migrate applied product records. [Quickstart](QUICKSTART.md) documents installation, manual packaging, and the portable prompt.
+
+### Saved context and session continuity
+
+For a new default-layout project, onboarding creates the canonical root `PRODUCT.md` and uses `product/PRODUCT.md` as a navigation pointer. Existing canonical contracts keep their established locations. If the product context folder is itself the repository root, its contract stays there instead of moving to a parent or becoming a self-link. Placement is defined in [MODEL](../template/product/MODEL.md#canonical-homes).
+
+Supporting documents hold vision, requirements, strategy, roadmap, current state, and relevant operating context. STATE records interview coverage, remaining questions, explicit deferrals, and the next topic. Existing facts, record IDs, history, active work, design guidance, and local conventions are preserved when adding missing context.
+
+Onboarding merges a product-context pointer into the target's root agent instructions, preserving unrelated instructions. New contracts retain a standalone `Platform` heading, with constraints separate. The template remains self-contained before adoption; root contract links are rewritten for the target layout when onboarding creates it.
+
+A read-only target receives proposed content and an explicitly unsaved checkpoint. Ambiguous product scope is resolved before writing. A contributor orientation does not restart setup. These paths share the same procedure and completion model.
+
+### Completion and compatibility
+
+Completion requires saved coverage of the required areas, working references and agent pointers, an aligned roadmap and first action, and a linked summary presented to the user for correction. An additional approval round is not required for answers already supplied. Readiness for the next action is reported separately: a complete brief may still need discovery, access, or another dependency resolved before implementation.
+
+The addition introduces REQUIREMENTS and onboarding guidance, plus checkpoint and navigation changes. Typed-record metadata and lifecycle remain unchanged. The [upgrade guidance](CUSTOMIZATION.md#adding-guided-onboarding-to-a-010-instance) explains how to merge these additions while preserving applied context; installed skill updates are separate from product-context upgrades. The [fictional walkthrough](../examples/onboarding.md) illustrates the experience without placing example facts in the template.
+
+## Validation record
+
+The following checks were completed during implementation on 2026-09-26. They are evidence of local behavior and simulated onboarding coverage, not a real-product pilot or proof of improved user outcomes.
+
+| Check | Observed result |
+| --- | --- |
+| Six automated [installer tests](../scripts/test_install_skill.py) | Passed: self-contained packaging without initialization, preservation of context and other skills, refusal of reinstallation, rejection of missing/framework targets, symlink refusal, and cleanup after copy failure |
+| CLI and skill validation | Installation succeeded in a temporary project; repeat installation was refused. Source and freshly installed skill entry points passed the skill validator. |
+| New-project interview simulations | Saved a root contract, supporting context, explicit hypotheses/deferrals, priorities, and a first action without executing product work or registering schedules |
+| Interrupted setup and continuation | Saved partial coverage, incorporated subsequent answers, and preserved a paused incomplete checkpoint without repeating settled questions |
+| Existing-product adoption | Preserved original contract content, roadmap, design guidance, active work, and unrelated agent instructions while adding needed onboarding context |
+| Contributor, ambiguous-target, and read-only scenarios | Oriented without rewriting context, requested target clarification before writing, and reported unsaved proposals honestly |
+| Platform heading follow-up | An initial simulation combined platform with boundaries; the guide was clarified and a fresh installed-skill simulation retained a standalone Platform section |
+| Documentation and template checks | Repository and isolated-template relative links and anchors resolved; generic-template leakage checks and whitespace checks passed; record templates were unchanged |
+
+Installer tests can be rerun with:
+
+```sh
+python3 -m unittest discover -s scripts -p 'test_*.py' -v
+```
+
+The interview scenarios were agent-driven trials in temporary fixtures, not an automated regression suite committed to the repository. Future procedure changes should repeat the relevant scenarios and inspect saved context and handoffs, as described in [framework maintenance guidance](CUSTOMIZATION.md#improve-the-framework).
+
+## Limits and follow-up
+
+The current skill supplies setup and orientation. It does not provide dedicated run, review, or scheduling commands, install a runner, or register wake-ups. Users can request product work through the existing documented loop, but packaged operating workflows and a complete real-project pilot remain on the [development plan](DEVELOPMENT_PLAN.md#remaining-work).
+
+Update this record when the implemented decisions materially change, and update its status snapshot when the onboarding addition is merged or released. Keep runtime success, product outcome evidence, and delivery status distinct.

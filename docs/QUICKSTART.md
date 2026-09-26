@@ -1,66 +1,122 @@
 # Adopt ProductOS
 
-The copy boundary is `template/product/`. It is self-contained and can live inside an application repository or a dedicated product-context repository.
+Onboarding turns a conversation into a complete initial product brief, requirements, and a Now / Next / Later roadmap. Start in the actual target project, which may be an empty folder, an existing app, or a dedicated product-context repository.
 
-## 1. Copy the bare instance
+## 1. Choose an entry point
 
-Clone this repository if needed:
+Obtain this framework checkout if needed:
 
 ```sh
 git clone https://github.com/khangtoh/product-os.git
 cd product-os
 ```
 
-From this checkout, copy the template into an existing target project that has no `product/` path:
+### Codex skill
+
+From the framework checkout, install into an existing target directory:
 
 ```sh
-test ! -e ../my-project/product && cp -R template/product ../my-project/product
+python3 scripts/install_skill.py --project ../my-project
 ```
 
-Replace `../my-project` with your project path. Check that it exists. If it already has product documentation, map and merge the relevant sections manually; do not overwrite existing context. The command intentionally refuses an existing `product/` path.
+The optional installer uses Python's standard library and requires no dependencies or network access. It creates `.agents/skills/product-os/` with the skill and a snapshot of the canonical template under `assets/product/`. It preserves other skills and creates no product context. It refuses existing destinations, symlinked skill directories, and installation inside this framework checkout.
 
-To create a separate product-context repository, copy `template/product/` to an empty destination and initialize Git there. Connect it to the app with explicit repository and environment references in its operations register. Creating a repository from this entire framework includes the guides and examples too; copying the inner folder produces the bare instance.
+Open the target project in Codex, then invoke:
 
-## 2. Connect agent context
+```text
+$product-os init
+```
 
-Merge this paragraph into the project's existing root AGENTS.md or equivalent agent instructions:
+If the skill does not appear, start a new session. A bare `$product-os` invocation explains setup readiness and offers the appropriate next step. This release supplies onboarding and orientation; it does not add run, review, or scheduling subcommands.
+
+### Manual skill installation
+
+Without Python, create `.agents/skills/` in your target project. Copy this checkout's `skills/product-os/` there as `product-os/`, then copy `template/product/` into the installed skill as `assets/product/`. The final layout must be:
+
+```text
+.agents/skills/product-os/
+  SKILL.md
+  assets/product/
+    ONBOARDING.md
+    MODEL.md
+    ...the rest of the template
+```
+
+Copy both parts; the source skill alone is not a complete package. Preserve existing destinations and do not copy the framework's maintenance AGENTS.md. [Skill updates](CUSTOMIZATION.md#update-the-installed-skill) are separate from changes to project context.
+
+### Portable prompt or manual documentation
+
+For another agent, or to use the documents yourself, copy only the bare instance. This command requires an existing target directory and refuses an existing product path:
+
+```sh
+test -d ../my-project && test ! -e ../my-project/product && test ! -L ../my-project/product && cp -R template/product ../my-project/product
+```
+
+If a product folder already exists, inspect and merge relevant additions instead of overwriting it. Open the target project and paste:
+
+```text
+Read product/ONBOARDING.md and guide me through ProductOS onboarding.
+Inspect this project, ask me for the missing product vision and requirements,
+help me make unresolved decisions, and save the initial brief and roadmap.
+```
+
+You can also follow [the guide](../template/product/ONBOARDING.md) manually. The skill and prompt paths use the same procedure and [completion rules](../template/product/MODEL.md#onboarding-completion).
+
+## 2. Work through the interview
+
+The agent reads existing context, summarizes it, and asks small groups of related questions. It covers product vision, users and their problem, essential workflows, initial requirements and acceptance criteria, boundaries, success, priorities, and the current starting point. You do not need to know ProductOS terminology.
+
+If you are unsure, it offers options and tradeoffs. Choose a hypothesis or explicitly defer a decision with a follow-up. Unknowns stay unknown; an unanswered question is not agreement. The agent saves answers and a checkpoint between rounds so you can pause and resume with the same prompt.
+
+Existing products reuse confirmed answers. A person joining an initialized product receives an orientation and a place to contribute rather than a repeated setup interview. See the [fictional walkthrough](../examples/onboarding.md).
+
+The interaction pattern is inspired by [Impeccable's project setup](https://impeccable.style/tutorials/getting-started/). ProductOS extends the interview to requirements, outcome priorities, and a resumable operating handoff.
+
+## 3. Review the saved context
+
+For a newly initialized project, the resulting layout is:
+
+```text
+my-project/
+  AGENTS.md                 Existing instructions plus a product-context pointer
+  PRODUCT.md                Canonical product contract
+  product/
+    PRODUCT.md              Navigation pointer to the root contract
+    VISION.md
+    REQUIREMENTS.md
+    STRATEGY.md
+    ROADMAP.md
+    STATE.md
+    operations/
+    ...model, guides, templates, and real records as needed
+```
+
+Existing established contracts keep their current location. An untouched copied blueprint can be promoted to the root during onboarding; a populated local contract is preserved unless consolidation is requested. If the copied product folder itself is the root of a dedicated context repository, retain its contract in place. See [contract placement](PRODUCT_MD.md).
+
+For the default new-project layout, merge this into the existing root agent instructions:
 
 ```markdown
 ## Product context
 
-For product work, read product/AGENTS.md, product/PRODUCT.md, and
-product/STATE.md before making changes. Follow linked product records as
-needed and update product context after material decisions or results.
+For product work, read PRODUCT.md, product/AGENTS.md, and product/STATE.md
+before making changes. Follow linked vision, requirements, roadmap, and
+work records as needed. Update the affected context after material
+product decisions or results.
 ```
 
-Preserve existing repository instructions. Do not replace them with the template's nested AGENTS.md. No special filename guarantees automatic loading across every agent tool.
+The agent does this during guided onboarding. Manual users should adapt paths to their layout and preserve unrelated instructions.
 
-## 3. Establish intent and current truth
+## 4. Finish setup and choose the first loop
 
-Fill the known parts of PRODUCT.md: name, promise, users, core job, desired change, constraints, and non-goals. Reference existing briefs or owner direction. Fill VISION and STRATEGY only with relevant context; unknowns are valid.
+Check that every required brief area is addressed, hypotheses and explicit deferrals are visible, context is saved, links resolve, and the roadmap agrees with the first action. Correct any misunderstood answers. A complete brief can still need discovery before implementation; the handoff must say so.
 
-Update STATE.md with the actual project stage, owner, current work, blockers, and next action. Record the adoption date there. Link verified app code, release environments, observation sources, and existing operating scope in operations/README.md.
+Onboarding offers the first loop without starting it. When ready, ask:
 
-Do not copy facts or permissions from another project to make this one look complete.
+```text
+Read the product context and current state. Carry out the next eligible
+bounded action using the ProductOS loop, verify the result, and save a handoff.
+```
 
-## 4. Choose one outcome
+Substantive work follows [the operating guide](OPERATING_GUIDE.md) and uses a cycle. A completed setup is not evidence that a product outcome was achieved.
 
-Copy `templates/outcome.md` to a new `outcomes/OUT-001-descriptive-slug.md`. Assign an owner and define the desired change, evidence, baseline, target, evaluation window, and guardrails appropriate to the project.
-
-If those are not yet known, keep the outcome proposed and define a bounded discovery action to establish them. Select a real next step in ROADMAP and STATE. Do not make speculative targets appear accepted.
-
-## 5. Complete one small loop
-
-For substantive work, create a cycle record and link it from STATE. Research a problem, implement a small change, or evaluate existing behavior. Add a feature or experiment only when needed. Preserve acceptance criteria and experiment criteria before collecting results.
-
-Record what happened, what remains uncertain, and the resulting decision. Update the relevant product records and next action. Start with the [operating guide](OPERATING_GUIDE.md) or [fictional worked example](../examples/first-learning-loop.md).
-
-## Check adoption
-
-- Can a human and an agent find the product purpose and next action?
-- Do internal links work in the copied folder without this framework checkout?
-- Are unknowns, proposed targets, and actual permissions distinguishable?
-- Is there one real priority rather than a fabricated sample backlog?
-- Does active work have an owner, criteria, and a handoff?
-
-You can now use ProductOS manually or with an assistant. Follow [automation](AUTOMATION.md) when you want recurring autonomous execution; copying the template does not configure it.
+For recurring work, request scheduling setup separately and follow [automation](AUTOMATION.md). A proposed schedule in a document is not a registered task. The current onboarding release neither installs a runner nor registers schedules.

@@ -16,13 +16,23 @@ Its central convention is **[PRODUCT.md](docs/PRODUCT_MD.md)**: the shared produ
 
 ## Adopt it
 
-From a checkout of this repository, with an existing target repository and no `product/` directory:
+From this checkout, install the Codex skill into an existing target project:
 
 ```sh
-test ! -e ../my-project/product && cp -R template/product ../my-project/product
+python3 scripts/install_skill.py --project ../my-project
 ```
 
-Then open `product/PRODUCT.md`, fill in the facts you know, choose one outcome, and update `product/STATE.md`. Keep unknowns explicit. The [quickstart](docs/QUICKSTART.md) explains how to connect your root agent instructions and complete the first loop.
+Open that project in Codex and invoke:
+
+```text
+$product-os init
+```
+
+ProductOS reads existing context, then asks you about the vision, users, requirements, constraints, success criteria, and priorities still needed for a complete initial brief. It helps you decide when you are unsure, saves progress between rounds, and ends with a Now / Next / Later roadmap and a proposed first loop.
+
+New projects get a shared root `PRODUCT.md` and supporting context under `product/`. Existing product contracts and history are preserved. Installing the skill does not initialize a product or start a loop.
+
+The [quickstart](docs/QUICKSTART.md) includes manual skill installation and a portable prompt workflow for other agents. No hosted service or agent runtime is required to use the documentation model.
 
 ## The model
 
@@ -46,6 +56,7 @@ flowchart LR
 | --- | --- |
 | [docs/](docs/README.md) | Guides to the method, contract, adoption, collaboration, and automation |
 | [template/product/](template/product/README.md) | A blank, self-contained ProductOS instance |
+| [skills/product-os/](skills/product-os/SKILL.md) | Onboarding skill entrypoint; the installer bundles the template as assets |
 | [examples/](examples/README.md) | Explicitly fictional illustrations; never live project data |
 | [AGENTS.md](AGENTS.md) | Instructions for maintaining this framework repository |
 
