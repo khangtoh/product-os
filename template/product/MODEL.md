@@ -12,6 +12,16 @@ New project onboarding creates the canonical contract at the target project root
 
 If the product folder is itself a standalone context repository's root, keep its contract in place. Do not create a self-referencing pointer or move the contract outside that project.
 
+### PRODUCT.md compatibility
+
+The ProductOS 0.2 contract is a superset of the open PRODUCT.md convention. A newly adopted contract must have one product-name H1 and preserve its `productmd: 1`, `productos: 1`, `$type: Product`, and `$context` metadata.
+
+Use the canonical headings in the blueprint. Resolve `## Register` to exactly `brand` or `product` during onboarding, then mirror the value in frontmatter. Page-level design modes may override that default for one surface. Retain `## Platform` as a separate ProductOS and design-tool field.
+
+When promoting the blueprint, rewrite its local Stack and ProductOS links to `product/...`. Replace the local file with a navigation pointer only after the root contract is complete and its links resolve. Preserve frontmatter, valid machine islands, and sections a tool does not understand when modifying an established contract.
+
+Offer, pricing islands, and `$id` are optional. Omit them until the underlying values and any public binding are established. A bare blueprint with unresolved identity and Register is intentionally incomplete; do not claim conformance until onboarding resolves the required product context.
+
 When adopting into a project with an established product contract, preserve its canonical location. The local PRODUCT.md can link to that source or its sections. Do not promote a populated local contract or replace a root file without direction to consolidate. Keep one authoritative home for each fact and update affected links and agent instructions together. For multiple products, the target app root is the project root; establish the target before writing.
 
 REQUIREMENTS.md is a summary document, not a new typed record or parallel task backlog. Link existing specifications and issue trackers instead of copying their maintained details. Feature records add scoped implementation and verification detail and link to the relevant requirements. ROADMAP remains the only canonical priority order.

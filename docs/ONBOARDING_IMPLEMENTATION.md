@@ -2,7 +2,7 @@
 
 This record explains the onboarding addition to the ProductOS framework. It records the implemented design and its rationale; the [development plan](DEVELOPMENT_PLAN.md) tracks the remaining operating workflows.
 
-Status snapshot: **2026-09-26**. Onboarding is implemented and validated locally, but its changes are uncommitted and unreleased at this snapshot. The recorded framework release remains 0.1.0. This is not a claim of merge, publication, or validation on an actual customer product.
+Status snapshot: **2026-09-26**. Onboarding is merged and released as part of ProductOS 0.2.0 together with the open-standard-compatible product contract. This is not a claim of validation on an actual customer product or of a running autonomous loop.
 
 ## Intent and decisions
 
@@ -47,7 +47,7 @@ A read-only target receives proposed content and an explicitly unsaved checkpoin
 
 Completion requires saved coverage of the required areas, working references and agent pointers, an aligned roadmap and first action, and a linked summary presented to the user for correction. An additional approval round is not required for answers already supplied. Readiness for the next action is reported separately: a complete brief may still need discovery, access, or another dependency resolved before implementation.
 
-The addition introduces REQUIREMENTS and onboarding guidance, plus checkpoint and navigation changes. Typed-record metadata and lifecycle remain unchanged. The [upgrade guidance](CUSTOMIZATION.md#adding-guided-onboarding-to-a-010-instance) explains how to merge these additions while preserving applied context; installed skill updates are separate from product-context upgrades. The [fictional walkthrough](../examples/onboarding.md) illustrates the experience without placing example facts in the template.
+The addition introduces REQUIREMENTS and onboarding guidance, plus checkpoint and navigation changes. ProductOS 0.2 also makes the promoted contract a superset of the open PRODUCT.md convention while retaining ProductOS operating sections. Typed-record metadata and lifecycle remain unchanged. The [upgrade guidance](CUSTOMIZATION.md#adding-guided-onboarding-to-a-010-instance) explains how to merge these additions while preserving applied context; installed skill updates are separate from product-context upgrades. The [fictional walkthrough](../examples/onboarding.md) illustrates the experience without placing example facts in the template.
 
 ## Validation record
 

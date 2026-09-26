@@ -2,7 +2,7 @@
 
 The shared product memory where humans and AI steer, build, operate, and evolve this product together.
 
-Template version: 0.1.0. Adoption date: unknown. Project owner: unknown. Set those values when adopting this folder.
+Template version: 0.2.0. Adoption date: unknown. Project owner: unknown. Set those values when adopting this folder.
 
 This is a bare instance. No project facts, live records, measurements, or operating authority are supplied by the template.
 

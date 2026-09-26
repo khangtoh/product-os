@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+No unreleased changes.
+
+## 0.2.0 — 2026-09-26
+
+- Made the ProductOS contract a superset of the open PRODUCT.md convention with canonical headings, preservation rules, and ProductOS extension sections.
+- Standardized root-contract promotion while retaining a self-contained blueprint and local navigation pointer.
+- Added 0.1-to-0.2 migration guidance and validation for adopted contracts.
 - Added a discoverable Codex onboarding skill and an optional standard-library Python installer that bundles the canonical template without initializing project context. See the [onboarding decisions and implementation record](docs/ONBOARDING_IMPLEMENTATION.md).
 - Added a complete initial-brief interview with decision support, explicit deferrals, saved checkpoints, contributor orientation, and a first-loop offer. The portable prompt uses the same procedure.
 - Defaulted new-project onboarding to a shared root PRODUCT.md with a local navigation pointer, preserving established contracts and the self-contained bare template.

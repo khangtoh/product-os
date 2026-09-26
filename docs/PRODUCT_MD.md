@@ -1,56 +1,78 @@
 # PRODUCT.md: the shared product contract
 
-PRODUCT.md is ProductOS's proposed portable convention for product intent. It describes what a product should become, for whom, why it matters, and how humans and agents will make decisions about its evolution.
+PRODUCT.md is ProductOS's portable contract for product intent: what the product is, who it serves, why it matters, how it speaks, and how its evolution is governed.
 
-Keep it understandable without execution history. It is the starting point for product decisions; linked records supply detail.
+ProductOS 0.2 makes this contract a superset of the [open PRODUCT.md standard](https://product.md/). Tools that understand the standard can consume the canonical core. Humans and ProductOS agents can also follow its linked outcomes, operating principles, and learning loop.
 
 ## Responsibilities
 
 | File or artifact | Responsibility |
 | --- | --- |
-| PRODUCT.md | Purpose, users, core job, desired outcomes, constraints, decision principles, and navigation |
+| PRODUCT.md | Product identity, users, problem, purpose, voice, boundaries, outcomes, operating principles, and navigation |
 | AGENTS.md | How an agent should work in the repository or scoped folder |
-| Design guidance, such as DESIGN.md if a project uses it | Visual and interaction principles and design conventions |
+| DESIGN.md or established brand system | Visual tokens, components, interaction rules, and detailed visual guidance |
 | REQUIREMENTS.md | Initial workflows, functional and quality requirements, acceptance criteria, and open decisions |
-| Feature specification or PRD | Detailed behavior and acceptance criteria for a particular change |
+| Feature specification or PRD | Detailed behavior and acceptance criteria for a scoped change |
 | STATE.md | Current truth, active work, dependencies, and next action |
 | ROADMAP.md | Canonical priority order of outcomes |
 
-These files complement one another. Avoid copying a detailed backlog or metric history into PRODUCT.md.
+Keep one authoritative home for each fact. PRODUCT.md links to detailed records rather than copying a backlog, metric history, visual system, or operational procedure.
 
-## Required questions
+## Compatibility layers
 
-1. What is the product's promise and purpose?
-2. Who is it for, in what context, and what job does it help them do?
-3. What would an observable improvement look like?
-4. What constraints, non-goals, and tradeoffs shape choices?
-5. How do direction and evidence become product decisions?
-6. Where are the current priorities, work, measurements, and operating context?
+A ProductOS contract uses the open convention as its core and appends ProductOS operating context.
 
-The [bare PRODUCT.md](../template/product/PRODUCT.md) provides a starting structure. Unknown answers can remain explicit; do not invent facts to fill sections.
+| Layer | ProductOS requirement |
+| --- | --- |
+| CommonMark | Exactly one H1 containing the product name, followed by a concise promise |
+| Metadata | `productmd: 1`, `productos: 1`, `$type: Product`, and `$context: https://schema.org.ai` |
+| Canonical core | Register, Users, Problem, Product Purpose, Brand Personality, Anti-references, Design Principles, Accessibility & Inclusion, optional Offer, Boundaries, and Stack |
+| ProductOS extension | Platform, Core Experience and Requirements, Desired Outcomes, Operating Principles, Human and Agent Control, and Evolution Loop |
 
-Use [guided onboarding](../template/product/ONBOARDING.md) to build the first version through a conversation. An assistant inspects existing context, interviews for the [required brief areas](../template/product/MODEL.md#onboarding-completion), helps resolve uncertainty, and saves supported answers and explicit deferrals. A complete initial brief does not imply that every claim is validated or implementation can start immediately.
+The bare blueprint is intentionally unresolved. It becomes conformant during onboarding, when the product name, promise, Register, Users, and Product Purpose are established. Unknowns remain explicit elsewhere.
+
+### Register compatibility
+
+The open convention treats `## Register` as the canonical product-wide default. Use exactly `brand` or `product`. When frontmatter includes `register:`, it must match the heading.
+
+Current design tools may choose a mode per page or surface. That task-level choice overrides the default for the surface without rewriting the product register.
+
+### Offer and linked data
+
+Offer is optional. Omit it until the commercial offer is real. A pricing machine island must be valid JSON and contain approved values.
+
+Add `$id` only when a canonical URL exists for the same contract. ProductOS does not require publishing an internal product contract. A project may use the build-time repository binding without serving `/product.md`.
 
 ## Contract placement
 
-For new projects, onboarding creates the canonical `PRODUCT.md` at the target project root so tools can share the same product truth. Supporting context stays in `product/`, whose local PRODUCT.md becomes a navigation pointer. Rewrite the root contract's relative links to point into the product folder; do not retain two copies of the brief.
+For a normal new project, onboarding creates the canonical PRODUCT.md at the project root, beside root agent instructions. Supporting context remains under `product/`; its local PRODUCT.md becomes a navigation pointer to the root contract, STATE, and ROADMAP.
 
-The bare template keeps its contract inside its copy boundary until adopted, so all template links still resolve independently. If that folder is itself a standalone context repository's root, its contract stays there. Placement and preservation rules are canonical in [MODEL.md](../template/product/MODEL.md#canonical-homes).
+The bare template keeps the complete blueprint inside `template/product/` so the copy boundary and installed skill assets remain self-contained. During promotion, rewrite its relative links to `product/...`.
 
-If a project already has a product contract, including one created by another tool, preserve that canonical source. The local `product/PRODUCT.md` can serve as an entry point linking to its established sections. Consolidation should follow project direction and update affected links and agent instructions together; avoid parallel definitions of the same product facts.
+If the product folder is itself a standalone context repository's root, keep the contract there. If a project already has an established product contract, preserve its canonical location and merge only supported additions. Never maintain two populated definitions of the same facts.
 
-## Loading it into agent context
+## Required questions
 
-PRODUCT.md is a documentation convention in this repository. Naming a file does not guarantee that an agent tool loads it automatically. Add an explicit instruction to the project's existing root AGENTS.md or equivalent agent configuration to read the canonical product contract, `product/AGENTS.md`, and `product/STATE.md` before product work. For new projects this means root `PRODUCT.md`; existing pointers to `product/PRODUCT.md` can follow its link to the canonical source.
+A useful first contract answers:
 
-A nested AGENTS.md may only apply when an agent works in that directory. The root pointer makes the context relevant when it edits app code elsewhere. Preserve existing root instructions and tool-specific configuration. See [quickstart](QUICKSTART.md).
+1. What is the product's promise and purpose?
+2. Who is it for, in what context, and what problem or job brings them here?
+3. What alternatives do they use now?
+4. What voice, constraints, and accessibility requirements must hold?
+5. What observable outcome would represent successful use?
+6. How do humans, users, and agents influence product decisions?
+7. Where are requirements, current priorities, measurements, and operating context maintained?
 
-## Updating the contract
+Use [guided onboarding](../template/product/ONBOARDING.md) to answer these through a conversation. Supported facts, user-selected hypotheses, and explicit deferrals remain distinguishable.
 
-Change PRODUCT.md when identity, intended outcomes, boundaries, or decision principles change. Link the steering, evidence, or decision that prompted the change. Keep historical rationale in records and version control.
+## Preservation rules
 
-Owner direction can change purpose. Evidence can refine strategy and product choices within established intent. Changing PRODUCT.md cannot grant tool access, release permission, spending authority, or a new approval policy.
+Tools that update PRODUCT.md must preserve frontmatter, valid machine islands, and sections they do not understand. Do not rewrite historical hypotheses to match later results. Link steering, evidence, or decisions behind material changes.
+
+Changing PRODUCT.md cannot grant tool access, release permission, spending authority, or a new approval policy.
 
 ## First version versus mature version
 
-A first version may contain a user/job hypothesis and one learning outcome. A mature version should point to an evidence-backed audience, product promise, active outcome framework, and actual operating constraints. Both should stay brief enough to read before important work.
+A first version may contain a clearly labeled audience hypothesis, explicit measurement gaps, and one learning outcome. A mature version should point to evidence-backed users, a demonstrated promise, active outcome definitions, and actual operating constraints.
+
+Both should remain brief enough to read before consequential product work.

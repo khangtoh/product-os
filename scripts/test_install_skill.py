@@ -19,6 +19,38 @@ class InstallSkillTests(unittest.TestCase):
         self.project = Path(self.temp.name).resolve() / "project with spaces"
         self.project.mkdir()
 
+    def test_bundled_contract_preserves_compatibility_layers(self):
+        contract = (TEMPLATE / "PRODUCT.md").read_text()
+        lines = contract.splitlines()
+
+        self.assertEqual(lines.count("# Product name"), 1)
+        self.assertIn("productmd: 1", lines)
+        self.assertIn("productos: 1", lines)
+        self.assertIn("$type: Product", lines)
+        self.assertIn("$context: https://schema.org.ai", lines)
+        self.assertNotIn("register:", lines)
+
+        required_headings = [
+            "## Register",
+            "## Users",
+            "## Problem",
+            "## Product Purpose",
+            "## Brand Personality",
+            "## Anti-references",
+            "## Design Principles",
+            "## Accessibility & Inclusion",
+            "## Platform",
+            "## Boundaries",
+            "## Stack",
+            "## Core Experience and Requirements",
+            "## Desired Outcomes",
+            "## Operating Principles",
+            "## Human and Agent Control",
+            "## Evolution Loop",
+        ]
+        positions = [lines.index(heading) for heading in required_headings]
+        self.assertEqual(positions, sorted(positions))
+
     def test_installs_self_contained_skill_without_initializing_product(self):
         destination = install(self.project)
         self.assertEqual(destination, self.project / ".agents/skills/product-os")

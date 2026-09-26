@@ -45,9 +45,15 @@ To upgrade an applied instance:
 
 Do not recopy the blank template over an applied instance. There is no automatic migration in this release. Template release version and per-record `schema_version` are separate: a documentation revision need not change record schema.
 
+### Upgrading the product contract to 0.2.0
+
+Follow [the 0.2 migration guide](MIGRATING_0.2.md). Preserve the applied contract and record history, establish one canonical location, map supported facts into the open-standard headings, and retain ProductOS operating sections. Do not copy the blank blueprint over a populated contract.
+
+A normal application repository should use root PRODUCT.md and a local `product/PRODUCT.md` navigation pointer. A standalone context repository keeps its contract at its own root. Omit Offer, pricing data, `$id`, and public publication until separately established.
+
 ### Adding guided onboarding to a 0.1.0 instance
 
-The unreleased onboarding addition leaves typed-record metadata and lifecycle unchanged. Merge the model's canonical-home and completion guidance, then add ONBOARDING and REQUIREMENTS where absent. Link them from README and agent instructions, and add STATE's onboarding checkpoint without erasing current work. If requirements already live in a PRD or tracker, make the new entry point link to them. Preserve local adaptations and record IDs.
+The 0.2 onboarding addition leaves typed-record metadata and lifecycle unchanged. Merge the model's canonical-home and completion guidance, then add ONBOARDING and REQUIREMENTS where absent. Link them from README and agent instructions, and add STATE's onboarding checkpoint without erasing current work. If requirements already live in a PRD or tracker, make the new entry point link to them. Preserve local adaptations and record IDs.
 
 New-project onboarding defaults to a root PRODUCT.md. Applied 0.1.0 instances retain their current canonical contract. If the owner chooses to consolidate at the root, first check for an existing contract, move or merge the real content without overwriting another source, rewrite its relative links, replace the local entry with a navigation pointer, and update root instructions together. If the product folder is already the project root, no move is needed. Verify both entry points resolve to the same facts.
 

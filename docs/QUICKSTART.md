@@ -93,6 +93,8 @@ my-project/
 
 Existing established contracts keep their current location. An untouched copied blueprint can be promoted to the root during onboarding; a populated local contract is preserved unless consolidation is requested. If the copied product folder itself is the root of a dedicated context repository, retain its contract in place. See [contract placement](PRODUCT_MD.md).
 
+The promoted contract uses the open PRODUCT.md canonical headings plus ProductOS operating sections. The local blueprint is intentionally incomplete until onboarding establishes the product name, promise, Register, Users, and Product Purpose. After setup, run `npx productmd check` when the checker is available; do not force placeholder values merely to pass it.
+
 For the default new-project layout, merge this into the existing root agent instructions:
 
 ```markdown

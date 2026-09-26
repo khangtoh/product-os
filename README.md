@@ -4,7 +4,7 @@
 
 ProductOS is a portable product management method expressed in Markdown. It connects purpose and priorities to execution, evidence, and learning so the next person or agent can continue with context.
 
-Its central convention is **[PRODUCT.md](docs/PRODUCT_MD.md)**: the shared product contract describing what a product should become, for whom, why it matters, and how it will evolve.
+Its central convention is **[PRODUCT.md](docs/PRODUCT_MD.md)**: the shared product contract describing what a product should become, for whom, why it matters, and how it will evolve. ProductOS 0.2 makes that contract a superset of the [open PRODUCT.md standard](https://product.md/) while keeping outcomes, operations, and learning in linked records.
 
 ## Start here
 
@@ -64,4 +64,4 @@ The template contains no product decisions, evidence, assigned work, or inherite
 
 ProductOS defines the memory and operating protocol. Continuous autonomous execution additionally needs an actual runner, authorized tools, event sources, and working observation. See [automation](docs/AUTOMATION.md).
 
-Current release: [0.1.0](CHANGELOG.md). See [customization](docs/CUSTOMIZATION.md) for adapting and upgrading an instance.
+Current release: [0.2.0](CHANGELOG.md). See [customization](docs/CUSTOMIZATION.md) for adapting and upgrading an instance.

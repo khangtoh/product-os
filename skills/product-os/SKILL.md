@@ -25,6 +25,8 @@ For an explicitly requested initialization with no instance, copy the bundled pr
 
 Then follow the guide in the target project. Respect established local model adaptations; an installation update is not authorization to migrate product records. For older instances missing onboarding guidance, use the bundled procedure with their existing model and preserve their lifecycle conventions.
 
+When creating or promoting a PRODUCT.md, follow the bundled MODEL and ONBOARDING compatibility rules. Preserve open-standard metadata, canonical headings, valid machine islands, and unknown sections; resolve Register during onboarding rather than inventing it.
+
 Interview through the available structured question tool or ordinary conversation. Wait for answers to questions that determine product direction. Save supported answers and progress in project-owned files, never in the installed skill assets. Do not infer user approval from silence.
 
 Finish with links to saved context, unresolved decisions, and the first proposed loop. An onboarding-only request ends there. Do not implement the product, register schedules, or suggest that setup proves a user outcome was achieved.

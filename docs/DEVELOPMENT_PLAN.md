@@ -8,8 +8,9 @@ Status snapshot: **2026-09-26**.
 
 | Capability | Status |
 | --- | --- |
-| Portable product memory, record model, and loop protocol | Available in the 0.1.0 framework |
-| Guided onboarding and contributor orientation | Implemented and validated locally; changes are uncommitted and unreleased at this snapshot |
+| Portable product memory, record model, and loop protocol | Available in the 0.2.0 framework |
+| Open-standard-compatible product contract | Available in 0.2.0 with ProductOS operating extensions |
+| Guided onboarding and contributor orientation | Available in 0.2.0 through the packaged ProductOS skill and portable prompt |
 | User-triggered product work | Can follow the documented loop through an ordinary prompt; no dedicated operating workflow is packaged in the skill |
 | Review, learning, and handling new direction | Described in the operating model; dedicated skill workflows remain to be implemented |
 | Recurring execution | Runtime contract documented; no runner or registered scheduler is bundled |
@@ -23,7 +24,6 @@ The sequence below is a proposed development roadmap reconstructed from the avai
 
 | Piece | Intended behavior | Dependencies | Completion criteria |
 | --- | --- | --- | --- |
-| Ship onboarding | Make the reviewed onboarding implementation available through the repository's delivery process | Review the local implementation, documentation, and validation evidence | Changes are committed, reviewed, and merged; the changelog and release status accurately describe what is available |
 | User-triggered execution | Load context, resume existing work or select the next eligible action, execute within scope, verify, and save a handoff | Established product context, the existing loop protocol, and actual tools and authorization for the selected action | An invocation completes a bounded action or leaves a specific blocked/waiting handoff; another session resumes without duplicating work; affected records match actual results |
 | Review and learning | Evaluate results against the original requirements and outcome criteria, then update decisions, learning, and priorities | Execution artifacts, observation sources, and an evaluation question; basic verification and handoff must already work in the first execution workflow | A supported or inconclusive result leads to a recorded decision and appropriate context updates; delivery is not mistaken for outcome validation |
 | New direction and feedback | Capture owner direction as steering and user feedback as evidence; reconcile each with priorities and active work | Existing record model and current product state; execution must already respect established direction | Representative direction changes and feedback update or retain priorities with a reason, preserve history, and leave a clear next action without changing operating authority |
@@ -39,7 +39,7 @@ The operating behavior already has a foundation: follow the [operating guide](OP
 - The skill interface for execution, review, and steering, including whether these use named commands or natural-language routing.
 - The runner, scheduling integration, and observation sources for recurring execution. No vendor or mandatory service has been chosen.
 - The pilot product, its owner, operating scope, and measures of whether ProductOS helps contributors work and resume effectively.
-- Release version and timing for the onboarding addition and subsequent capabilities.
+- Release version and timing for subsequent operating capabilities.
 
 Resolve these when designing the corresponding implementation. They do not prevent documenting or using the current onboarding workflow. Keep documentation adoption portable; optional automation must not become a prerequisite for using the model.
 

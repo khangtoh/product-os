@@ -8,6 +8,7 @@ Read in order when adopting the method for the first time:
 4. [Operating guide](OPERATING_GUIDE.md) — steering, prioritization, execution, handoffs, and learning.
 5. [Automation](AUTOMATION.md) — connect the model to actual execution over time.
 6. [Customization](CUSTOMIZATION.md) — adapt the model, integrate existing tools, and upgrade it.
+7. [Migrate to 0.2](MIGRATING_0.2.md) — promote the canonical contract and merge onboarding without losing applied history.
 
 The canonical [record model](../template/product/MODEL.md), [loop protocol](../template/product/LOOP.md), and [record templates](../template/product/templates/README.md) ship inside the portable template. The [worked example](../examples/first-learning-loop.md) illustrates them without creating live project records.
 
