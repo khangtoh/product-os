@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-No unreleased changes.
+- Replaced abbreviated record IDs such as `OPP-001` with full-word IDs such as `Opportunity-01`, and record filenames with `<ID>_short_text_description.md`. Existing abbreviated IDs remain valid and are not renamed.
 
 ## 0.2.0 — 2026-09-26
 

@@ -1,6 +1,6 @@
 # Record templates
 
-Copy the smallest template that fits the work. Replace every placeholder, allocate a unique ID, use a descriptive filename, and follow [MODEL.md](../MODEL.md). Create the destination directory when adding its first real record.
+Copy the smallest template that fits the work. Replace every placeholder, allocate a unique ID such as `Decision-01`, name the file `<ID>_short_text_description.md`, and follow [MODEL.md](../MODEL.md). Create the destination directory when adding its first real record.
 
 | Template | Destination | Use |
 | --- | --- | --- |

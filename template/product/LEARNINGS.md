@@ -11,7 +11,7 @@ No project learning is supplied by this template. Product direction is not proof
 | ID | Learning | Scope and confidence | Evidence | Consequence | Revisit condition |
 | --- | --- | --- | --- | --- | --- |
 
-Use IDs `LRN-001`, `LRN-002`, and so on. These IDs identify rows in this file, not separate records. Add a dated detail paragraph if a row needs more context.
+Use IDs `Learning-01`, `Learning-02`, and so on. These IDs identify rows in this file, not separate records. Add a dated detail paragraph if a row needs more context.
 
 ## Rules
 

@@ -12,17 +12,17 @@ PRODUCT.md would define that user job. STATE.md would name the current research 
 
 | Illustrative ID | Meaning | Links |
 | --- | --- | --- |
-| STR-001 | Investigate first-save confusion | OUT-001 |
-| OUT-001 | Improve successful first-save behavior | MET-001, EXP-001 |
-| EV-001 | Fictional usability notes suggest uncertainty about whether a link was saved | OPP-001 |
-| OPP-001 | New users cannot confidently tell whether saving succeeded | OUT-001, EV-001 |
-| FEAT-001 | Prototype a visible saved-item confirmation | OPP-001, OUT-001 |
-| EXP-001 | Evaluate whether the confirmation is understandable | FEAT-001, MET-001 |
-| EV-002 | Fictional observations from the prototype sessions | EXP-001 |
-| DEC-001 | Revise duplicate-save feedback before live exposure | EV-002, FEAT-001 |
-| LRN-001 | Distinguish first-save and already-saved feedback in future designs | EV-002, DEC-001 |
+| Steering-01 | Investigate first-save confusion | Outcome-01 |
+| Outcome-01 | Improve successful first-save behavior | Metric-01, Experiment-01 |
+| Evidence-01 | Fictional usability notes suggest uncertainty about whether a link was saved | Opportunity-01 |
+| Opportunity-01 | New users cannot confidently tell whether saving succeeded | Outcome-01, Evidence-01 |
+| Feature-01 | Prototype a visible saved-item confirmation | Opportunity-01, Outcome-01 |
+| Experiment-01 | Evaluate whether the confirmation is understandable | Feature-01, Metric-01 |
+| Evidence-02 | Fictional observations from the prototype sessions | Experiment-01 |
+| Decision-01 | Revise duplicate-save feedback before live exposure | Evidence-02, Feature-01 |
+| Learning-01 | Distinguish first-save and already-saved feedback in future designs | Evidence-02, Decision-01 |
 
-MET-001 would be defined in METRICS.md and LRN-001 in LEARNINGS.md. The other IDs would have typed records if this were a real project.
+Metric-01 would be defined in METRICS.md and Learning-01 in LEARNINGS.md. The other IDs would have typed records if this were a real project.
 
 ## Protocol before observation
 
@@ -42,6 +42,6 @@ The primary task criterion was met in this small sample, while a relevant failur
 
 The illustrative decision is to revise already-saved feedback before exposing the change to real users. The feature acceptance criteria gain an explicit duplicate-save case. The next experiment tests that case and later defines a suitable live evaluation. LEARNINGS records the scoped design lesson with its evidence and revisit condition.
 
-STATE points to the next action, and the roadmap keeps the user-value outcome active. The research cycle can be `completed`, EXP-001 can be `concluded`, and the feature can remain `building`. The outcome is not `achieved` because its live user-value criteria have not been demonstrated.
+STATE points to the next action, and the roadmap keeps the user-value outcome active. The research cycle can be `completed`, Experiment-01 can be `concluded`, and the feature can remain `building`. The outcome is not `achieved` because its live user-value criteria have not been demonstrated.
 
 That distinction lets the system learn honestly while continuing useful work.
