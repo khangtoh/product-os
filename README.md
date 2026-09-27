@@ -12,6 +12,7 @@ Its central convention is **[PRODUCT.md](docs/PRODUCT_MD.md)**: the shared produ
 - [Quickstart](docs/QUICKSTART.md) — add a clean instance to a new or existing project.
 - [Bare template](template/product/README.md) — copy this folder into your project as `product/`.
 - [Operating guide](docs/OPERATING_GUIDE.md) — how humans and agents work together day to day.
+- [Execution procedure](template/product/EXECUTION.md) — run one bounded action and leave a resumable handoff.
 - [Worked example](examples/first-learning-loop.md) — a fictional experiment from user problem to decision.
 
 ## Adopt it
@@ -29,6 +30,8 @@ Open that project in Codex and invoke `$product-os init`, or `/product-os init` 
 ```
 
 ProductOS reads existing context, then asks you about the vision, users, requirements, constraints, success criteria, and priorities still needed for a complete initial brief. It helps you decide when you are unsure, saves progress between rounds, and ends with a Now / Next / Later roadmap and a proposed first loop.
+
+Once a brief exists, carry out the next action with `$product-os run` or `/product-os run`. That follows [EXECUTION.md](template/product/EXECUTION.md): orient in current state, resume or select one action, bound it, execute within established authority, verify, and save a handoff another session can resume. Asking for the next action in ordinary language routes to the same procedure.
 
 New projects get a shared root `PRODUCT.md` and supporting context under `product/`. Existing product contracts and history are preserved. Installing the skill does not initialize a product or start a loop.
 
@@ -56,8 +59,9 @@ flowchart LR
 | --- | --- |
 | [docs/](docs/README.md) | Guides to the method, contract, adoption, collaboration, and automation |
 | [template/product/](template/product/README.md) | A blank, self-contained ProductOS instance |
-| [skills/product-os/](skills/product-os/SKILL.md) | Onboarding skill entrypoint; the installer bundles the template as assets |
+| [skills/product-os/](skills/product-os/SKILL.md) | Skill entrypoint for setup and execution; the installer bundles the template as assets |
 | [examples/](examples/README.md) | Explicitly fictional illustrations; never live project data |
+| [test_project/](test_project/README.md) | Fictional fixtures for the end-to-end onboarding test |
 | [AGENTS.md](AGENTS.md) | Instructions for maintaining this framework repository |
 | [VERSION](VERSION) | Framework release; changing it on `main` [releases](docs/RELEASING.md) that version |
 

@@ -15,3 +15,5 @@ This repository defines the reusable ProductOS method, guides, and bare template
 - Do not change visibility, add a license, or make external product commitments without applicable owner direction. Existing task authorization still applies to routine repository work.
 
 There is no application build or dependency installation step. Validate the documentation at the level affected by a change; do not create an implementation-shaped test suite for prose edits.
+
+The checks under `scripts/` are the exception that proves the rule: they validate the observable result of a procedure, not its wording. Run `python3 -m unittest discover -s scripts -p 'test_*.py'` for any change to the installer, the checker, or `template/product/`; it is stdlib-only, offline, and adds no dependency. Changing the onboarding procedure additionally warrants the scripted live run described in [framework maintenance guidance](docs/CUSTOMIZATION.md#improve-the-framework). A check that can only be expressed as "the prose says X" does not belong in that suite.

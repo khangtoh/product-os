@@ -10,8 +10,8 @@ Status snapshot: **2026-09-26**.
 | --- | --- |
 | Portable product memory, record model, and loop protocol | Available in the 0.2.0 framework |
 | Open-standard-compatible product contract | Available in 0.2.0 with ProductOS operating extensions |
-| Guided onboarding and contributor orientation | Available in 0.2.0 through the packaged ProductOS skill and portable prompt |
-| User-triggered product work | Can follow the documented loop through an ordinary prompt; no dedicated operating workflow is packaged in the skill |
+| Guided onboarding and contributor orientation | Available in 0.2.0 through the packaged ProductOS skill and portable prompt. Covered by an offline regression suite and one scripted live run against a fixture project; not exercised on an actual product |
+| User-triggered product work | Procedure packaged as [EXECUTION.md](../template/product/EXECUTION.md) and reachable through `run` or natural language; structurally checked but not behaviorally trialled |
 | Review, learning, and handling new direction | Described in the operating model; dedicated skill workflows remain to be implemented |
 | Recurring execution | Runtime contract documented; no runner or registered scheduler is bundled |
 | Complete experience on an actual product | Not yet validated as part of this work |
@@ -24,7 +24,8 @@ The sequence below is a proposed development roadmap reconstructed from the avai
 
 | Piece | Intended behavior | Dependencies | Completion criteria |
 | --- | --- | --- | --- |
-| User-triggered execution | Load context, resume existing work or select the next eligible action, execute within scope, verify, and save a handoff | Established product context, the existing loop protocol, and actual tools and authorization for the selected action | An invocation completes a bounded action or leaves a specific blocked/waiting handoff; another session resumes without duplicating work; affected records match actual results |
+| Validate user-triggered execution | Exercise the packaged procedure on real work, including a fresh-session resume, and correct what the trials expose | The procedure and `run` entry, an initialized product, and actual tools and authorization for the selected action | Real invocations complete a bounded action or leave a specific blocked/waiting handoff; another session resumes without duplicating work; affected records match actual results |
+| Second onboarding seed | Cover the established-contract path, where the rule whose violation destroys user data is "do not promote a populated local contract or replace a root file without direction to consolidate" | The existing fixture layout and checker; a seed with a populated contract, and a preservation check that allows extension while forbidding replacement | A seed whose captured run preserves the original contract's facts and structure; a mutation that overwrites it with the blueprint is rejected |
 | Review and learning | Evaluate results against the original requirements and outcome criteria, then update decisions, learning, and priorities | Execution artifacts, observation sources, and an evaluation question; basic verification and handoff must already work in the first execution workflow | A supported or inconclusive result leads to a recorded decision and appropriate context updates; delivery is not mistaken for outcome validation |
 | New direction and feedback | Capture owner direction as steering and user feedback as evidence; reconcile each with priorities and active work | Existing record model and current product state; execution must already respect established direction | Representative direction changes and feedback update or retain priorities with a reason, preserve history, and leave a clear next action without changing operating authority |
 | Recurring execution | Wake on a useful schedule or event, resume eligible work, persist results, and arrange the next check | A proven user-triggered loop, an actual runner and scheduler, observation, resource limits, and coordination where needed | A registered trigger causes a real run, persists verified results, and resumes correctly on a later run; interruption, uncertain side effects, and observation failure are handled |
@@ -38,7 +39,7 @@ The operating behavior already has a foundation: follow the [operating guide](OP
 
 - The skill interface for execution, review, and steering, including whether these use named commands or natural-language routing.
 - The runner, scheduling integration, and observation sources for recurring execution. No vendor or mandatory service has been chosen.
-- The pilot product, its owner, operating scope, and measures of whether ProductOS helps contributors work and resume effectively.
+- The pilot product, its owner, operating scope, and measures of whether ProductOS helps contributors work and resume effectively. The [fixture project](../test_project/README.md) is a test harness, not a pilot: its product is fictional and its answers are scripted.
 - Release version and timing for subsequent operating capabilities.
 
 Resolve these when designing the corresponding implementation. They do not prevent documenting or using the current onboarding workflow. Keep documentation adoption portable; optional automation must not become a prerequisite for using the model.

@@ -11,6 +11,7 @@ This is a bare instance. No project facts, live records, measurements, or operat
 - Read [PRODUCT.md](PRODUCT.md) for product intent and [STATE.md](STATE.md) for current work.
 - Agents also read [AGENTS.md](AGENTS.md). Humans can use [WORKING_TOGETHER.md](WORKING_TOGETHER.md).
 - Use [guided onboarding](ONBOARDING.md) to establish an initial product brief, requirements, and roadmap, or follow the same guide manually. Keep uncertainty explicit.
+- Once the brief exists, use [execution](EXECUTION.md) to carry out the next bounded action and leave a resumable handoff.
 - Connect the project root's existing agent instructions to this folder; a nested context file may not be automatically loaded when working elsewhere.
 
 ## Map
@@ -18,6 +19,7 @@ This is a bare instance. No project facts, live records, measurements, or operat
 | Location | Purpose |
 | --- | --- |
 | [ONBOARDING.md](ONBOARDING.md) | Guided setup or orientation for a new contributor |
+| [EXECUTION.md](EXECUTION.md) | Procedure for running one bounded action and handing off |
 | [PRODUCT.md](PRODUCT.md) | Contract blueprint; after onboarding, entry point to the canonical contract |
 | [VISION.md](VISION.md) | Durable ambition and boundaries |
 | [REQUIREMENTS.md](REQUIREMENTS.md) | Core workflows, initial requirements, acceptance criteria, and open decisions |
@@ -25,7 +27,7 @@ This is a bare instance. No project facts, live records, measurements, or operat
 | [ROADMAP.md](ROADMAP.md) | Outcome priority order |
 | [STATE.md](STATE.md) | Current truth and resumable handoff |
 | [MODEL.md](MODEL.md) | Record types, metadata, relationships, and lifecycle |
-| [LOOP.md](LOOP.md) | Development, operation, and learning protocol |
+| [LOOP.md](LOOP.md) | Canonical development, operation, and learning protocol |
 | [METRICS.md](METRICS.md) | Measurement definitions |
 | [LEARNINGS.md](LEARNINGS.md) | Evidence-backed reusable knowledge |
 | [operations/](operations/README.md) | Actual capabilities, authority, runbooks, and incidents |

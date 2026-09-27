@@ -46,7 +46,13 @@ def install(project, agent="codex"):
         raise ValueError("The target project must be an existing directory.")
     if project == ROOT or ROOT in project.parents:
         raise ValueError("Choose a target outside the ProductOS framework checkout.")
-    for required in (SKILL_SOURCE / "SKILL.md", TEMPLATE / "ONBOARDING.md", TEMPLATE / "MODEL.md"):
+    for required in (
+        SKILL_SOURCE / "SKILL.md",
+        TEMPLATE / "ONBOARDING.md",
+        TEMPLATE / "EXECUTION.md",
+        TEMPLATE / "MODEL.md",
+        TEMPLATE / "LOOP.md",
+    ):
         if not required.is_file():
             raise ValueError("Incomplete framework checkout: missing {}".format(required))
 

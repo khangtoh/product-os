@@ -30,7 +30,7 @@ No onboarding session recorded. Use [ONBOARDING.md](ONBOARDING.md) and the compl
 
 ## Next action
 
-For setup, use [ONBOARDING.md](ONBOARDING.md) to establish the initial brief and roadmap. For ongoing product work, resume its actual next action. Record existing capabilities and authority in [operations](operations/README.md); optional missing fields alone do not require onboarding again.
+For setup, use [ONBOARDING.md](ONBOARDING.md) to establish the initial brief and roadmap. For ongoing product work, resume its actual next action using [EXECUTION.md](EXECUTION.md). Record existing capabilities and authority in [operations](operations/README.md); optional missing fields alone do not require onboarding again.
 
 ## Dependencies
 

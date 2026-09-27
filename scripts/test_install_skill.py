@@ -111,7 +111,7 @@ class InstallSkillTests(unittest.TestCase):
     def test_source_keeps_argument_hint_under_metadata(self):
         lines = (SKILL_SOURCE / "SKILL.md").read_text().split("\n---\n", 1)[0].splitlines()
         self.assertFalse(any(line.startswith("argument-hint:") for line in lines))
-        self.assertEqual(lines[lines.index("metadata:") + 1], '  argument-hint: "[init|resume|orient] [target or question]"')
+        self.assertEqual(lines[lines.index("metadata:") + 1], '  argument-hint: "[init|resume|orient|run] [target or question]"')
 
     def test_claude_install_hoists_argument_hint_for_the_slash_menu(self):
         [destination] = install(self.project, "claude")
@@ -119,7 +119,7 @@ class InstallSkillTests(unittest.TestCase):
         installed = (destination / "SKILL.md").read_text()
         source = (SKILL_SOURCE / "SKILL.md").read_text()
         frontmatter, body = installed[4:].split("\n---\n", 1)
-        self.assertIn('argument-hint: "[init|resume|orient] [target or question]"', frontmatter.splitlines())
+        self.assertIn('argument-hint: "[init|resume|orient|run] [target or question]"', frontmatter.splitlines())
         self.assertNotIn("metadata:", frontmatter.splitlines())
         self.assertEqual(body, source[4:].split("\n---\n", 1)[1])
         self.assertEqual(snapshot(destination / "assets/product"), snapshot(TEMPLATE))

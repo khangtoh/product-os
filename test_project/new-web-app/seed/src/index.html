@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>PocketGarden</title>
+  </head>
+  <body>
+    <h1>PocketGarden</h1>
+    <form id="save-form">
+      <input id="url" placeholder="https://..." />
+      <input id="title" placeholder="Title" />
+      <button type="submit">Save</button>
+    </form>
+    <input id="query" placeholder="Search titles" />
+    <ul id="results"></ul>
+    <script type="module">
+      import { save } from "./store.js";
+      import { searchByTitle } from "./search.js";
+
+      const results = document.getElementById("results");
+
+      function render(items) {
+        results.innerHTML = "";
+        for (const item of items) {
+          const li = document.createElement("li");
+          const a = document.createElement("a");
+          a.href = item.url;
+          a.textContent = item.title;
+          li.appendChild(a);
+          results.appendChild(li);
+        }
+      }
+
+      document.getElementById("save-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        save(document.getElementById("url").value, document.getElementById("title").value);
+        render(searchByTitle(document.getElementById("query").value));
+      });
+
+      document.getElementById("query").addEventListener("input", (event) => {
+        render(searchByTitle(event.target.value));
+      });
+
+      render(searchByTitle(""));
+    </script>
+  </body>
+</html>

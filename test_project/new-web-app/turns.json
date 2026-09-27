@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "source": "examples/onboarding.md",
+  "note": "The five answer turns are verbatim from the fictional walkthrough so the drift guard in scripts/test_check_instance.py can confirm they still match. The trigger and catch_all are not from the walkthrough: the walkthrough shows Codex syntax ($product-os init), and the catch-all is a harness turn with no counterpart in the prose.",
+  "trigger": "/product-os init",
+  "turns": [
+    "Researchers who save articles while reading and later lose track of them. They use browser bookmarks or notes. I want them to retrieve what they found without having to organize everything. Treat that audience as my initial hypothesis; we haven't tested it.",
+    "Save an article link, search my saved collection by title, and open the original article. A saved article must appear in the collection; a title search must return its matching article; opening the result must use its saved URL. If there are no matches, explain that and let me change the query. Preserve the existing saving flow. No team libraries or automated summaries for now.",
+    "Keep it a web app. Saving, search, and opening a result must work by keyboard, and collection controls need visible labels. My requirement is to keep each user's collection private; verify that before exposing changes. We haven't inspected production health or analytics. No release date is committed. Defer a numeric speed target until we can inspect current behavior; I'll own that follow-up.",
+    "First find out whether researchers can retrieve an old article. We have no observations. Next, improve retrieval using what we learn; treat that as proposed. Leave Later undecided until the first study, and I'll revisit it then. I don't want an invented backlog.",
+    "Observe researchers trying to retrieve an article from their collection and record whether they can find and open it without help. Defer the participant count, decision threshold, and timing until the study is scoped. I'm the product owner and will arrange the first session. This is an early prototype; there's no other active work. Record that next action and stop after setup."
+  ],
+  "catch_all": "That is everything I have. Finish saving the initial brief, wire the product context into the project's agent instructions, and show me the linked summary. For anything still open, use your recommendation and label it as a hypothesis or an explicit deferral with an owner and a discovery action."
+}

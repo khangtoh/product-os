@@ -2,7 +2,7 @@
 
 ProductOS keeps product intent, requirements, priorities, and learning available to people and agents. Onboarding establishes a complete initial brief through a conversation, then offers the first useful loop.
 
-If the ProductOS skill is installed, invoke `$product-os init`. Otherwise, after copying this folder into a target project, paste:
+If the ProductOS skill is installed, invoke `$product-os init` in Codex or `/product-os init` in Claude Code. Otherwise, after copying this folder into a target project, paste:
 
 ```text
 Read product/ONBOARDING.md and guide me through ProductOS onboarding.
@@ -110,13 +110,15 @@ Apply the completion rules in [MODEL.md](MODEL.md#onboarding-completion). Verify
 
 Show a short linked summary of the product vision, core requirements, Now / Next / Later priorities, unresolved decisions, and the first proposed action. Invite corrections. Record completion only once the required coverage has been saved and presented; do not require another approval round for answers already given.
 
-Offer the next action using a working prompt such as:
+Offer the next action. With the skill installed, that is `$product-os run`; otherwise use a working prompt such as:
 
 ```text
-Read the product context and current state. Carry out the next eligible
-bounded action using the ProductOS loop, verify the result, and save a handoff.
+Read product/EXECUTION.md and carry out the next eligible bounded action.
+Load the product context and current state, resume existing work or select
+the next action, execute within established scope, verify the result, and
+save a handoff.
 ```
 
-Also offer scheduling setup as a separate next step when the user wants recurring work. A proposed cadence or next-review field is not a registered schedule. Do not present run or scheduling skill commands that have not been implemented.
+Both follow [EXECUTION.md](EXECUTION.md). Offer scheduling setup as a separate next step when the user wants recurring work, and note that no runner ships with this model. A proposed cadence or next-review field is not a registered schedule. Do not present review or scheduling skill commands that have not been implemented.
 
-An onboarding-only request ends with this offer. Do not start implementation, release anything, or register a schedule. If a broader request already authorizes subsequent work, hand back to that task's workflow using [LOOP.md](LOOP.md) and existing operating scope. On a later onboarding visit, continue from the saved checkpoint rather than repeating settled questions.
+An onboarding-only request ends with this offer. Do not start implementation, release anything, or register a schedule. If a broader request already authorizes subsequent work, continue through [EXECUTION.md](EXECUTION.md) within existing operating scope. On a later onboarding visit, continue from the saved checkpoint rather than repeating settled questions.

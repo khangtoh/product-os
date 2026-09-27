@@ -29,7 +29,7 @@ These decisions are implemented through the canonical [onboarding coverage and c
 
 ### Entry points and installation
 
-The [skill](../skills/product-os/SKILL.md) handles `$product-os init` (`/product-os init` in Claude Code), `resume`, `orient`, and the equivalent natural-language requests. A bare invocation reports readiness and offers the appropriate next step. Advice requests remain advice; execution and scheduling requests are directed to the existing loop and operations guidance without claiming unsupported subcommands.
+The [skill](../skills/product-os/SKILL.md) handles `$product-os init` (`/product-os init` in Claude Code), `resume`, `orient`, and the equivalent natural-language requests. A bare invocation reports readiness and offers the appropriate next step. Advice requests remain advice. Execution later gained its own `run` entry, recorded in the [execution implementation record](EXECUTION_IMPLEMENTATION.md); review, steering, and scheduling requests are still directed to the existing loop and operations guidance without claiming unsupported subcommands.
 
 The [installer](../scripts/install_skill.py) accepts an existing target directory through `--project` and creates `.agents/skills/product-os/` for Codex, `.claude/skills/product-os/` with `--agent claude`, or both with `--agent both`. It bundles the skill entry point and the canonical blank template under `assets/product/`, using only Python's standard library. The source skill alone is not a complete installed package.
 
@@ -71,6 +71,8 @@ The following checks were completed during implementation on 2026-09-26. They ar
 | Contributor, ambiguous-target, and read-only scenarios | Oriented without rewriting context, requested target clarification before writing, and reported unsaved proposals honestly |
 | Platform heading follow-up | An initial simulation combined platform with boundaries; the guide was clarified and a fresh installed-skill simulation retained a standalone Platform section |
 | Documentation and template checks | Repository and isolated-template relative links and anchors resolved; generic-template leakage checks and whitespace checks passed; record templates were unchanged |
+| Offline onboarding regression checks ([checker](../scripts/check_instance.py), [tests](../scripts/test_check_instance.py)), added 2026-09-27 | Passed. A captured completed instance satisfies the canonical-home, required-area, front-matter, lifecycle, measurement, and link rules; a bare installation fails those checks; 28 mutations of the captured instance are each rejected by their named check. The checker parses record types, id forms, and lifecycle states from MODEL.md rather than restating them. Deterministic, offline, no agent involved. |
+| Scripted live onboarding run ([runner](../scripts/run_onboarding_e2e.py), opt-in), 2026-09-27 | A scripted seven-turn headless interview plus two catch-all nudges, in a temporary project outside the checkout, produced an instance passing every check above and left the installed skill assets byte-identical. One sample, one model, one CLI version, one runtime. |
 
 The 2026-09-27 update added these checks:
 
@@ -86,7 +88,11 @@ Installer tests can be rerun with:
 python3 -m unittest discover -s scripts -p 'test_*.py' -v
 ```
 
-The interview scenarios were agent-driven trials in temporary fixtures, not an automated regression suite committed to the repository. Future procedure changes should repeat the relevant scenarios and inspect saved context and handoffs, as described in [framework maintenance guidance](CUSTOMIZATION.md#improve-the-framework).
+The first two checks are now an automated regression suite committed to the repository; [the fixtures](../test_project/README.md) hold the mock product, the scripted turns, the expectation spec, and the captured instance. The remaining scenarios — contributor orientation, ambiguous target scope, and read-only access — stay manual, as described in [framework maintenance guidance](CUSTOMIZATION.md#improve-the-framework).
+
+These are regression checks over one captured run, not validation of onboarding. They cannot show that the interview asks good questions, that unscripted users reach the same coverage, that the Codex entry point behaves the same way, or that any product outcome improved. A captured instance goes stale when the template changes; a provenance digest fails the suite when it does, and the only sanctioned fix is a recapture.
+
+The first complete live run exposed seven defects, all in the checker, the expectation spec, or the test harness, and no gap in the procedure itself. They are recorded with their classifications in [the fixture README](../test_project/README.md).
 
 ## Limits and follow-up
 
