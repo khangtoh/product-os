@@ -1,0 +1,18 @@
+{
+  "name": "product-os",
+  "kitUpstream": "khangtoh/specloop",
+  "sync": [
+    { "file": "README.md", "pattern": "Current release: \\[([^\\]]+)\\]" },
+    { "file": "template/product/README.md", "pattern": "Template version: (\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?)" }
+  ],
+  "changelog": "CHANGELOG.md",
+  "verify": [
+    ["python3", "-m", "unittest", "discover", "-s", "scripts", "-p", "test_*.py"],
+    ["python3", "scripts/check_links.py"],
+    ["python3", "scripts/check_links.py", "--template"],
+    ["node", "--test", "scripts/release-kit/release.test.mjs"]
+  ],
+  "package": ["python3", "scripts/package_release.py", "--out", "{out}", "--version", "{version}"],
+  "verifyArtifacts": [["python3", "scripts/package_release.py", "--check", "{out}", "--version", "{version}"]],
+  "publish": null
+}

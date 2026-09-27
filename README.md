@@ -59,6 +59,7 @@ flowchart LR
 | [skills/product-os/](skills/product-os/SKILL.md) | Onboarding skill entrypoint; the installer bundles the template as assets |
 | [examples/](examples/README.md) | Explicitly fictional illustrations; never live project data |
 | [AGENTS.md](AGENTS.md) | Instructions for maintaining this framework repository |
+| [VERSION](VERSION) | Framework release; changing it on `main` [releases](docs/RELEASING.md) that version |
 
 The template contains no product decisions, evidence, assigned work, or inherited permissions. Your project owns the facts and history after adoption. You can adapt it without a hosted service or a particular model, framework, or database.
 

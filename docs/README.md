@@ -16,5 +16,6 @@ The canonical [record model](../template/product/MODEL.md), [loop protocol](../t
 
 - [Development plan](DEVELOPMENT_PLAN.md) — current capability status, remaining work, dependencies, and completion criteria.
 - [Onboarding decisions and implementation](ONBOARDING_IMPLEMENTATION.md) — implemented design, rationale, validation, and limits.
+- [Releasing](RELEASING.md) — how a VERSION change on `main` becomes a tagged GitHub Release with packaged archives.
 
 These documents track development of ProductOS itself; they are not part of an adopting project's product context.
