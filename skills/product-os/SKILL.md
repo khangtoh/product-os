@@ -1,6 +1,8 @@
 ---
 name: product-os
 description: Onboard a new or existing project to ProductOS through a product interview, save its vision, requirements, and roadmap, resume incomplete setup, or orient a new contributor. Use for ProductOS setup and orientation, not ordinary implementation requests.
+metadata:
+  argument-hint: "[init|resume|orient] [target or question]"
 ---
 
 # ProductOS onboarding
@@ -10,8 +12,9 @@ Help the user establish a complete initial product brief and a resumable startin
 ## Choose the entry
 
 - `init`, a request to set up ProductOS, or a request to complete its onboarding: follow the onboarding guide below.
-- A person joining an initialized project: use the guide's orientation path, preserving established direction.
-- Bare invocation with no task: inspect the target's existing contract and current state, briefly describe setup readiness, and offer `init`, resuming the interview, or orientation. Do not start writing or interviewing until the intent is clear.
+- `resume`, or a request to continue an interrupted setup: follow the guide from the saved onboarding checkpoint, asking only the next unresolved questions. With no checkpoint, say so and offer `init`.
+- `orient`, or a person joining an initialized project: use the guide's orientation path, preserving established direction.
+- Bare invocation with no task: inspect the target's existing contract and current state, briefly describe setup readiness, and offer `init`, `resume`, or `orient`. Do not start writing or interviewing until the intent is clear.
 - Advice about the method: answer from the bundled guide and model without starting setup.
 - An execution or scheduling request: explain that this skill supplies setup, and point to the target's loop and operations context for the requested next workflow. Do not claim another skill subcommand exists.
 

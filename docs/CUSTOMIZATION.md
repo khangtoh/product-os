@@ -61,7 +61,7 @@ Do not label an older brief complete merely because its files exist. During a re
 
 ### Update the installed skill
 
-The installer refuses an existing `.agents/skills/product-os/` destination, including an empty directory or symlink. To replace it deliberately, preserve local skill edits, move only that skill folder to a backup outside the skill-discovery directory, and rerun the installer from the desired framework checkout. Compare and reapply intentional local skill changes; start a new Codex session if needed.
+The installer refuses an existing `.agents/skills/product-os/` or `.claude/skills/product-os/` destination, including an empty directory or symlink. To replace it deliberately, preserve local skill edits, move only that skill folder to a backup outside the skill-discovery directory, and rerun the installer from the desired framework checkout. Compare and reapply intentional local skill changes; start a new Codex or Claude Code session if needed. Pass the same `--agent` value used originally.
 
 Skill assets are bundled blank templates. Updating them does not update project-owned PRODUCT, requirements, roadmap, state, or agent instructions. Merge improvements into applied context using the migration guidance above, never by recopying the blank asset folder. No automatic updater or project migration is included.
 

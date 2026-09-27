@@ -10,7 +10,8 @@ This repository defines the reusable ProductOS method, guides, and bare template
 - Preserve the distinction between delivery and validated outcomes, owner direction and user evidence, and written scheduling intent and actual runtime execution.
 - Do not add a mandatory service, framework, SDK, or agent runtime just to adopt the documentation model.
 - When changing file paths, metadata, or states, update guides, templates, examples, version notes, and migration instructions together.
-- Before publishing, check relative links across the repository and in an isolated copy of the template. Check for project-specific leakage and consistency of the example with the declared model.
+- Before publishing, check relative links across the repository and in an isolated copy of the template (`python3 scripts/check_links.py` and `--template`). Check for project-specific leakage and consistency of the example with the declared model.
+- Release by bumping [VERSION](VERSION) with `node scripts/release-kit/release.mjs bump`; CI tags and packages it. See [releasing](docs/RELEASING.md). Change the shared release kit in specloop first, then copy it here unchanged.
 - Do not change visibility, add a license, or make external product commitments without applicable owner direction. Existing task authorization still applies to routine repository work.
 
 There is no application build or dependency installation step. Validate the documentation at the level affected by a change; do not create an implementation-shaped test suite for prose edits.

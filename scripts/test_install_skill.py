@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from install_skill import ROOT, SKILL_SOURCE, TEMPLATE, install
+from install_skill import ROOT, SKILL_SOURCE, TEMPLATE, claude_skill, install
 
 
 def snapshot(directory):
@@ -52,7 +52,7 @@ class InstallSkillTests(unittest.TestCase):
         self.assertEqual(positions, sorted(positions))
 
     def test_installs_self_contained_skill_without_initializing_product(self):
-        destination = install(self.project)
+        [destination] = install(self.project)
         self.assertEqual(destination, self.project / ".agents/skills/product-os")
         self.assertEqual((destination / "SKILL.md").read_bytes(), (SKILL_SOURCE / "SKILL.md").read_bytes())
         self.assertEqual(snapshot(destination / "assets/product"), snapshot(TEMPLATE))
@@ -71,7 +71,7 @@ class InstallSkillTests(unittest.TestCase):
         self.assertTrue(all(after[path] == content for path, content in before.items()))
 
     def test_refuses_reinstallation_without_changes(self):
-        destination = install(self.project)
+        [destination] = install(self.project)
         (destination / "SKILL.md").write_text("Locally customized skill")
         before = snapshot(self.project)
         with self.assertRaises(ValueError):
@@ -106,6 +106,50 @@ class InstallSkillTests(unittest.TestCase):
             with self.assertRaises(OSError):
                 install(self.project)
         self.assertFalse((self.project / ".agents/skills/product-os").exists())
+
+
+    def test_source_keeps_argument_hint_under_metadata(self):
+        lines = (SKILL_SOURCE / "SKILL.md").read_text().split("\n---\n", 1)[0].splitlines()
+        self.assertFalse(any(line.startswith("argument-hint:") for line in lines))
+        self.assertEqual(lines[lines.index("metadata:") + 1], '  argument-hint: "[init|resume|orient] [target or question]"')
+
+    def test_claude_install_hoists_argument_hint_for_the_slash_menu(self):
+        [destination] = install(self.project, "claude")
+        self.assertEqual(destination, self.project / ".claude/skills/product-os")
+        installed = (destination / "SKILL.md").read_text()
+        source = (SKILL_SOURCE / "SKILL.md").read_text()
+        frontmatter, body = installed[4:].split("\n---\n", 1)
+        self.assertIn('argument-hint: "[init|resume|orient] [target or question]"', frontmatter.splitlines())
+        self.assertNotIn("metadata:", frontmatter.splitlines())
+        self.assertEqual(body, source[4:].split("\n---\n", 1)[1])
+        self.assertEqual(snapshot(destination / "assets/product"), snapshot(TEMPLATE))
+        self.assertFalse((self.project / ".agents").exists())
+
+    def test_claude_hoist_keeps_other_metadata_and_ignores_hintless_skills(self):
+        text = '---\nname: x\ndescription: d\nmetadata:\n  argument-hint: "[a]"\n  version: "1"\n---\n\nBody\n'
+        self.assertEqual(claude_skill(text), '---\nname: x\ndescription: d\nargument-hint: "[a]"\nmetadata:\n  version: "1"\n---\n\nBody\n')
+        plain = "---\nname: x\ndescription: d\n---\n\nBody\n"
+        self.assertEqual(claude_skill(plain), plain)
+
+    def test_both_installs_each_runtime_form(self):
+        codex, claude = install(self.project, "both")
+        self.assertEqual((codex / "SKILL.md").read_bytes(), (SKILL_SOURCE / "SKILL.md").read_bytes())
+        self.assertEqual((claude / "SKILL.md").read_text(), claude_skill((SKILL_SOURCE / "SKILL.md").read_text()))
+
+    def test_both_refuses_without_writing_when_either_destination_exists(self):
+        existing = self.project / ".claude/skills/product-os/SKILL.md"
+        existing.parent.mkdir(parents=True)
+        existing.write_text("Locally customized skill")
+        before = snapshot(self.project)
+        with self.assertRaises(ValueError):
+            install(self.project, "both")
+        self.assertEqual(snapshot(self.project), before)
+        self.assertFalse((self.project / ".agents").exists())
+
+    def test_rejects_unknown_agent(self):
+        with self.assertRaises(ValueError):
+            install(self.project, "cursor")
+        self.assertEqual(list(self.project.iterdir()), [])
 
 
 if __name__ == "__main__":
