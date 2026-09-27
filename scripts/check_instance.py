@@ -33,7 +33,7 @@ CHECKS = (
     "skill_assets_untouched",
     "adoption_stamp_set",
     "blank_markers_reduced",
-    "product_table_filled",
+    "contract_sections_resolved",
     "platform_section_standalone",
     "roadmap_now_has_rows",
     "state_checkpoint_resolved",
@@ -136,7 +136,9 @@ def _slug(heading):
     text = heading.lstrip("#").strip().lower()
     text = re.sub(r"[`*\[\]()]", "", text)
     text = re.sub(r"[^\w\s-]", "", text)
-    return re.sub(r"\s+", "-", text).strip("-")
+    # One hyphen per whitespace character, not per run: removing an em dash from
+    # "FR-4 — Explain" leaves two spaces, and the anchor is "fr-4--explain".
+    return re.sub(r"\s", "-", text).strip("-")
 
 
 def model_rules(template=TEMPLATE):
@@ -399,16 +401,25 @@ def check_instance(project, expect, template=TEMPLATE, seed=None, skill_source=S
     # --- the canonical contract -------------------------------------------
     contract_text = text_of(contract)
     if contract_text:
-        rows = _table_rows(contract_text, "## Purpose and identity")
-        if not rows:
-            add("product_table_filled", "error", contract, "no '## Purpose and identity' table found")
-        for cells in rows:
-            if len(cells) < 2:
+        sections = expect.get("contract_sections") or []
+        present = _headings(contract_text)
+        for heading in sections:
+            if heading not in present:
+                add("contract_sections_resolved", "error", contract,
+                    "canonical contract section is missing: {}".format(heading))
                 continue
-            field, value = cells[0], cells[1]
-            if not value or value.lower() == "unknown":
-                add("product_table_filled", "error", contract,
-                    "identity row still unresolved: {}".format(field))
+            body = _section(contract_text, heading).strip()
+            if not body:
+                add("contract_sections_resolved", "error", contract,
+                    "contract section is empty: {}".format(heading))
+            elif re.match(r"(?i)^unknown\b", body):
+                add("contract_sections_resolved", "error", contract,
+                    "contract section still holds the template placeholder: {}".format(heading))
+        # The pre-0.3.0 contract carried these as one table; support an instance that still does.
+        for cells in _table_rows(contract_text, "## Purpose and identity"):
+            if len(cells) >= 2 and (not cells[1] or cells[1].lower() == "unknown"):
+                add("contract_sections_resolved", "error", contract,
+                    "identity row still unresolved: {}".format(cells[0]))
 
         if "## Platform" not in _headings(contract_text):
             add("platform_section_standalone", "error", contract,
@@ -462,12 +473,14 @@ def check_instance(project, expect, template=TEMPLATE, seed=None, skill_source=S
             ("coverage", r"(?i)coverage|required area|saved where|saved in"),
             ("completion", r"(?i)\bcomplete|\bincomplete|\bremaining\b|outstanding"),
             ("deferrals", r"(?i)defer|no deferrals"),
-            ("readiness", r"(?i)readiness|\bready\b|depend|blocks|blocked"),
+            ("readiness", r"(?i)readiness|\bready\b|depend|block|prerequisite|not implementation|cannot"),
         )
         for name, pattern in topics:
-            if not re.search(pattern, body):
-                add("state_checkpoint_resolved", "error", state_rel,
-                    "checkpoint does not address {}".format(name))
+            if re.search(pattern, body):
+                continue
+            severity = "warning" if name == "readiness" else "error"
+            add("state_checkpoint_resolved", severity, state_rel,
+                "checkpoint does not visibly address {}".format(name))
 
     # --- local contract pointer -------------------------------------------
     pointer = expect.get("pointer")
@@ -589,9 +602,15 @@ def check_instance(project, expect, template=TEMPLATE, seed=None, skill_source=S
     metrics = text_of(metrics_rel)
     if metrics:
         for cells in _table_rows(metrics, "## Metric registry"):
-            if cells and cells[0]:
+            if not (cells and cells[0]):
+                continue
+            row = " | ".join(cells)
+            scrubbed = re.sub(r"\d{4}-\d{2}-\d{2}|\b[A-Za-z]+-\d{2,4}\b|`[^`]*`", "", row)
+            if re.search(r"\d", scrubbed) and not re.search(
+                    r"(?i)\bunknown\b|\bnot measured\b|\bno baseline\b|\bnone\b|"
+                    r"\bno target\b|\bunmeasured\b|\bn/a\b", row):
                 add("no_fabricated_measurement", "warning", metrics_rel,
-                    "metric registry row {!r} was added during setup; confirm it is measured, "
+                    "metric registry row {!r} carries a measurement; confirm it was measured, "
                     "not invented".format(cells[0]))
     for rel, fields in records:
         if fields.get("type") != "outcome":
@@ -604,8 +623,9 @@ def check_instance(project, expect, template=TEMPLATE, seed=None, skill_source=S
             scrubbed = re.sub(r"\d{4}-\d{2}-\d{2}|\b[A-Z]{2,4}-\d{2,4}\b|`[^`]*`", "", line)
             if not re.search(r"\d", scrubbed):
                 continue
-            if re.search(r"(?i)unknown|not measured|no measurement|no baseline|none|unmeasured|"
-                         r"not yet|no observation|n/?a", line):
+            if re.search(r"(?i)\bunknown\b|\bnot measured\b|\bno measurement\b|\bno baseline\b|"
+                         r"\bnone\b|\bunmeasured\b|\bnot yet\b|\bno observation\b|"
+                         r"\bn/a\b", line):
                 continue
             add("no_fabricated_measurement", "warning", rel,
                 "baseline line carries a measurement: {}".format(line.strip()[:70]))

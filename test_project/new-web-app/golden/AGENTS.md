@@ -13,6 +13,3 @@ For product work, read PRODUCT.md, product/AGENTS.md, and product/STATE.md
 before making changes. Follow linked vision, requirements, roadmap, and
 work records as needed. Update the affected context after material
 product decisions or results.
-
-Privacy is an owner requirement: each user's collection stays private, and
-that must be verified before exposing any change.

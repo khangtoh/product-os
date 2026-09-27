@@ -2,8 +2,6 @@
 
 ProductOS keeps product intent, requirements, priorities, and learning available to people and agents. Onboarding establishes a complete initial brief through a conversation, then offers the first useful loop.
 
-> **This instance is already adopted.** PocketGarden was onboarded on 2026-09-27; the canonical contract is [../PRODUCT.md](../PRODUCT.md) and the checkpoint is in [STATE.md](STATE.md). Use this guide to **orient a new contributor** or to **resume the incomplete checkpoint**, not to start over. An orientation does not reset the brief or create a fresh roadmap.
-
 If the ProductOS skill is installed, invoke `$product-os init` in Codex or `/product-os init` in Claude Code. Otherwise, after copying this folder into a target project, paste:
 
 ```text
@@ -37,7 +35,7 @@ Start with a concise summary of what the project establishes and what remains un
 
 Use [MODEL.md's required areas](MODEL.md#onboarding-completion) as a coverage checklist, not a questionnaire to dump on the user. A useful progression is:
 
-- **Purpose and people:** What lasting change should this product make possible? Who needs it, in what situation, and what do they use today?
+- **Purpose and people:** What lasting change should this product make possible? Who needs it, in what situation, and what do they use today? Establish whether the product-wide Register is `brand` or `product`; if the repository does not make that clear, explain the distinction and ask.
 - **Experience and requirements:** What must users be able to do? Walk through the essential workflow. What behavior must the first version include, and how would we check it works? Which failures matter?
 - **Boundaries and success:** What must remain intact, and what is out of scope? What platform and constraints apply? What result would tell us the product is helping, and what evidence do we already have?
 - **Direction and starting work:** Which outcomes belong Now, Next, and Later, and why? What is already underway? Who owns direction and the first action, and what needs resolving before it can start?
@@ -70,11 +68,15 @@ Follow [MODEL.md's canonical homes](MODEL.md#canonical-homes):
 
 Do not overwrite an unrelated root file. If two populated contracts disagree, resolve authority with the user. Do not invent a second canonical definition or claim compatibility with another tool solely because a link exists. Keep DESIGN.md and other existing design artifacts in place.
 
-When creating a new contract, retain the blueprint's standalone `## Platform` heading and put the established platform beneath it. Keep constraints in a separate section. This lets tools that read that heading find the platform; an unresolved platform stays `unknown`. Preserve useful existing contract structure when updating an established file.
+When creating a new contract, retain the blueprint's open PRODUCT.md metadata and canonical headings. Replace the H1 with the product name and the opening line with its promise. Resolve `## Register` to `brand` or `product` and add the identical `register:` value to frontmatter. Keep the standalone `## Platform` heading and put the established platform beneath it. Keep boundaries separate. Omit Offer, pricing islands, and `$id` unless their values and any public binding are established.
+
+When updating an existing contract, preserve frontmatter, valid machine islands, and sections not owned by ProductOS. Map supported facts into canonical headings without erasing useful local sections. Current page-level design modes may differ from the product Register.
+
+This lets standard-aware tools consume the contract while ProductOS follows its extension sections and linked records. Preserve useful existing contract structure when updating an established file.
 
 | Destination | Saved context |
 | --- | --- |
-| Canonical PRODUCT | Concise identity, promise, users and alternatives, platform, boundaries, sources, and navigation |
+| Canonical PRODUCT | Product-name H1 and promise; Register; users, problem and alternatives; purpose; voice and design commitments; accessibility; platform; boundaries; ProductOS operating sections; sources and navigation |
 | [VISION.md](VISION.md) | Lasting product ambition and durable principles |
 | [REQUIREMENTS.md](REQUIREMENTS.md) | Core workflows, initial functional and quality requirements, acceptance criteria, exclusions, and open decisions |
 | [STRATEGY.md](STRATEGY.md) | Initial approach, rationale, assumptions, and what would change the approach |
@@ -101,8 +103,6 @@ product decisions or results.
 ```
 
 Adapt the contract and folder paths for an existing instance or standalone context repository. Use the project's equivalent agent configuration when applicable, and report exactly what was changed. A nested AGENTS.md alone may not load during work elsewhere.
-
-For PocketGarden this is already done: the pointer lives in the root [../AGENTS.md](../AGENTS.md) under "Product context".
 
 ## 5. Check completion and offer the first loop
 

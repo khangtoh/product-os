@@ -64,4 +64,18 @@ Add an entry here whenever a check is weakened, with the reason and the date.
 | 2026-09-27 | Three mutation rows did not fire: one asserted error severity for a check that is a warning by design, one relied on `_edit` replacing every occurrence when it replaced one, and one assumed a METRICS.md structure the instance had legitimately rewritten. | Test bug | Mutations now assert a check fires at any severity, `_edit` takes a count, and the metrics mutation adds the registry section it needs. |
 | 2026-09-27 | The link checker reported a broken link inside a code span, where the text was an example of link syntax rather than a link. | Checker bug | Fenced blocks and inline code are stripped before links and heading anchors are collected. A broken link in prose is still reported. |
 
+### Second capture, against v0.3.0
+
+The branch was rebased onto v0.3.0, which restructured PRODUCT.md, renamed record ids, and added its own link checker. A recapture against the new template exposed five more defects, again none in the procedure.
+
+| Date | Finding | Classification | Resolution |
+| --- | --- | --- | --- |
+| 2026-09-27 | `_slug` collapsed whitespace runs into one hyphen, so `### FR-4 — Explain …` was slugged `fr-4-explain-…`. GitHub emits one hyphen per space, `fr-4--explain-…`, which is what the instance correctly linked to. Six valid anchors were reported broken. Worse, `scripts/check_links.py` had been correct and was regressed by delegating to this function. | Checker bug | One hyphen per whitespace character. Verified against both anchor shapes the instance produced. |
+| 2026-09-27 | The exculpating pattern for measurements included `n/?a`, which matches the bare substring "na", so a metric row mentioning **analytics** excused itself. Any row containing "na" was exempt. | Checker bug | Every exculpating phrase is now anchored on word boundaries. |
+| 2026-09-27 | `state_checkpoint_resolved` reported "does not address readiness" against a checkpoint that addressed it as "the first action remains discovery, not implementation" and "cannot conclude". Third time a wording-based topic check failed a substantively correct instance. | Checker bug, and a relaxation | The pattern was broadened and readiness downgraded to a warning, because the detector is not reliable enough to block on. Recorded under relaxations above. |
+| 2026-09-27 | The `no-match` traceability stems missed a requirement phrased "explain an empty result". | Spec bug | Added `empty result` and `zero result`. |
+| 2026-09-27 | Three mutations stopped firing: one replaced only lowercase "keyboard" while a capitalized one survived a case-insensitive check, one stripped deferrals from two of the three paths the spec names, and one appended a second `## Metric registry` heading that the section reader never reaches. | Test bug | Mutations now derive their targets from the spec, match case-insensitively, and insert into the registry the instance already has. |
+
+`product_table_filled` was also replaced by `contract_sections_resolved`, driven by a `contract_sections` list in `expect.json`, because v0.3.0 replaced the single identity table with named contract sections. The structure has now moved twice, so it belongs in per-version data rather than in code.
+
 No ProductOS gap was found in the first complete run. Every finding was in the checker, the expectation spec, or the test harness. That is worth stating plainly: the procedure produced a conforming instance on the first complete attempt, and the suite's early value was mostly in exposing its own bugs.

@@ -1,8 +1,9 @@
-# PRODUCT.md
+# Product contract
 
-The canonical product contract for PocketGarden is [../PRODUCT.md](../PRODUCT.md) at the project root.
+The canonical PocketGarden product contract lives at [../PRODUCT.md](../PRODUCT.md), in the repository root beside the root agent instructions. This file is a navigation pointer; do not add product facts here.
 
-Do not maintain a second definition here. Add product identity, users, platform, boundaries, and direction to the root contract.
+- [Canonical contract](../PRODUCT.md) — identity, users, problem, purpose, platform, accessibility, boundaries
+- [Current state and onboarding checkpoint](STATE.md)
+- [Roadmap](ROADMAP.md)
 
-- Current work and handoff: [STATE.md](STATE.md)
-- Priority order: [ROADMAP.md](ROADMAP.md)
+One section of the canonical contract is unresolved: `## Register` is still `unknown`, with `product` recorded as an unconfirmed agent proposal. It was asked three times during onboarding on 2026-09-27 and not answered.

@@ -1,41 +1,28 @@
 # Outcome roadmap
 
-Updated: 2026-09-27 — established during ProductOS adoption, interview round 4.
+Updated: 2026-09-27.
 
-This is the canonical priority order. Priorities carry **no dates**: the owner committed no release date. A priority slot does not itself authorize spending or release.
+This is the canonical priority order, set by the owner during onboarding on 2026-09-27. A priority slot does not itself authorize spending or release, and none of these are delivery commitments — no release date is committed.
 
 ## Now
 
 | Rank | Outcome / record | State | Next step |
 | --- | --- | --- | --- |
-| 1 | [OUT-001 — We know whether researchers can retrieve an article they saved weeks ago](outcomes/OUT-001-know-whether-researchers-can-retrieve-an-old-article.md) | `active` | The product owner arranges the first observation session, scoping participant count, decision threshold, and timing with it. |
+| 1 | [Outcome-01 — a researcher retrieves an article they saved weeks earlier](outcomes/Outcome-01_retrieve_an_old_article.md) | `active`, owner: product owner | The owner arranges the first observation session: watch researchers try to retrieve an article from their own collection and record whether they find and open it without help. Participant count, decision threshold, and timing are deferred until the study is scoped. |
 
-Rationale — owner direction, 2026-09-27: "First find out whether researchers can retrieve an old article. We have no observations." Discovery leads because the product's whole retrieval design rests on title search and nobody has checked whether title recall matches how researchers remember what they saved.
+Rationale (owner, 2026-09-27): retrieval is the product's promise and there are no observations of anyone using it. Learn first, then change retrieval.
 
-Owner: the product owner, who will arrange the first session. Participant access is no longer a blocker. Remaining dependency: a participant may have no genuinely old save to retrieve, since `localStorage` is per-browser — scoping must solve this ([STATE.md](STATE.md)).
+Note that this Now item is discovery, not delivery. It is deliberately ranked above the known unmet requirements [FR-4](REQUIREMENTS.md#fr-4--explain-an-empty-result-and-allow-a-new-query), QR-1, and QR-2, which remain recorded but unprioritized.
 
 ## Next
 
-| Outcome / record | State | Depends on |
-| --- | --- | --- |
-| [OUT-002 — Researchers retrieve what they saved more often](outcomes/OUT-002-retrieval-succeeds-more-often.md) | `proposed` | [OUT-001](outcomes/OUT-001-know-whether-researchers-can-retrieve-an-old-article.md) |
+**Improve retrieval using what the first study teaches — proposed, not committed** (owner, 2026-09-27). Its content depends on the study's findings, so no record, scope, or approach is defined for it. Do not treat this as authorization to build a retrieval change.
 
-Owner direction, 2026-09-27: "improve retrieval using what we learn; treat that as proposed." Deliberately left unspecified — what to improve depends on what the study finds, so no features are attached.
+The open decision about untitled saves versus title-only search ([REQUIREMENTS.md](REQUIREMENTS.md#open-decisions), item 1) is the most likely subject of this work, but the owner has not chosen an approach and the study may point elsewhere.
 
 ## Later
 
-**Undecided, by owner direction.** The owner will revisit Later after the first study rather than fill it now: "I don't want an invented backlog."
-
-This horizon is empty on purpose. It is not an oversight, and it should not be populated with speculative items.
-
-## Not on the roadmap
-
-Two owner-stated requirements are unmet by the current build and are **not prioritized**, because the owner placed discovery first:
-
-- **R4** — a search with no matches must say so and let the query be changed. Currently indistinguishable from an empty collection.
-- **R6** — collection controls need visible labels. Currently placeholder-only.
-
-Both are specified in [REQUIREMENTS.md](REQUIREMENTS.md#functional-requirements) and remain available if the owner pulls them forward. They are recorded here so they are not silently lost.
+**Deliberately empty.** The owner declined to populate this horizon until the first study is done and said they will revisit it then, explicitly to avoid an invented backlog. This is a recorded decision, not an omission.
 
 ## Selection rules
 
@@ -47,6 +34,5 @@ Keep blocked work visible with its dependency and select the next eligible actio
 
 | Date | Change | Evidence / steering / decision |
 | --- | --- | --- |
-| 2026-09-27 | Roadmap established. Now: OUT-001 discovery. Next: OUT-002, proposed. Later: deliberately undecided. | Owner direction during ProductOS onboarding, round 4. |
-| 2026-09-27 | Agent proposed R4 + R6 as Now; owner overrode in favour of discovery first. R4 and R6 left unprioritized. | Owner direction, round 4. |
-| 2026-09-27 | OUT-001 moved `proposed` → `active`. Owner named and committed to arranging the first session; observation method defined as find-and-open without help. | Owner direction, round 5. |
+| 2026-09-27 | Initial priorities set: Now = discovery of whether retrieval works; Next = retrieval improvement, proposed; Later = left empty pending the study | Owner direction during ProductOS onboarding, recorded in [STATE.md](STATE.md) |
+| 2026-09-27 | Outcome-01 moved `proposed` → `active`: the product owner took ownership and the observation method was specified | Owner direction at the close of onboarding |

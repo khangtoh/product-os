@@ -13,6 +13,7 @@ from pathlib import Path
 
 from check_instance import (
     CHECKS,
+    _section,
     SKILL_SOURCE,
     REQUIRED_AREAS,
     TEMPLATE,
@@ -333,11 +334,13 @@ def _future_stamp(project):
     path.write_text(re.sub(r"(?m)^Updated:.*$", "Updated: 2999-01-01", body, count=1), encoding="utf-8")
 
 
-def _blank_identity_row(project):
+def _blank_contract_section(project):
+    """Revert a canonical contract section to its placeholder."""
     path = project / "PRODUCT.md"
     body = path.read_text(encoding="utf-8")
-    body = re.sub(r"(?m)^(\| Target users and context \| )[^|]*\|", r"\1Unknown |", body, count=1)
-    path.write_text(body, encoding="utf-8")
+    replaced = re.sub(r"(?ms)^## Users\n.*?(?=^## )", "## Users\n\nUnknown.\n\n", body, count=1)
+    assert replaced != body, "mutation precondition missing: '## Users' section"
+    path.write_text(replaced, encoding="utf-8")
 
 
 def _empty_now_table(project):
@@ -423,26 +426,51 @@ def _fabricate_baseline(project):
 
 
 def _metrics_row(project):
+    """Invent a measured metric row, inside whichever registry table the instance has."""
     path = project / "product" / "METRICS.md"
+    body = path.read_text(encoding="utf-8")
+    invented = ("| Metric-99 | Retrieval success | Share of sessions finding an article "
+                "| analytics | 62% / 30d | 80% / 30d | owner | active |")
+    separator = re.search(r"(?m)^\|(?:[\s:-]*\|)+[\s:-]*$", _section(body, "## Metric registry")) \
+        if "## Metric registry" in body else None
+    if separator:
+        line = separator.group(0)
+        path.write_text(body.replace(line, line + "\n" + invented, 1), encoding="utf-8")
+        return
     with path.open("a", encoding="utf-8") as handle:
-        handle.write(
-            "\n## Metric registry\n\n"
-            "| ID | Name | Definition | Source | Baseline | Target | Owner | Status |\n"
-            "| --- | --- | --- | --- | --- | --- | --- | --- |\n"
-            "| MET-001 | Retrieval success | Share of sessions finding an article | analytics "
-            "| 62% / 30d | 80% / 30d | owner | active |\n")
+        handle.write("\n## Metric registry\n\n"
+                     "| ID | Name | Definition | Source | Baseline | Target | Owner | Status |\n"
+                     "| --- | --- | --- | --- | --- | --- | --- | --- |\n" + invented + "\n")
+
+
+def _deferral_paths():
+    """Every path the spec's deferral-stemmed entries name, so the mutation cannot miss one."""
+    expect = load_expect(FIXTURES / MUTATION_SEED / "expect.json")
+    paths = []
+    for entry in expect.get("traceability", ()):
+        stems = list(entry.get("all_of", ())) + list(entry.get("any_of", ()))
+        if any("defer" in s.lower() for s in stems):
+            paths.extend(entry.get("any_of_paths") or ([entry["path"]] if entry.get("path") else []))
+    return sorted(set(paths))
 
 
 def _strip_deferrals(project):
-    for rel in ("product/REQUIREMENTS.md", "product/STATE.md"):
+    for rel in _deferral_paths():
         path = project / rel
+        if not path.is_file():
+            continue
         body = path.read_text(encoding="utf-8")
-        path.write_text(re.sub(r"(?i)defer(red|ral|rals|s)?", "settled", body), encoding="utf-8")
+        path.write_text(re.sub(r"(?i)defer\w*", "settled", body), encoding="utf-8")
 
 
 def _break_traceability(project):
-    # Every occurrence, or a surviving mention keeps the check satisfied.
-    _edit(project, "product/REQUIREMENTS.md", "keyboard", "pointing device", count=-1)
+    # Every occurrence and every case, or a surviving mention keeps the check satisfied: the
+    # traceability match is case-insensitive.
+    path = project / "product" / "REQUIREMENTS.md"
+    body = path.read_text(encoding="utf-8")
+    replaced = re.sub(r"(?i)keyboard", "pointing device", body)
+    assert replaced != body, "mutation precondition missing: 'keyboard' in REQUIREMENTS.md"
+    path.write_text(replaced, encoding="utf-8")
 
 
 def _delete_required_file(project):
@@ -463,7 +491,7 @@ def _leak_example(project):
 MUTATIONS = (
     ("platform_section_standalone", "Platform body reverted to the placeholder", _blank_platform),
     ("platform_section_standalone", "Platform heading removed, text folded in elsewhere", _remove_platform_heading),
-    ("product_table_filled", "identity row reverted to Unknown", _blank_identity_row),
+    ("contract_sections_resolved", "contract section reverted to its placeholder", _blank_contract_section),
     ("adoption_stamp_set", "Updated line reverted to the template placeholder", _restore_template_stamp),
     ("adoption_stamp_set", "Updated line set to a future date", _future_stamp),
     ("blank_markers_reduced", "VISION reverted to the blank template", _restore_template_file("product/VISION.md")),

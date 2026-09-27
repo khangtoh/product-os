@@ -15,7 +15,7 @@ Adjust the path if the folder lives elsewhere. Both entry points use this guide.
 
 ## 1. Orient
 
-Follow the target project's existing instructions first. Read [../PRODUCT.md](../PRODUCT.md) for intent, [STATE.md](STATE.md) for current truth and active work, [ROADMAP.md](ROADMAP.md) for priority order, and the most recent steering. Read [operations](operations/README.md) for actual capabilities and operating scope, and [LEARNINGS.md](LEARNINGS.md) where a prior lesson applies. Load the linked records the selected work needs; do not read the entire history.
+Follow the target project's existing instructions first. Read [PRODUCT.md](PRODUCT.md) for intent, [STATE.md](STATE.md) for current truth and active work, [ROADMAP.md](ROADMAP.md) for priority order, and the most recent steering. Read [operations](operations/README.md) for actual capabilities and operating scope, and [LEARNINGS.md](LEARNINGS.md) where a prior lesson applies. Load the linked records the selected work needs; do not read the entire history.
 
 Establish what is actually true before acting. A handoff describes the state at the time it was written, so inspect reality where the action depends on it: current code, branch and pull request state, deployment target, experiment exposure, and service health. Treat a stale or contradicted handoff as a reason to inspect, not as permission to proceed on its assumptions.
 
@@ -63,8 +63,6 @@ Before repeating any uncertain external action, confirm its actual result. A tim
 
 Check the result against the criteria that were set, not against the intention. Run the project's actual tests, checks, or evaluations where they exist, and report what they returned. State plainly when a check was unavailable, skipped, or inconclusive.
 
-**For this project:** there is no test suite. Verification means opening `src/index.html` in a browser and checking the behavior by hand ([../AGENTS.md](../AGENTS.md)). An inference from reading the markup is not a verification — say which it was.
-
 | Work | Verification that closes the run |
 | --- | --- |
 | Behavior change | Acceptance criteria met, regression risk considered, instrumentation confirmed working |
@@ -100,7 +98,7 @@ Ending a run without finishing the action is a valid result when it is reported 
 - **Waiting:** record the exact event or time that should resume the work, and what to inspect on return. Avoid repeat checks scheduled before evidence could change.
 - **Stopped at a limit:** record the limit reached, the verified partial result, and the remaining scope.
 
-A scheduling field is a written intention, not a registered wake-up. If a runner is available, register the trigger and record whether that registration actually succeeded; if none is available, say the continuation depends on someone invoking it. See the project's [operations](operations/README.md) context for what is genuinely configured — no runner exists here.
+A scheduling field is a written intention, not a registered wake-up. If a runner is available, register the trigger and record whether that registration actually succeeded; if none is available, say the continuation depends on someone invoking it. See the project's [operations](operations/README.md) context for what is genuinely configured.
 
 For a read-only target, present the proposed changes and the handoff in the response and state clearly that nothing was saved. Do not describe unsaved work as recorded.
 

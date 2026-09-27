@@ -1,54 +1,136 @@
-# PRODUCT.md
+---
+productmd: 1
+productos: 1
+register: product
+$type: Product
+$context: https://schema.org.ai
+---
 
-> The shared product contract for humans and AI: what we are building, for whom, why it matters, how we choose, and how we learn.
+# PocketGarden
 
-Updated: 2026-09-27 — established during ProductOS adoption. Initial brief complete; see [product/STATE.md](product/STATE.md).
+Save an article while you are reading, and find it again later without having to organize anything.
 
-## Purpose and identity
+Updated: 2026-09-27.
 
-PocketGarden helps a researcher get back to an article they saved while reading, without requiring them to organize their saves first.
+This is the canonical product contract. It follows the open PRODUCT.md convention and adds ProductOS operating context. Sections still marked unknown have not been established; onboarding is in progress and the checkpoint lives in [product/STATE.md](product/STATE.md). Replace unknowns only with supplied direction, supported evidence, a user-selected hypothesis, or an explicit deferral.
 
-The target audience and the problem are the owner's **stated initial hypothesis**, recorded on 2026-09-27 and **not tested against users**. Treat them as direction to work from, not as validated evidence.
+## Register
 
-| Field | Current definition |
-| --- | --- |
-| Product name | PocketGarden |
-| Purpose and one-sentence promise | Retrieve an article you saved while reading, without having to organize everything. |
-| Target users and context | Researchers who save articles while reading and later lose track of them. *Hypothesis, untested.* The moment of saving and the moment of retrieval have not yet been described in detail. |
-| Core user job and recurring need | Save an article encountered mid-reading, then find it again later from memory of what it was. |
-| Current alternatives | Browser bookmarks and notes. *Owner-stated.* The specific failure of those tools has not yet been articulated beyond "lose track of them". |
-| Distinctive value and role of AI, if any | Distinctive value: retrieval without an upfront organizing step (no folders, tags, or filing required). No AI role is established. Project instructions forbid third-party scripts, which would constrain any hosted model; that tradeoff has not been decided. |
-| Current experience and maturity | Early prototype. Save by URL and title, case-insensitive title substring search, open at original URL; all data in browser `localStorage`. No accounts, server, deployment, or tests. See [product/REQUIREMENTS.md](product/REQUIREMENTS.md). |
-| Business model, if applicable | unknown — not yet discussed. |
-| Constraints and non-goals | **Privacy is an owner requirement:** each user's collection stays private, verified before exposing any change. Engineering constraints from [AGENTS.md](AGENTS.md): `src/` stays dependency-free; no build step, bundler, or framework; plain ES modules and vanilla DOM; **no analytics, telemetry, or third-party scripts**. Non-goals for now: team or shared libraries, automated summaries. No release date is committed. See [product/REQUIREMENTS.md](product/REQUIREMENTS.md#exclusions-and-tradeoffs). |
-| Source of product direction | The product owner, recorded as `product-owner` — a role identifier, since no name or handle was supplied. They own the first study session and the deferred speed target. |
+product
 
-Use [product/VISION.md](product/VISION.md) for longer-term ambition and [product/STRATEGY.md](product/STRATEGY.md) for current bets.
+Design serves a task here rather than being the product itself: PocketGarden is a personal utility built around save and retrieve, and every requirement the owner stated is functional or accessibility-related, not expressive.
+
+**Provenance:** the agent recommended `product` in onboarding rounds 1 to 3; the owner did not answer those rounds and then authorized the agent's recommendations wholesale on 2026-09-27. So this is owner-authorized, but it was never a considered per-field choice. Revisit if the product ever becomes something whose presentation is the point. Page-specific design modes may override this default without changing the product register.
+
+## Users
+
+**Hypothesis — stated by the owner on 2026-09-27 and explicitly untested.** Researchers who save articles while they are reading and later lose track of them. They are mid-task when they save: reading something, following a thread, not filing an archive.
+
+No user research, interview, or usage evidence exists for this audience. See [Desired Outcomes](#desired-outcomes) for the discovery action that would test it.
+
+## Problem
+
+Articles saved while reading get lost. Retrieval today depends on having organized the material at save time, which is exactly the work a reader in the middle of something will not do.
+
+### Current alternatives
+
+Browser bookmarks and notes apps (owner, 2026-09-27). Why they are insufficient is part of the same untested hypothesis: they stay findable only if the user maintains folders, tags, or note structure, so saved items accumulate unorganized and become unretrievable.
+
+Not established: which of these the target researchers actually use, in what proportion, or whether they experience the loss as a problem worth changing tools for.
+
+## Product Purpose
+
+PocketGarden lets someone save an article in one step while reading, and get it back later by searching rather than by filing. Successful use means a researcher recovers something they saved weeks ago without ever having organized it.
+
+The durable commitment is **retrieval without organizing**: the product must not make findability depend on user-maintained structure. Recorded in [product/VISION.md](product/VISION.md).
+
+### Role of AI
+
+Not applicable at present. The product contains no AI behavior, and no direction has established any. Recorded as a fact about the current product, not a decision against future use.
+
+## Brand Personality
+
+**Hypothesis — agent recommendation, authorized wholesale by the owner on 2026-09-27, never discussed directly.** Quiet and unfussy. The product is a place things are put down and picked up again; it should not ask for attention, enthusiasm, or maintenance. Revisit condition: any observation that users want the product to feel like a library or a workspace rather than a pocket.
+
+### Tone
+
+**Hypothesis, same provenance.** Plain and literal. In ordinary use it says almost nothing. In failure it states what happened and what the person can do next — the empty-result message in [FR-4](product/REQUIREMENTS.md#fr-4--explain-an-empty-result-and-allow-a-new-query) is the first and currently only instance of this tone, and is a good test of it.
+
+## Anti-references
+
+**Hypothesis, same provenance.** The product must not resemble tools whose usefulness depends on the user maintaining structure — folder trees, tag taxonomies, curated collections. This follows directly from the established retrieval-without-organizing principle, so it is the most durable of the hypotheses in this section. A feature that asks the user to file, tag, or tidy is suspect by default.
+
+## Design Principles
+
+**Hypotheses, same provenance.** Derived from the established purpose and the owner's stated requirements, not from any design discussion:
+
+1. Saving costs one action and no decisions. A person mid-reading should never be asked to categorize.
+2. Retrieval degrades gracefully. When search finds nothing, say so and keep the person's query — never show a blank space.
+3. Controls are labeled, not guessed. Visible labels over placeholder-only fields (QR-2), for everyone, not only assistive-technology users.
+
+Visual tokens and component rules belong in project design guidance; this repository has none, and the prototype has no stylesheet at all.
+
+## Accessibility & Inclusion
+
+Established by the owner on 2026-09-27:
+
+- **Keyboard operability.** Saving an article, searching, and opening a result must all work by keyboard.
+- **Visible labels.** Collection controls need visible labels, not placeholder text alone.
+
+**Proposed floor — agent recommendation under the owner's 2026-09-27 authorization, not verified and not a conformance claim:** WCAG 2.2 Level AA. It is the ordinary baseline for a public web app and is consistent with the two requirements the owner did state. Adopting it as a target costs nothing today; claiming to meet it would be false.
+
+Observed gap: the inputs in `src/index.html` have placeholders and no labels, so the visible-label requirement is unmet. Nothing has been audited against any standard, and the page has no stylesheet, so contrast and focus styling are browser defaults. Discovery action, owner the product owner: audit the prototype against the proposed floor once the first study is done, and either accept the floor or replace it with a smaller one. Verification criteria are in [product/REQUIREMENTS.md](product/REQUIREMENTS.md).
 
 ## Platform
 
-Web app.
+web
 
-Confirmed by the owner on 2026-09-27: it stays a web app, not a native application.
+A web app. Confirmed as owner direction on 2026-09-27 ("keep it a web app"), consistent with the repository: `src/index.html` is opened directly in a browser, there is no build step and no server, and saved data lives in that browser's `localStorage`. Whether it is eventually hosted, installable, or multi-device is not established; native platforms are excluded by this direction.
 
-Today it runs as a local file opened directly in a browser (`src/index.html`), with no server and no build step.
+## Boundaries
 
-Device reach and hosting are an **explicit deferral** with a recommended position: stay single-browser and local for now, because hosting or sync would turn privacy (R7) from free-by-construction into real engineering and pull against the no-dependency constraints. The risk being carried is that saving while reading plausibly happens on a phone, and `localStorage` crosses neither browsers nor devices. Owner `product-owner`; discovery action is to note participants' devices during the first study sessions. See [product/REQUIREMENTS.md](product/REQUIREMENTS.md#explicit-deferrals).
+Owner requirements and commitments, 2026-09-27:
 
-## Core experience and requirements
+- **Each user's collection stays private.** This is an owner requirement, not an inference from the current storage choice. Any change that would expose a collection must have its privacy verified before that exposure.
+- **No release date is committed.** Priorities are not deadlines.
+- **Not yet inspected:** production health and analytics. Nothing is known about how the product behaves in real use; absence of reports is not evidence of health.
 
-The essential workflows, initial acceptance criteria, and open decisions live in [product/REQUIREMENTS.md](product/REQUIREMENTS.md). Behavior implemented today is recorded there and distinguished from intended behavior.
+Established constraints, from the repository's root `AGENTS.md` and `README.md`:
 
-## Desired outcomes
+- `src/` stays dependency-free. No build step, no bundler, no framework.
+- No analytics, telemetry, or third-party scripts.
+- Plain ES modules and vanilla DOM APIs; two-space indentation.
+- No accounts, no deployment pipeline, no tests at present.
 
-- **Active:** [OUT-001](product/outcomes/OUT-001-know-whether-researchers-can-retrieve-an-old-article.md) — know whether researchers can find and open an article from their collection without help. Evaluated by direct observation (MET-001); no baseline, and the decision threshold is deferred to scoping.
-- **Proposed:** [OUT-002](product/outcomes/OUT-002-retrieval-succeeds-more-often.md) — researchers retrieve what they saved more often. Deliberately unspecified until the study reports.
+Product non-goals and unacceptable tradeoffs are unknown and scheduled for a later round. Detailed requirement exclusions belong in [product/REQUIREMENTS.md](product/REQUIREMENTS.md).
 
-Measurement is genuinely constrained here: the no-analytics instruction rules out usage instrumentation, so evaluation is by watching real people, not by data the app reports. See [product/METRICS.md](product/METRICS.md).
+No commercial offer is established, so this contract has no `## Offer` section, no pricing island, and no `$id`.
 
-The canonical priority order is [product/ROADMAP.md](product/ROADMAP.md); measurement definitions live in [product/METRICS.md](product/METRICS.md). A shipped feature is not proof that an outcome was achieved.
+## Stack
 
-## Decision principles
+- [Agent instructions](product/AGENTS.md)
+- [Current state](product/STATE.md)
+- [Vision](product/VISION.md)
+- [Requirements](product/REQUIREMENTS.md)
+- [Strategy](product/STRATEGY.md)
+- [Roadmap](product/ROADMAP.md)
+- [Metrics](product/METRICS.md)
+- [Learning](product/LEARNINGS.md)
+- [Operations](product/operations/README.md)
+
+This repository has no DESIGN.md or other established contract to link.
+
+## Core Experience and Requirements
+
+Essential workflows, initial functional and quality requirements, acceptance criteria, and open decisions live in [product/REQUIREMENTS.md](product/REQUIREMENTS.md). That document currently holds only behavior observed in the source; intended behavior is being established.
+
+## Desired Outcomes
+
+[Outcome-01 — a researcher retrieves an article they saved weeks earlier](product/outcomes/Outcome-01_retrieve_an_old_article.md). Status `active`, owned by the product owner. Evaluation is direct observation — whether a researcher finds and opens an article from their own collection without help — since analytics are forbidden and the prototype has no instrumentation. It has no baseline (nobody has been observed using this product) and no threshold or sample plan yet; those are deferred until the study is scoped, so the first session can produce observations but not a verdict.
+
+The canonical priority order is [product/ROADMAP.md](product/ROADMAP.md); measurement definitions belong in [product/METRICS.md](product/METRICS.md), which currently defines none. The owner's Now priority is discovery — finding out whether researchers can retrieve an old article — before changing retrieval. A shipped feature is not proof that this outcome was achieved.
+
+## Operating Principles
 
 These are starting conventions to adapt to the project:
 
@@ -59,18 +141,16 @@ These are starting conventions to adapt to the project:
 - Preserve uncertain claims as hypotheses and retain contrary evidence.
 - Let results change product choices and operating practice.
 
-## Shared control
+## Human and Agent Control
 
-Humans and agents can research, design, build, operate, and evaluate. Active work has an owner, criteria, and a handoff. Owner direction sets intent; user input provides evidence. Actual authority is recorded in [product/operations/README.md](product/operations/README.md) and comes from applicable project/session instructions.
+Humans and agents can research, design, build, operate, and evaluate. Active work has an owner, criteria, and a handoff. Owner direction sets intent; user input provides evidence. Actual authority is recorded in [product/operations/README.md](product/operations/README.md) and comes from applicable project or session instructions.
 
 This file does not grant external access, spending, or release permission. Existing authorization carries forward without repeated approval requests for work within scope.
 
-## Evolution
+## Evolution Loop
 
 **Steer → observe → prioritize → design → build → verify → release → operate → measure → learn → update the product model.**
 
 Every material change should connect a reason to an observed result and a subsequent decision. Update the app, priorities, evaluation, or operating practice when learning warrants it. An explicit decision to retain an approach is also valid.
 
-Read [product/STATE.md](product/STATE.md) to resume work, [product/AGENTS.md](product/AGENTS.md) for agent instructions, [product/WORKING_TOGETHER.md](product/WORKING_TOGETHER.md) for collaboration, and [product/LOOP.md](product/LOOP.md) for execution. Use [product/MODEL.md](product/MODEL.md) for records and [product/LEARNINGS.md](product/LEARNINGS.md) for durable knowledge.
-
-Keep this contract brief and current. Link the direction or decision behind material changes; detailed specifications and results belong in their own records.
+Keep this contract brief and current. Preserve frontmatter, valid machine islands, and sections a tool does not understand. Link the direction or decision behind material changes; detailed specifications and results belong in their canonical records.

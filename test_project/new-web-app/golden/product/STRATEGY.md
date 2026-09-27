@@ -1,40 +1,29 @@
-# Strategy
+# Current strategy
 
-Updated: 2026-09-27 — established during ProductOS adoption.
+Updated: 2026-09-27.
 
-## Current approach
+## Thesis
 
-**Find out before building.** The owner's direction on 2026-09-27 was to establish whether researchers can retrieve an old article before improving retrieval. Discovery comes first; retrieval work is proposed and waits on what the study finds.
+Researchers who save articles while reading lose them because staying findable currently costs organizing work they will not do mid-task. PocketGarden's bet is that search over a saved collection, with no filing required, is enough to make those articles retrievable.
 
-The product keeps its current shape while that happens: a dependency-free local web app, personal collection, existing saving flow preserved.
+Confirmed direction: retrieval must not depend on organizing ([VISION.md](VISION.md)); the product stays a web app; collections stay private.
 
-## Rationale
+Hypothesis, not confirmed: that the audience is researchers of this kind, that they experience this loss as a problem worth changing tools for, and that title search is sufficient retrieval. Nothing here has been observed with a user. There is no sustainability or business model direction, and none has been asked for.
 
-The product's retrieval design has a single handle — substring match on a user-typed title ([REQUIREMENTS.md](REQUIREMENTS.md#functional-requirements), R2). Whether that matches how researchers actually recall a save is unknown and untested. Building more retrieval capability first would risk refining the wrong mechanism, so the cheaper move is to look.
+## Bets and choices
 
-## Assumptions
+| Choice | Evidence / rationale | Uncertainty | Revisit condition |
+| --- | --- | --- | --- |
+| Retrieval by search rather than by folders or tags | Owner direction, 2026-09-27; the organizing cost is the stated reason alternatives fail | High — no observation of whether search alone succeeds weeks later | First study of whether researchers can retrieve an old article |
+| Search matches titles only | Existing implementation (`src/search.js`), retained by the owner's round 2 workflow description | High — a save made without typing a title is findable only by URL text, which is the same failure the product exists to fix | Same study; see [open decision 1](REQUIREMENTS.md#open-decisions) |
+| Keep the collection in the user's own browser, no accounts or sync | Follows the privacy requirement (QR-3) and the no-dependency, no-analytics constraints | Medium — clearing browser data destroys the collection, and multi-device use is impossible | Evidence that loss of collection or single-device use blocks retrieval |
+| Learn before improving retrieval | Owner direction, 2026-09-27: find out first, improve second | Low as direction; the cost is that known unmet requirements (FR-4, QR-1, QR-2) wait | Study findings, or owner reprioritization |
+| Keep the collection durable enough as-is, with no export or backup | Agent recommendation adopted under the owner's 2026-09-27 authorization; adding export would be the largest change in the product and rests on no evidence | High — a researcher losing months of saved work would discredit the product with its target audience | Any participant reporting they have lost a saved collection |
 
-All of these are unvalidated. They are what the current approach rests on.
+## Constraints and discovery
 
-- **The audience is researchers who lose track of what they saved.** The owner's explicit hypothesis, stated as untested ([../PRODUCT.md](../PRODUCT.md), [VISION.md](VISION.md)).
-- **Retrieval is the binding problem**, rather than saving, durability, or the app simply not being used. The study should be designed to notice if this is wrong.
-- **H1: recall is topical or phrase-based rather than title-exact.** Agent recommendation, owner-authorized 2026-09-27 ([REQUIREMENTS.md](REQUIREMENTS.md#selected-hypotheses)). If this holds, title search is the wrong handle and OUT-002 becomes a redesign rather than a refinement — which is a larger bet than the current approach implies.
-- **H2: silent data loss is the failure that matters most**, ranked by irreversibility. Authorized on the same basis. It is not on the roadmap, which is a deliberate risk the owner is carrying.
-- **Researchers can be observed.** Participant access is unverified ([operations](operations/README.md)).
-- **A meaningful "old save" can be produced for a study.** Uncertain: `localStorage` is per-browser and the app is a local file, so participants may have no existing collection at all. This may force a waiting period into the study design.
-- **Retrieval without organizing is achievable** under the current constraints — no dependencies, no build step, no third-party scripts.
+Constraints: no dependencies in `src/`, no build step, no analytics or telemetry, no third-party scripts, no accounts, no deployment, no tests. Product maturity is prototype. Resource limits and available time are unknown and were not asked about. No product ownership is assigned, which is the binding constraint on starting anything.
 
-## What would change the approach
+The most consequential uncertainty is whether a researcher can retrieve an article they saved weeks ago at all. The small next step to resolve it is the Now item: a first study of real retrieval attempts. Every other uncertainty here is cheaper to resolve after that one.
 
-- The study finds retrieval is **not** where researchers fail — then OUT-002 is the wrong Next, and priorities should follow the observed failure instead.
-- The researcher audience does not hold up — then [VISION.md](VISION.md) needs revising with the evidence and a recorded decision, not a quiet rewrite.
-- Participants cannot be recruited or observed — then discovery-by-study is blocked, and the owner should choose between self-observation, a different evidence source, or pulling the unmet requirements (R4, R6) forward instead of sitting idle.
-- Durability becomes urgent — one `localStorage` key holds everything, with no export and no version control on the project. A real data loss would outrank discovery.
-
-## Bets not being made
-
-- No team or shared libraries, and no automated summaries — owner non-goals "for now".
-- No hosting or sync decision. Device reach remains an open question ([REQUIREMENTS.md](REQUIREMENTS.md#open-decisions)).
-- No redesign of the saving flow, by owner direction, despite its tension with the vision.
-
-Priority order is canonical in [ROADMAP.md](ROADMAP.md).
+Link material changes to decisions and evidence. Keep ordering in [ROADMAP.md](ROADMAP.md) and immediate next actions in [STATE.md](STATE.md).

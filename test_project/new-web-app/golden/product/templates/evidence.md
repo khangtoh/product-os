@@ -29,5 +29,3 @@ What was actually seen, measured, or said. Separate owner instructions, user fee
 - Linked opportunity, experiment, incident, or decision:
 
 Summarize only necessary information. Keep credentials and unnecessary personal data out of the record.
-
-For PocketGarden specifically: do not copy, retain, or transmit a participant's saved articles. Privacy (R7) applies to research as much as to the app.

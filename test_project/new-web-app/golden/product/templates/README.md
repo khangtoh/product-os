@@ -1,6 +1,6 @@
 # Record templates
 
-Copy the smallest template that fits the work. Replace every placeholder, allocate a unique ID, use a descriptive filename, and follow [MODEL.md](../MODEL.md). Create the destination directory when adding its first real record.
+Copy the smallest template that fits the work. Replace every placeholder, allocate a unique ID such as `Decision-01`, name the file `<ID>_short_text_description.md`, and follow [MODEL.md](../MODEL.md). Create the destination directory when adding its first real record.
 
 | Template | Destination | Use |
 | --- | --- | --- |
@@ -18,5 +18,3 @@ Copy the smallest template that fits the work. Replace every placeholder, alloca
 Use real links in the body and IDs in `related`. For information not yet known, state `unknown` and its effect on the next action. Remove irrelevant prompts with a reason where necessary. Do not manufacture metrics, users, results, or approvals.
 
 The templates have intentionally blank metadata values. They are examples to copy, not live records. Keep completed records concise; small changes do not require every type of record.
-
-Next unused IDs for PocketGarden as of 2026-09-27: `OUT-003`. All other types start at `001`.

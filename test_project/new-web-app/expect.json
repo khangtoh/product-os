@@ -67,6 +67,14 @@
     "target": "PRODUCT.md",
     "max_lines": 25
   },
+  "contract_sections": [
+    "## Register",
+    "## Users",
+    "## Problem",
+    "## Product Purpose",
+    "## Platform",
+    "## Boundaries"
+  ],
   "coverage": {
     "identity-and-vision": [
       "PRODUCT.md",
@@ -153,7 +161,9 @@
       "any_of": [
         "no match",
         "no results",
-        "nothing matches"
+        "nothing matches",
+        "empty result",
+        "zero result"
       ]
     },
     {

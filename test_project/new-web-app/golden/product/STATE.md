@@ -1,82 +1,91 @@
 # Current state
 
-Updated: 2026-09-27 — ProductOS adoption complete. **Initial brief complete.** Setup only; no product work was executed.
+Updated: 2026-09-27.
 
 ## Snapshot
 
-- Product stage: **early prototype**, confirmed by the owner. Save by URL and title, case-insensitive title substring search, open at original URL; all data in browser `localStorage`.
-- Product owner: recorded as `product-owner`. A role identifier — the owner self-identified but supplied no name or handle, and none was invented. Replace it at any time.
-- Other active work: **none**, confirmed by the owner.
-- Current app and service health: **not inspected** (owner statement). No deployment, server, or tests are known to exist. Verify by opening `src/index.html`. See [operations](operations/README.md).
-- Measurement: MET-001 only, by direct observation. Analytics are forbidden, so no instrumentation exists or will ([METRICS.md](METRICS.md)).
-- Code shows the implemented behavior exists; it does not show users need it. The audience remains the owner's untested hypothesis.
+- Product stage: early prototype, confirmed by the owner. `src/index.html` with `src/store.js` and `src/search.js` runs by opening the file in a browser; no build step, no server, no deployment, no tests.
+- Product owner: the person who ran onboarding on 2026-09-27 and self-identified as owner. No personal name or handle is recorded; substitute one if a second contributor joins.
+- Current app and service health: unknown and not inspected (owner, 2026-09-27). No analytics, telemetry, accounts, or hosting exist, so there is no signal to inspect.
+- Implemented behavior, verified by reading the source: save an article by URL with an optional title to `localStorage` under `pocketgarden.saved`; case-insensitive substring search over titles; render results as links to the original URL.
+- Known unmet requirements: [FR-4](REQUIREMENTS.md#fr-4--explain-an-empty-result-and-allow-a-new-query) (empty-result message) and QR-2 (visible labels) are not met; QR-1 (keyboard operability) is unverified. None is prioritized — the owner ranked discovery first.
+- No user has ever been observed using this product. The audience remains an untested hypothesis.
 
 ## Active work
 
 | Work | Owner | State | Record |
 | --- | --- | --- | --- |
-| Know whether researchers can find and open a saved article unaided | `product-owner` | `active` | [OUT-001](outcomes/OUT-001-know-whether-researchers-can-retrieve-an-old-article.md) |
-| Improve retrieval from what the study finds | unassigned | `proposed` | [OUT-002](outcomes/OUT-002-retrieval-succeeds-more-often.md) |
+| A researcher retrieves an article they saved weeks earlier | product owner | `active` | [Outcome-01](outcomes/Outcome-01_retrieve_an_old_article.md) |
 
-Active cycle: none. No cycle record was created — the owner asked to record the next action and stop after setup, so no execution run was opened.
+Active cycle: none. No cycle record exists, because no execution run has started — onboarding stopped at setup by the owner's instruction.
+
+The owner confirmed on 2026-09-27 that there is no other active work.
 
 ## Onboarding checkpoint
 
-Session 2026-09-27, six interview rounds. **Complete** per [MODEL.md](MODEL.md#onboarding-completion): all eight required areas are covered and saved, links resolve, the roadmap agrees with the first action, and a linked summary was presented for correction.
+Session on 2026-09-27 via `/product-os init`: five interview rounds, then a closing authorization from the owner for the agent to settle whatever remained open. Followed [ONBOARDING.md](ONBOARDING.md) and the completion rules in [MODEL.md](MODEL.md).
 
-In the final round the owner closed the interview and authorized the agent's recommendation on every remaining open question, to be labeled as a hypothesis or an explicit deferral. Those positions are recorded as such and are weaker than individually reasoned direction — see below.
+**The initial brief is complete.** All eight required areas are addressed and saved, the roadmap agrees with the first action, internal links resolve, the root agent instructions point at this context, and a linked summary was presented for correction at the close of each round.
 
 | Required area | Saved where |
 | --- | --- |
-| Identity and vision | [VISION.md](VISION.md), [../PRODUCT.md](../PRODUCT.md) |
-| Users and problem | [../PRODUCT.md](../PRODUCT.md) — owner-stated hypothesis, untested |
-| Core experience | [REQUIREMENTS.md](REQUIREMENTS.md#core-workflows) |
-| Initial requirements | [REQUIREMENTS.md](REQUIREMENTS.md) — R1–R7 with acceptance criteria |
-| Boundaries | [REQUIREMENTS.md](REQUIREMENTS.md#exclusions-and-tradeoffs), [../PRODUCT.md](../PRODUCT.md#platform) |
-| Success | [METRICS.md](METRICS.md), [OUT-001](outcomes/OUT-001-know-whether-researchers-can-retrieve-an-old-article.md) |
-| Priorities | [ROADMAP.md](ROADMAP.md) |
-| Starting point | this file, [operations](operations/README.md) |
+| Identity and vision | [../PRODUCT.md](../PRODUCT.md), [VISION.md](VISION.md) |
+| Users and problem — recorded as an explicit untested hypothesis | [../PRODUCT.md](../PRODUCT.md) |
+| Core experience | [REQUIREMENTS.md](REQUIREMENTS.md) |
+| Initial requirements — FR-1 to FR-4, QR-1 to QR-3 | [REQUIREMENTS.md](REQUIREMENTS.md) |
+| Boundaries | [../PRODUCT.md](../PRODUCT.md), [REQUIREMENTS.md](REQUIREMENTS.md) |
+| Success | [Outcome-01](outcomes/Outcome-01_retrieve_an_old_article.md), [METRICS.md](METRICS.md) |
+| Priorities | [ROADMAP.md](ROADMAP.md), [STRATEGY.md](STRATEGY.md) |
+| Starting point | this file, [operations/](operations/README.md) |
 
-**A complete brief is not a validated product.** Nothing here has been tested with a user.
+Register is resolved as `product` and mirrored in frontmatter, so the contract now follows the open PRODUCT.md convention. **The first action remains discovery, not implementation** — no code change is authorized or scheduled.
 
-### Deferred, with owners
+**Agent recommendations adopted wholesale on 2026-09-27.** The owner authorized the agent to settle everything still open using its own judgment, labeled. These carry the owner's authority but were never individually considered by them, so they are the weakest direction in this brief and should be overturned cheaply:
 
-| Deferred | Owner | Discovery action | Blocks |
-| --- | --- | --- | --- |
-| Participant count | `product-owner` | Scope the study | Interpreting a result, not running the first session |
-| Decision threshold for "can retrieve" | `product-owner` | Scope the study — fix before observing | Interpreting a result |
-| Session timing and how old a save must be | `product-owner` | Scope the study | Interpreting a result |
-| Numeric speed target | `product-owner` | Inspect current save/search behavior first | A later performance decision only |
-| Device reach and hosting — recommendation: stay single-browser and local | `product-owner` | Note each participant's device and cross-device expectations during the first sessions | Hosting, sync, or mobile work; nothing currently planned |
-| Whether R5 (keyboard operation) is actually met — assumed likely, unverified | `product-owner`, delegable to an agent run | Complete all three workflows in a browser using only the keyboard. Cheap; needs no participants. | Any claim that R5 is verified |
+| Adopted | Where | Kind |
+| --- | --- | --- |
+| Register = `product` | [../PRODUCT.md](../PRODUCT.md) | Resolved field |
+| Brand personality, tone, anti-references, three design principles | [../PRODUCT.md](../PRODUCT.md) | Hypotheses |
+| WCAG 2.2 AA as a proposed accessibility floor — a target, not a conformance claim | [../PRODUCT.md](../PRODUCT.md) | Hypothesis, with an audit as its discovery action |
+| [Metric-01](METRICS.md#metric-01--unassisted-retrieval-success), unassisted retrieval success | [METRICS.md](METRICS.md) | `proposed` definition, no target |
+| Untitled saves: do not decide before the study | [REQUIREMENTS.md](REQUIREMENTS.md#open-decisions) | Deferral |
+| Collection durability acceptable at prototype stage | [REQUIREMENTS.md](REQUIREMENTS.md#open-decisions) | Hypothesis |
+| Duplicate saves should update rather than append | [REQUIREMENTS.md](REQUIREMENTS.md#open-decisions) | Unbuilt proposal, not on the roadmap |
+| A starting study scope to react to — five participants, stop rule, no threshold | [Outcome-01](outcomes/Outcome-01_retrieve_an_old_article.md) | Proposal; does not lift the owner's deferral |
 
-Study deferrals are detailed in [OUT-001](outcomes/OUT-001-know-whether-researchers-can-retrieve-an-old-article.md); the rest in [REQUIREMENTS.md](REQUIREMENTS.md#explicit-deferrals).
+Each carries an owner (the product owner) and a discovery action in its home document. Three of them are answered by observations available in the first session at no extra cost.
 
-### Selected hypotheses
+Explicit owner deferrals:
 
-On 2026-09-27 the owner authorized the agent's recommendation on the remaining open questions. Recorded in [REQUIREMENTS.md](REQUIREMENTS.md#selected-hypotheses):
+- **Study scope, 2026-09-27:** participant count, decision threshold, and timing, deferred until the study is scoped. Consequence: the first session can produce observations but **cannot conclude** — no threshold separates success from failure and no sample plan says when to stop. Owner: the product owner. Next discovery action: fix all three before interpreting results.
+- **Numeric speed target, 2026-09-27:** deferred until current behavior can be inspected. Consequence: no performance acceptance criterion, so speed regressions cannot be detected. Owner: the product owner. Next discovery action: measure search and render behavior at a realistic collection size, then set a target.
+- **Later horizon left empty, 2026-09-27**, to be revisited after the first study, explicitly to avoid an invented backlog.
 
-- **H1** — researchers recall a topic or phrase rather than an exact title. If true, title search is the wrong handle and OUT-002 becomes a redesign.
-- **H2** — silent data loss is the failure that matters most, ranked by irreversibility; then unsearchable saves, link rot, duplicates.
+The four questions the agent raised in [REQUIREMENTS.md](REQUIREMENTS.md#open-decisions) are now resolved per the table above. The consequential one is unchanged in substance: title is optional and defaults to the raw URL while retrieval is title-only, so the retrieval-without-organizing principle may not hold for a save made mid-reading without a typed title. It is deliberately left undecided until the study can speak to it.
 
-Both are working positions taken on an agent recommendation under a blanket authorization, not findings. H1's discovery action is built into [OUT-001](outcomes/OUT-001-know-whether-researchers-can-retrieve-an-old-article.md). H2 carries a standing caveat: data loss is possible today, needs no study to confirm, and nothing on the roadmap addresses it.
+Nothing remains unaddressed in the initial brief. What remains is evidence, which only the first session can supply.
 
-### Unmet requirements, not prioritized
+Installation state:
 
-**R4** (explain zero search matches) and **R6** (visible labels on collection controls) are owner-stated and unmet by the current build. The owner placed discovery first, so neither is on the roadmap. They are not lost — see [ROADMAP.md](ROADMAP.md#not-on-the-roadmap).
+- `cp` was denied in this session (no approval surface), so the instance was created file by file with the editor. It is complete: all framework guides, summary documents, `operations/`, and the eleven record templates are present, plus the canonical [../PRODUCT.md](../PRODUCT.md) at the repository root. Internal links resolve.
+- The root `AGENTS.md` has a Product context pointer under a `## Product context` heading, added 2026-09-27 and verified present. It points at `PRODUCT.md`, `product/AGENTS.md`, and `product/STATE.md`. The repository's existing engineering rules above it were left untouched, and there is no CLAUDE.md or other agent configuration to update.
+- `outcomes/` is the only record directory that exists. Others are created with their first real record.
+- Nothing in `src/` was modified. This directory is not a git repository, so no commit records these changes.
 
 ## Next action
 
-**The product owner arranges the first observation session**: watch researchers try to retrieve an article from their collection and record whether they can find and open it without help. Scope participant count, decision threshold, and timing as part of arranging it.
+**The product owner arranges the first observation session** for [Outcome-01](outcomes/Outcome-01_retrieve_an_old_article.md): observe researchers trying to retrieve an article from their own collection, and record whether they find and open it without help.
 
-This is owner-executed work. An agent session can help scope the protocol or work on R4/R6 if the owner asks, via `/product-os run` in Claude Code or `$product-os run` in Codex.
+Scoping the study — participant count, decision threshold, timing — follows and must be settled before any result is interpreted.
+
+Onboarding stopped here at the owner's instruction. No execution run was started.
 
 ## Dependencies
 
-- **A participant may have no genuinely old save.** `localStorage` is per-browser and the app is a local file, so scoping must establish how an aged collection exists to retrieve from. This may force a waiting period, and it interacts with the timing deferral.
-- **Privacy during research (R7).** A session looks at someone's real collection. Do not copy, retain, or transmit participants' saved articles.
-- **No version control.** The project is not a git repository, so there is no history to recover from. Prefer small, reversible edits.
+- **Participants:** researchers with a collection they saved earlier. Someone with an empty or freshly created collection cannot exercise this outcome. The owner is arranging this; the agent has no channel to researchers.
+- **Study criteria:** deferred, and required before conclusions — not before the first session.
+- **Privacy in the session itself:** observing someone's collection means seeing what they saved. QR-3 applies to the session, not only the software; participant collections must not be copied into this repository.
 
 ## Next review
 
-Trigger: the first observation session taking place. **No schedule is registered** — ProductOS installs no runner and none is configured here ([operations](operations/README.md)). Continuation depends on someone invoking the next session.
+Trigger: the owner completing or scheduling the first observation session, or new owner direction. No date is set. Scheduling capability: none — no runner ships with this model, none is configured here, and no schedule is registered. Continuation depends on someone starting a session.
