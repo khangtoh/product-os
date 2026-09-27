@@ -4,13 +4,15 @@ This record explains the onboarding addition to the ProductOS framework. It reco
 
 Status snapshot: **2026-09-26**. Onboarding is merged and released as part of ProductOS 0.2.0 together with the open-standard-compatible product contract. This is not a claim of validation on an actual customer product or of a running autonomous loop.
 
+Update **2026-09-27** (unreleased): named `resume` and `orient` entries, an inline argument hint, and a Claude Code installation target. See [entry hints and Claude Code](#entry-hints-and-claude-code).
+
 ## Intent and decisions
 
 The requested inspiration was Impeccable's conversational context-onboarding approach: help a user establish context by asking for what is missing and save it for later agent work. ProductOS applies that approach to product intent, requirements, priorities, and a resumable starting point.
 
 | Decision | Rationale and resulting behavior |
 | --- | --- |
-| Offer a Codex skill and a portable prompt | Provide a discoverable entry point while retaining a workflow usable without a particular runtime. Both use the same onboarding procedure. |
+| Offer a Codex skill, a Claude Code skill, and a portable prompt | Provide a discoverable entry point while retaining a workflow usable without a particular runtime. Both use the same onboarding procedure. |
 | Establish a complete initial brief | Cover the product's vision, users, experience, requirements, boundaries, success, priorities, and starting point, rather than collecting only enough detail for one immediate task. Applicable detail and explicit deferrals keep this practical. |
 | Inspect first and ask two or three related questions per round | Reuse reliable project context and previous answers. Adapt the conversation instead of repeating settled questions or presenting one large questionnaire. |
 | Help users make unresolved decisions | Present options and tradeoffs. A user-selected hypothesis is direction, not validated evidence. Explicit deferrals retain consequences and a discovery action; silence is not agreement. |
@@ -27,9 +29,9 @@ These decisions are implemented through the canonical [onboarding coverage and c
 
 ### Entry points and installation
 
-The [skill](../skills/product-os/SKILL.md) handles `$product-os init`, natural-language setup requests, resuming an interview, and contributor orientation. A bare invocation reports readiness and offers the appropriate next step. Advice requests remain advice; execution and scheduling requests are directed to the existing loop and operations guidance without claiming unsupported subcommands.
+The [skill](../skills/product-os/SKILL.md) handles `$product-os init` (`/product-os init` in Claude Code), `resume`, `orient`, and the equivalent natural-language requests. A bare invocation reports readiness and offers the appropriate next step. Advice requests remain advice; execution and scheduling requests are directed to the existing loop and operations guidance without claiming unsupported subcommands.
 
-The [installer](../scripts/install_skill.py) accepts an existing target directory through `--project` and creates `.agents/skills/product-os/`. It bundles the skill entry point and the canonical blank template under `assets/product/`, using only Python's standard library. The source skill alone is not a complete installed package.
+The [installer](../scripts/install_skill.py) accepts an existing target directory through `--project` and creates `.agents/skills/product-os/` for Codex, `.claude/skills/product-os/` with `--agent claude`, or both with `--agent both`. It bundles the skill entry point and the canonical blank template under `assets/product/`, using only Python's standard library. The source skill alone is not a complete installed package.
 
 Installation does not initialize product context or edit root agent instructions. It rejects a target inside the framework checkout, refuses an existing skill destination or unsafe symlinked parents, and removes its newly created partial package if copying fails. Replacement is deliberate; it does not migrate applied product records. [Quickstart](QUICKSTART.md) documents installation, manual packaging, and the portable prompt.
 
@@ -49,6 +51,12 @@ Completion requires saved coverage of the required areas, working references and
 
 The addition introduces REQUIREMENTS and onboarding guidance, plus checkpoint and navigation changes. ProductOS 0.2 also makes the promoted contract a superset of the open PRODUCT.md convention while retaining ProductOS operating sections. Typed-record metadata and lifecycle remain unchanged. The [upgrade guidance](CUSTOMIZATION.md#adding-guided-onboarding-to-a-010-instance) explains how to merge these additions while preserving applied context; installed skill updates are separate from product-context upgrades. The [fictional walkthrough](../examples/onboarding.md) illustrates the experience without placing example facts in the template.
 
+### Entry hints and Claude Code
+
+Impeccable also showed that an inline hint helps users find a skill's entries: Claude Code displays a skill's `argument-hint` after the typed command. The skill declares `[init|resume|orient] [target or question]`. `resume` and `orient` name paths the guide already defined, so no new workflow was added, and run, review, and scheduling remain unsupported.
+
+The Agent Skills specification that Codex follows has no top-level `argument-hint`, so the source and Codex copy keep it under `metadata:` and still pass the skill validator. The installer hoists it to the top level only in the Claude Code copy. Codex shows no inline hint. `--agent` defaults to `codex`, so existing installation commands behave as before.
+
 ## Validation record
 
 The following checks were completed during implementation on 2026-09-26. They are evidence of local behavior and simulated onboarding coverage, not a real-product pilot or proof of improved user outcomes.
@@ -63,6 +71,14 @@ The following checks were completed during implementation on 2026-09-26. They ar
 | Contributor, ambiguous-target, and read-only scenarios | Oriented without rewriting context, requested target clarification before writing, and reported unsaved proposals honestly |
 | Platform heading follow-up | An initial simulation combined platform with boundaries; the guide was clarified and a fresh installed-skill simulation retained a standalone Platform section |
 | Documentation and template checks | Repository and isolated-template relative links and anchors resolved; generic-template leakage checks and whitespace checks passed; record templates were unchanged |
+
+The 2026-09-27 update added these checks:
+
+| Check | Observed result |
+| --- | --- |
+| Thirteen automated installer tests | Passed: the six above plus hint placement in the source, Claude hoisting with an unchanged body and bundled assets, preservation of other metadata, both-runtime installation, refusal without writes when either destination exists, and rejection of an unknown runtime |
+| CLI and skill validation | `--agent both` installed both copies, and a repeat `--agent claude` was refused. The source and Codex copy passed the skill validator; the Claude copy fails it only on its top-level `argument-hint`, as intended |
+| Claude Code 2.1.283 | Typing `/product-os ` rendered `[init|resume|orient] [target or question]` inline. No turn was submitted, so interview behavior of the new entries was not exercised |
 
 Installer tests can be rerun with:
 

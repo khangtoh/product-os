@@ -11,15 +11,17 @@ git clone https://github.com/khangtoh/product-os.git
 cd product-os
 ```
 
-### Codex skill
+### Codex or Claude Code skill
 
 From the framework checkout, install into an existing target directory:
 
 ```sh
-python3 scripts/install_skill.py --project ../my-project
+python3 scripts/install_skill.py --project ../my-project                 # Codex (default)
+python3 scripts/install_skill.py --project ../my-project --agent claude  # Claude Code
+python3 scripts/install_skill.py --project ../my-project --agent both
 ```
 
-The optional installer uses Python's standard library and requires no dependencies or network access. It creates `.agents/skills/product-os/` with the skill and a snapshot of the canonical template under `assets/product/`. It preserves other skills and creates no product context. It refuses existing destinations, symlinked skill directories, and installation inside this framework checkout.
+The optional installer uses Python's standard library and requires no dependencies or network access. It creates `.agents/skills/product-os/` for Codex and `.claude/skills/product-os/` for Claude Code, each with the skill and a snapshot of the canonical template under `assets/product/`. It preserves other skills and creates no product context. It refuses existing destinations, symlinked skill directories, and installation inside this framework checkout; with `both`, a refusal for either runtime writes nothing.
 
 Open the target project in Codex, then invoke:
 
@@ -27,7 +29,13 @@ Open the target project in Codex, then invoke:
 $product-os init
 ```
 
-If the skill does not appear, start a new session. A bare `$product-os` invocation explains setup readiness and offers the appropriate next step. This release supplies onboarding and orientation; it does not add run, review, or scheduling subcommands.
+In Claude Code, invoke `/product-os init`. Claude Code shows the entry hint inline as you type `/product-os `:
+
+```text
+/product-os  [init|resume|orient] [target or question]
+```
+
+`init` sets up or completes onboarding, `resume` continues an interrupted interview from its saved checkpoint, and `orient` introduces a contributor to an initialized project. If the skill does not appear, start a new session. A bare invocation explains setup readiness and offers the appropriate entry. This release supplies onboarding and orientation; it does not add run, review, or scheduling subcommands.
 
 ### Manual skill installation
 
@@ -41,6 +49,8 @@ Without Python, create `.agents/skills/` in your target project. Copy this check
     MODEL.md
     ...the rest of the template
 ```
+
+For Claude Code, use `.claude/skills/` instead, and in the copied SKILL.md move the `argument-hint` line out of `metadata:` to the top level (delete `metadata:` if nothing else remains under it). Claude Code reads the hint only at the top level; the source keeps it under `metadata:` because the Agent Skills specification Codex follows has no top-level field for it.
 
 Copy both parts; the source skill alone is not a complete package. Preserve existing destinations and do not copy the framework's maintenance AGENTS.md. [Skill updates](CUSTOMIZATION.md#update-the-installed-skill) are separate from changes to project context.
 

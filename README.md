@@ -16,16 +16,16 @@ Its central convention is **[PRODUCT.md](docs/PRODUCT_MD.md)**: the shared produ
 
 ## Adopt it
 
-From this checkout, install the Codex skill into an existing target project:
+From this checkout, install the skill into an existing target project. Add `--agent claude` for Claude Code or `--agent both`; the default is Codex:
 
 ```sh
 python3 scripts/install_skill.py --project ../my-project
 ```
 
-Open that project in Codex and invoke:
+Open that project in Codex and invoke `$product-os init`, or `/product-os init` in Claude Code. Claude Code previews the entries as you type:
 
 ```text
-$product-os init
+/product-os  [init|resume|orient] [target or question]
 ```
 
 ProductOS reads existing context, then asks you about the vision, users, requirements, constraints, success criteria, and priorities still needed for a complete initial brief. It helps you decide when you are unsure, saves progress between rounds, and ends with a Now / Next / Later roadmap and a proposed first loop.
