@@ -51,18 +51,18 @@ Report readiness for the proposed next action separately from brief completion. 
 
 | Type | ID | Directory | Answers |
 | --- | --- | --- | --- |
-| `steering` | `STR-001` | `steering/` | What direction was given, by whom, within what scope? |
-| `outcome` | `OUT-001` | `outcomes/` | What observable change matters? |
-| `opportunity` | `OPP-001` | `opportunities/` | What user problem could produce that change? |
-| `feature` | `FEAT-001` | `features/` | What behavior will we deliver and verify? |
-| `experiment` | `EXP-001` | `experiments/` | What uncertain claim are we testing? |
-| `evidence` | `EV-001` | `evidence/` | What was observed, where, when, and how? |
-| `decision` | `DEC-001` | `decisions/` | What did we choose and why? |
-| `cycle` | `CYC-YYYYMMDD-01` | `cycles/` | What happened, and how does the work resume? |
-| `incident` | `INC-001` | `operations/incidents/` | What failed and how was it resolved? |
-| `runbook` | `RUN-001` | `operations/runbooks/` | How do we carry out or recover an operation? |
+| `steering` | `Steering-01` | `steering/` | What direction was given, by whom, within what scope? |
+| `outcome` | `Outcome-01` | `outcomes/` | What observable change matters? |
+| `opportunity` | `Opportunity-01` | `opportunities/` | What user problem could produce that change? |
+| `feature` | `Feature-01` | `features/` | What behavior will we deliver and verify? |
+| `experiment` | `Experiment-01` | `experiments/` | What uncertain claim are we testing? |
+| `evidence` | `Evidence-01` | `evidence/` | What was observed, where, when, and how? |
+| `decision` | `Decision-01` | `decisions/` | What did we choose and why? |
+| `cycle` | `Cycle-01` | `cycles/` | What happened, and how does the work resume? |
+| `incident` | `Incident-01` | `operations/incidents/` | What failed and how was it resolved? |
+| `runbook` | `Runbook-01` | `operations/runbooks/` | How do we carry out or recover an operation? |
 
-MET IDs and LRN IDs identify entries in METRICS.md and LEARNINGS.md. Create a directory with its first real record; do not manufacture work to populate folders.
+`Metric-01` and `Learning-01` style IDs identify entries in METRICS.md and LEARNINGS.md. Create a directory with its first real record; do not manufacture work to populate folders.
 
 ## Metadata
 
@@ -71,7 +71,7 @@ Copy the relevant template. Every typed record has these fields:
 ```yaml
 ---
 schema_version: 1
-id: OPP-001
+id: Opportunity-01
 type: opportunity
 title: A concise description of the user problem
 status: proposed
@@ -82,7 +82,7 @@ related: []
 ---
 ```
 
-Use a stable unique ID and a filename such as `OPP-001-descriptive-slug.md`. Select the next unused ID after checking records; coordinate allocation if several actors write. Never reuse IDs. Keep IDs when retiring or moving records and repair affected links.
+IDs use the full record type as a single-word prefix, a hyphen, and a two-digit sequence number, such as `Opportunity-01`; never abbreviate the type. Name the file `<ID>_short_text_description.md`, for example `Opportunity-01_first_save_confusion.md`, using lowercase words joined by underscores. Continue with three digits after `99`. Use a stable unique ID. Select the next unused ID after checking records; coordinate allocation if several actors write. Never reuse IDs. Keep IDs when retiring or moving records and repair affected links. Instances with older abbreviated IDs such as `OPP-001` keep them; use the full-word form for new records.
 
 Dates use ISO `YYYY-MM-DD`; observations and execution use UTC ISO timestamps when precision matters. Active work must have a named human or agent owner. Proposed work may be `unassigned`. `related` lists existing record, metric, or learning IDs. Use relative Markdown links in the body for human navigation.
 

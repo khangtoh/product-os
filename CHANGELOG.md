@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Replaced abbreviated record IDs such as `OPP-001` with full-word IDs such as `Opportunity-01`, and record filenames with `<ID>_short_text_description.md`. Existing abbreviated IDs remain valid and are not renamed.
 - Added an inline argument hint, `[init|resume|orient] [target or question]`, which Claude Code shows while `/product-os` is typed. `resume` and `orient` now name the existing interrupted-setup and contributor-orientation paths.
 - Added a VERSION-driven release: changing VERSION on `main` runs a shared release kit (identical to specloop's) that verifies, packages Codex and Claude Code skill archives plus the blank template, and creates a tagged GitHub Release. See [releasing](docs/RELEASING.md).
 - Added `scripts/check_links.py` for repository and isolated-template link checks.

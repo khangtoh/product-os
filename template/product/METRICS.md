@@ -9,7 +9,7 @@ No metric definitions, baselines, or product targets are supplied by this templa
 | ID | Name | Definition and population | Source | Baseline / window | Target / window | Owner | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 
-Use `MET-001`, `MET-002`, and so on. These IDs identify definitions in this file. Add one subsection per adopted metric with the fields below.
+Use `Metric-01`, `Metric-02`, and so on. These IDs identify definitions in this file. Add one subsection per adopted metric with the fields below.
 
 ## Required definition
 
