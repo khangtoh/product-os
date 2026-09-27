@@ -35,7 +35,7 @@ In Claude Code, invoke `/product-os init`. Claude Code shows the entry hint inli
 /product-os  [init|resume|orient] [target or question]
 ```
 
-`init` sets up or completes onboarding, `resume` continues an interrupted interview from its saved checkpoint, and `orient` introduces a contributor to an initialized project. If the skill does not appear, start a new session. A bare invocation explains setup readiness and offers the appropriate entry. This release supplies onboarding and orientation; it does not add run, review, or scheduling subcommands.
+`init` sets up or completes onboarding, `resume` continues an interrupted interview from its saved checkpoint, `orient` introduces a contributor to an initialized project, and `run` carries out the next eligible bounded action once a brief exists. Asking for the next action in ordinary language routes to the same procedure. If the skill does not appear, start a new session. A bare invocation explains setup readiness and the current next action, then offers the appropriate entry. The skill supplies onboarding, orientation, and execution; it adds no review, steering, or scheduling subcommands and installs no runner.
 
 ### Manual skill installation
 
@@ -46,7 +46,9 @@ Without Python, create `.agents/skills/` in your target project. Copy this check
   SKILL.md
   assets/product/
     ONBOARDING.md
+    EXECUTION.md
     MODEL.md
+    LOOP.md
     ...the rest of the template
 ```
 

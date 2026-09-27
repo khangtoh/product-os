@@ -1,0 +1,7 @@
+{
+  "name": "pocketgarden",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Save articles and find them again later.",
+  "type": "module"
+}

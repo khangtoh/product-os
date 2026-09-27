@@ -6,7 +6,7 @@ This folder is the shared product memory for humans and agents working on this p
 
 1. [PRODUCT.md](PRODUCT.md) for product intent and [STATE.md](STATE.md) for current work.
 2. [ROADMAP.md](ROADMAP.md), then relevant [vision](VISION.md), [requirements](REQUIREMENTS.md), [strategy](STRATEGY.md), and steering records.
-3. [LOOP.md](LOOP.md) and [operations](operations/README.md) for execution and actual capabilities/authority.
+3. [LOOP.md](LOOP.md) and [operations](operations/README.md) for the protocol and actual capabilities/authority; [EXECUTION.md](EXECUTION.md) for the procedure that applies them to one action.
 4. Linked task records and relevant [learning](LEARNINGS.md). Read [MODEL.md](MODEL.md) before creating records and [METRICS.md](METRICS.md) before interpreting measurements.
 
 Use [WORKING_TOGETHER.md](WORKING_TOGETHER.md) for shared ownership and handoffs. Load relevant context rather than every historical record.
@@ -27,7 +27,7 @@ Progress the highest-priority eligible action through design, build, verificatio
 
 When asked to set up ProductOS or orient a new contributor, use [ONBOARDING.md](ONBOARDING.md). Inspect existing context first, ask only about material gaps, and preserve established records. Missing optional fields alone do not require onboarding again or interrupt the requested work.
 
-Read the active cycle in STATE and resume it when relevant. For substantive new work, create a cycle from [the template](templates/cycle.md), identify owner, deliverable, limits, stop conditions, and next observation. Link it from STATE. Reading and small standalone corrections do not need a new cycle.
+For product work, follow [EXECUTION.md](EXECUTION.md): orient, resume or select one action, bound it, execute, verify, and hand off. Read the active cycle in STATE and resume it when relevant. For substantive new work, create a cycle from [the template](templates/cycle.md), identify owner, deliverable, limits, stop conditions, and next observation. Link it from STATE. Reading and small standalone corrections do not need a new cycle.
 
 Check real external state before repeating an uncertain action. Markdown ownership is not a lock; use actual runner coordination or serialize mutations. Multiple agents are optional, not required by this model.
 

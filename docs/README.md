@@ -10,12 +10,14 @@ Read in order when adopting the method for the first time:
 6. [Customization](CUSTOMIZATION.md) — adapt the model, integrate existing tools, and upgrade it.
 7. [Migrate to 0.2](MIGRATING_0.2.md) — promote the canonical contract and merge onboarding without losing applied history.
 
-The canonical [record model](../template/product/MODEL.md), [loop protocol](../template/product/LOOP.md), and [record templates](../template/product/templates/README.md) ship inside the portable template. The [worked example](../examples/first-learning-loop.md) illustrates them without creating live project records.
+The canonical [record model](../template/product/MODEL.md), [loop protocol](../template/product/LOOP.md), [onboarding](../template/product/ONBOARDING.md) and [execution](../template/product/EXECUTION.md) procedures, and [record templates](../template/product/templates/README.md) ship inside the portable template. The [worked example](../examples/first-learning-loop.md) illustrates them without creating live project records.
 
 ## Framework maintenance
 
 - [Development plan](DEVELOPMENT_PLAN.md) — current capability status, remaining work, dependencies, and completion criteria.
 - [Onboarding decisions and implementation](ONBOARDING_IMPLEMENTATION.md) — implemented design, rationale, validation, and limits.
 - [Releasing](RELEASING.md) — how a VERSION change on `main` becomes a tagged GitHub Release with packaged archives.
+- [Execution decisions and implementation](EXECUTION_IMPLEMENTATION.md) — the packaged run procedure, its interface, validation, and limits.
+- [End-to-end onboarding test plan and handoff](E2E_TEST_PLAN.md) — the test design, what is built, outstanding decisions, and how to resume.
 
 These documents track development of ProductOS itself; they are not part of an adopting project's product context.

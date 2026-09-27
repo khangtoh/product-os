@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "seed": "new-web-app",
+  "layout": "new-root-contract",
+  "canonical_contract": "PRODUCT.md",
+  "product_dir": "product",
+  "agent_files": [
+    "AGENTS.md",
+    "CLAUDE.md"
+  ],
+  "must_exist": [
+    "PRODUCT.md",
+    "AGENTS.md",
+    "product/PRODUCT.md",
+    "product/VISION.md",
+    "product/REQUIREMENTS.md",
+    "product/STRATEGY.md",
+    "product/ROADMAP.md",
+    "product/STATE.md",
+    "product/operations/README.md"
+  ],
+  "must_not_exist": [
+    "product/features",
+    "product/experiments",
+    "product/decisions",
+    "product/cycles",
+    "product/evidence",
+    "product/opportunities",
+    "product/steering",
+    "product/operations/runbooks",
+    "product/operations/incidents"
+  ],
+  "seed_preserved": [
+    "README.md",
+    "package.json",
+    "src/store.js",
+    "src/search.js",
+    "src/index.html"
+  ],
+  "filled": [
+    "PRODUCT.md",
+    "product/VISION.md",
+    "product/REQUIREMENTS.md",
+    "product/STRATEGY.md",
+    "product/ROADMAP.md",
+    "product/STATE.md",
+    "product/operations/README.md"
+  ],
+  "may_stay_blank": [
+    "product/METRICS.md",
+    "product/LEARNINGS.md"
+  ],
+  "bare_install_reports": [
+    "required_paths_exist",
+    "adoption_stamp_set",
+    "blank_markers_reduced",
+    "state_checkpoint_resolved",
+    "roadmap_now_has_rows",
+    "local_contract_is_pointer",
+    "root_agents_pointer",
+    "coverage_destinations_nonblank",
+    "deferrals_recorded",
+    "traceability"
+  ],
+  "pointer": {
+    "path": "product/PRODUCT.md",
+    "target": "PRODUCT.md",
+    "max_lines": 25
+  },
+  "coverage": {
+    "identity-and-vision": [
+      "PRODUCT.md",
+      "product/VISION.md"
+    ],
+    "users-and-problem": [
+      "PRODUCT.md"
+    ],
+    "core-experience": [
+      "product/REQUIREMENTS.md"
+    ],
+    "initial-requirements": [
+      "product/REQUIREMENTS.md"
+    ],
+    "boundaries": [
+      "PRODUCT.md",
+      "product/REQUIREMENTS.md"
+    ],
+    "success": [
+      "product/outcomes"
+    ],
+    "priorities": [
+      "product/ROADMAP.md",
+      "product/STRATEGY.md"
+    ],
+    "starting-point": [
+      "product/STATE.md",
+      "product/operations/README.md"
+    ]
+  },
+  "traceability": [
+    {
+      "id": "platform",
+      "path": "PRODUCT.md",
+      "section": "## Platform",
+      "all_of": [
+        "web"
+      ]
+    },
+    {
+      "id": "users",
+      "path": "PRODUCT.md",
+      "all_of": [
+        "research"
+      ]
+    },
+    {
+      "id": "hypothesis",
+      "path": "PRODUCT.md",
+      "all_of": [
+        "hypothes"
+      ]
+    },
+    {
+      "id": "alternatives",
+      "path": "PRODUCT.md",
+      "any_of": [
+        "bookmark",
+        "notes"
+      ]
+    },
+    {
+      "id": "non-goals",
+      "any_of_paths": [
+        "PRODUCT.md",
+        "product/REQUIREMENTS.md"
+      ],
+      "all_of": [
+        "librar",
+        "summar"
+      ]
+    },
+    {
+      "id": "workflows",
+      "path": "product/REQUIREMENTS.md",
+      "all_of": [
+        "search",
+        "open"
+      ]
+    },
+    {
+      "id": "no-match",
+      "path": "product/REQUIREMENTS.md",
+      "any_of": [
+        "no match",
+        "no results",
+        "nothing matches"
+      ]
+    },
+    {
+      "id": "accessibility",
+      "path": "product/REQUIREMENTS.md",
+      "all_of": [
+        "keyboard"
+      ]
+    },
+    {
+      "id": "privacy",
+      "path": "product/REQUIREMENTS.md",
+      "all_of": [
+        "privat"
+      ]
+    },
+    {
+      "id": "speed-deferral",
+      "any_of_paths": [
+        "product/REQUIREMENTS.md",
+        "product/STATE.md"
+      ],
+      "all_of": [
+        "defer"
+      ]
+    },
+    {
+      "id": "now-priority",
+      "path": "product/ROADMAP.md",
+      "all_of": [
+        "retriev"
+      ]
+    },
+    {
+      "id": "first-action",
+      "path": "product/STATE.md",
+      "any_of": [
+        "mira",
+        "observ"
+      ]
+    },
+    {
+      "id": "later-deferred",
+      "path": "product/ROADMAP.md",
+      "section": "## Later",
+      "any_of": [
+        "defer",
+        "undecided",
+        "after the",
+        "until the"
+      ]
+    },
+    {
+      "id": "study-protocol-deferral",
+      "any_of_paths": [
+        "product/STATE.md",
+        "product/REQUIREMENTS.md"
+      ],
+      "any_of": [
+        "participant",
+        "threshold"
+      ]
+    },
+    {
+      "id": "direction-owner",
+      "path": "PRODUCT.md",
+      "any_of": [
+        "mira",
+        "product owner"
+      ]
+    }
+  ],
+  "skip_checks": []
+}

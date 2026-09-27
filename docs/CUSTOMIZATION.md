@@ -59,6 +59,12 @@ New-project onboarding defaults to a root PRODUCT.md. Applied 0.1.0 instances re
 
 Do not label an older brief complete merely because its files exist. During a requested revisit, reuse known answers and check coverage against MODEL; otherwise leave ordinary work uninterrupted. Keep the recorded release version at 0.1.0 until adopting a released upgrade and note the onboarding addition as a local change.
 
+### Adding the execution procedure to an earlier instance
+
+EXECUTION.md is a new procedure document; it changes no record metadata, lifecycle, or canonical home. Copy it into the instance, then link it from the instance README, agent instructions, and STATE's next action. It applies the LOOP and MODEL rules the instance already has, so local adaptations to those stay authoritative — if a local LOOP has diverged, keep the local rules and adjust the procedure's references rather than reintroducing the canonical text.
+
+Instances that added their own run checklist can keep it. Reconcile the two rather than stacking them: one procedure per instance, with the other retired or folded in. Update the installed skill separately, using the guidance below.
+
 ### Update the installed skill
 
 The installer refuses an existing `.agents/skills/product-os/` or `.claude/skills/product-os/` destination, including an empty directory or symlink. To replace it deliberately, preserve local skill edits, move only that skill folder to a backup outside the skill-discovery directory, and rerun the installer from the desired framework checkout. Compare and reapply intentional local skill changes; start a new Codex or Claude Code session if needed. Pass the same `--agent` value used originally.
@@ -69,4 +75,20 @@ Skill assets are bundled blank templates. Updating them does not update project-
 
 When repeated project friction suggests a reusable improvement, describe the problem and proposed convention here, without copying private product history. Keep fictional examples separate from the template. A proposed framework improvement does not automatically change every applied project.
 
-For installer changes, run `python3 -m unittest discover -s scripts -p 'test_*.py' -v`. For onboarding changes, exercise the installed skill in temporary projects covering new and existing products, explicit deferrals, interrupted setup, contributor orientation, ambiguous scope, and read-only access. Inspect the resulting context and handoff; prose matching alone does not validate an interview. Check repository links and an isolated template copy before publishing.
+Run the offline suite for any change to the installer, the checker, or the template:
+
+```sh
+python3 -m unittest discover -s scripts -p 'test_*.py' -v
+```
+
+It needs no network, no agent, and no dependencies. It covers the installer and the release packaging, and it validates a completed instance against the rules MODEL states: a bare installation must fail the checker, a captured good instance must pass, and each named check must reject a specific corruption. Check repository links and an isolated template copy with `python3 scripts/check_links.py`.
+
+For changes to the onboarding procedure itself, run the scripted live interview and read its output:
+
+```sh
+PRODUCT_OS_E2E_LIVE=1 python3 scripts/run_onboarding_e2e.py --seed new-web-app --keep
+```
+
+It costs tokens, takes minutes, and needs the `claude` CLI, so it stays opt-in and out of the default suite. When it disagrees with the checker, classify the finding before changing anything: a checker bug, an expectation bug, or a genuine gap in the guide. Never loosen a check to make a run pass, and record any relaxation in [the fixture README](../test_project/README.md). The captured good instance is never hand-edited; the only sanctioned change is a fresh capture recorded in its provenance file.
+
+Scenarios the suite does not cover remain manual: contributor orientation, ambiguous target scope, and a read-only project. Exercise those by hand in temporary projects and inspect the resulting context and handoff; prose matching alone does not validate an interview.

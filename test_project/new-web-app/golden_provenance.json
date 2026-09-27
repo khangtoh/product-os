@@ -1,0 +1,14 @@
+{
+  "captured_at": "2026-09-27T01:20:05.189463+00:00",
+  "seed": "new-web-app",
+  "claude_cli_version": "2.1.274 (Claude Code)",
+  "model": "default",
+  "session_id": "487c7571-8712-41c3-bb30-e3b683720f30",
+  "turns": 9,
+  "extra_turns_used": 2,
+  "total_cost_usd": 7.4285,
+  "template_sha256": "cae595e7be8a4969adaaed48e8159b1dc91813e1da9197dc35af9af0a65befb8",
+  "skill_sha256": "22bddb251ee254aeb3100b12f2de9ece9854fc23aeb755b9889508a090c6148d",
+  "turns_sha256": "1b7ff4ad43098f7d7dbcffea0ab34d550547cbaf8a056e8e3fddbe19d624dd84",
+  "note": "Captured from a real scripted run. Never hand-edit the golden; recapture with scripts/run_onboarding_e2e.py --capture-golden and record the reason in test_project/README.md."
+}

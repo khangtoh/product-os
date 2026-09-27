@@ -1,8 +1,10 @@
 # Operating with ProductOS
 
-The full protocol lives in [LOOP.md](../template/product/LOOP.md). This guide explains how to use it without turning every small action into a documentation exercise.
+The full protocol lives in [LOOP.md](../template/product/LOOP.md), and [EXECUTION.md](../template/product/EXECUTION.md) is the step-by-step procedure for carrying one action through it. This guide explains how to use both without turning every small action into a documentation exercise.
 
 ## Start a work session
+
+With the skill installed, `$product-os run` follows [EXECUTION.md](../template/product/EXECUTION.md) for you; the same procedure works from a prompt or by hand.
 
 Read PRODUCT, STATE, and current steering. Check the roadmap and relevant records. Resume existing work if it covers the same task; do not open a duplicate because another conversation started.
 
