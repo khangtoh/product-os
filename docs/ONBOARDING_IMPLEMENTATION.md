@@ -88,11 +88,11 @@ Installer tests can be rerun with:
 python3 -m unittest discover -s scripts -p 'test_*.py' -v
 ```
 
-The first two checks are now an automated regression suite committed to the repository; [the fixtures](../test_project/README.md) hold the mock product, the scripted turns, the expectation spec, and the captured instance. The remaining scenarios — contributor orientation, ambiguous target scope, and read-only access — stay manual, as described in [framework maintenance guidance](CUSTOMIZATION.md#improve-the-framework).
+The first two checks are now an automated regression suite committed to the repository; [the fixtures](../demo_project/README.md) hold the mock product, the scripted turns, the expectation spec, and the captured instance. The remaining scenarios — contributor orientation, ambiguous target scope, and read-only access — stay manual, as described in [framework maintenance guidance](CUSTOMIZATION.md#improve-the-framework).
 
 These are regression checks over one captured run, not validation of onboarding. They cannot show that the interview asks good questions, that unscripted users reach the same coverage, that the Codex entry point behaves the same way, or that any product outcome improved. A captured instance goes stale when the template changes; a provenance digest fails the suite when it does, and the only sanctioned fix is a recapture.
 
-The first complete live run exposed seven defects, all in the checker, the expectation spec, or the test harness, and no gap in the procedure itself. They are recorded with their classifications in [the fixture README](../test_project/README.md).
+The first complete live run exposed seven defects, all in the checker, the expectation spec, or the test harness, and no gap in the procedure itself. They are recorded with their classifications in [the fixture README](../demo_project/README.md).
 
 ## Limits and follow-up
 

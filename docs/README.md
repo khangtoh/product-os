@@ -15,6 +15,7 @@ The canonical [record model](../template/product/MODEL.md), [loop protocol](../t
 ## Framework maintenance
 
 - [Development plan](DEVELOPMENT_PLAN.md) — current capability status, remaining work, dependencies, and completion criteria.
+- [Event logging and version-aware evolution requirements](EVENT_LOGGING_REQUIREMENTS.md) — specified committed `.product-os/` events, command/interview/artifact provenance, and compatible upgrades; not yet implemented.
 - [Onboarding decisions and implementation](ONBOARDING_IMPLEMENTATION.md) — implemented design, rationale, validation, and limits.
 - [Releasing](RELEASING.md) — how a VERSION change on `main` becomes a tagged GitHub Release with packaged archives.
 - [Execution decisions and implementation](EXECUTION_IMPLEMENTATION.md) — the packaged run procedure, its interface, validation, and limits.

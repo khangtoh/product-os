@@ -1,0 +1,113 @@
+name: Demo checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      run_live:
+        description: Run the live Claude onboarding interview (uses paid API tokens)
+        type: boolean
+        default: false
+      per_turn_budget_usd:
+        description: Maximum USD per live interview turn (current demo allows up to 9 turns)
+        type: string
+        default: '5.0'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: demo-checks-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name != 'workflow_dispatch' }}
+
+jobs:
+  offline:
+    name: Demo validation (Python ${{ matrix.python }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.10', '3.13']
+    env:
+      PRODUCT_OS_E2E_LIVE: '0'
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Run offline regression and demo checks
+        shell: bash
+        run: python3 -m unittest discover -s scripts -p 'test_*.py' -v 2>&1 | tee "$RUNNER_TEMP/demo-tests.log"
+      - name: Validate captured demo against its seed and expectations
+        shell: bash
+        run: >-
+          python3 scripts/check_instance.py
+          --project demo_project/new-web-app/golden
+          --expect demo_project/new-web-app/expect.json
+          --seed demo_project/new-web-app/seed
+          --json > "$RUNNER_TEMP/demo-checker.json"
+      - name: Check repository links
+        run: python3 scripts/check_links.py
+      - name: Check isolated template links
+        run: python3 scripts/check_links.py --template
+      - name: Upload demo check reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: demo-checks-python-${{ matrix.python }}
+          path: |
+            ${{ runner.temp }}/demo-tests.log
+            ${{ runner.temp }}/demo-checker.json
+          if-no-files-found: warn
+          retention-days: 14
+
+  live:
+    name: Live scripted onboarding demo
+    if: github.event_name == 'workflow_dispatch' && inputs.run_live
+    needs: offline
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      PRODUCT_OS_E2E_LIVE: '1'
+      PER_TURN_BUDGET_USD: ${{ inputs.per_turn_budget_usd }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Check live-run credential and budget
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os
+          import math
+          if not os.environ.get('ANTHROPIC_API_KEY'):
+              raise SystemExit('Live demo requires the ANTHROPIC_API_KEY repository secret.')
+          budget = float(os.environ['PER_TURN_BUDGET_USD'])
+          if not math.isfinite(budget) or budget <= 0:
+              raise SystemExit('per_turn_budget_usd must be a finite positive number.')
+          PY
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install the Claude CLI used by the captured demo
+        run: npm install -g @anthropic-ai/claude-code@2.1.274
+      - name: Run a fresh scripted interview outside the checkout
+        shell: bash
+        run: >-
+          python3 scripts/run_onboarding_e2e.py --seed new-web-app --keep
+          --out "$RUNNER_TEMP/product-os-live-demo"
+          --budget-usd "$PER_TURN_BUDGET_USD"
+      - name: Upload live demo results, project, and transcript
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-onboarding-demo
+          path: ${{ runner.temp }}/product-os-live-demo/
+          if-no-files-found: warn
+          include-hidden-files: true
+          retention-days: 14

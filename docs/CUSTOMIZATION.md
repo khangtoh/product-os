@@ -45,6 +45,8 @@ To upgrade an applied instance:
 
 Do not recopy the blank template over an applied instance. There is no automatic migration in this release. Template release version and per-record `schema_version` are separate: a documentation revision need not change record schema.
 
+The planned [event journal and version-aware evolution](EVENT_LOGGING_REQUIREMENTS.md) will record the loaded framework/package version, instance layout, artifact schema and hashes, and target Git revision under a committed `.product-os/`. It specifies automatic handling of known compatible structural changes and proposed migrations for unresolved changes, preserving local content and historical events. This is a future requirement, not an updater available in the current release; continue using the deliberate upgrade procedure above until an implementation is released.
+
 ### Upgrading the product contract to 0.2.0
 
 Follow [the 0.2 migration guide](MIGRATING_0.2.md). Preserve the applied contract and record history, establish one canonical location, map supported facts into the open-standard headings, and retain ProductOS operating sections. Do not copy the blank blueprint over a populated contract.
@@ -83,12 +85,14 @@ python3 -m unittest discover -s scripts -p 'test_*.py' -v
 
 It needs no network, no agent, and no dependencies. It covers the installer and the release packaging, and it validates a completed instance against the rules MODEL states: a bare installation must fail the checker, a captured good instance must pass, and each named check must reject a specific corruption. Check repository links and an isolated template copy with `python3 scripts/check_links.py`.
 
+The [Demo checks workflow](../.github/workflows/demo-checks.yml) also automates offline validation on pull requests and pushes to `main`, with a manual live-run option. See [demo automation](../demo_project/README.md#automated-runs-in-github-actions) for credential setup and the distinction between checking a capture and generating a fresh one.
+
 For changes to the onboarding procedure itself, run the scripted live interview and read its output:
 
 ```sh
 PRODUCT_OS_E2E_LIVE=1 python3 scripts/run_onboarding_e2e.py --seed new-web-app --keep
 ```
 
-It costs tokens, takes minutes, and needs the `claude` CLI, so it stays opt-in and out of the default suite. When it disagrees with the checker, classify the finding before changing anything: a checker bug, an expectation bug, or a genuine gap in the guide. Never loosen a check to make a run pass, and record any relaxation in [the fixture README](../test_project/README.md). The captured good instance is never hand-edited; the only sanctioned change is a fresh capture recorded in its provenance file.
+It costs tokens, takes minutes, and needs the `claude` CLI, so it stays opt-in and out of the default suite. When it disagrees with the checker, classify the finding before changing anything: a checker bug, an expectation bug, or a genuine gap in the guide. Never loosen a check to make a run pass, and record any relaxation in [the fixture README](../demo_project/README.md). The captured good instance is never hand-edited; the only sanctioned change is a fresh capture recorded in its provenance file.
 
 Scenarios the suite does not cover remain manual: contributor orientation, ambiguous target scope, and a read-only project. Exercise those by hand in temporary projects and inspect the resulting context and handoff; prose matching alone does not validate an interview.

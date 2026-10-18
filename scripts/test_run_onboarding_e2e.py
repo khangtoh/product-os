@@ -20,11 +20,11 @@ class RunnerGuardTests(unittest.TestCase):
     """These run offline. They protect the repository from a stray run writing into it."""
 
     def test_output_inside_the_checkout_is_refused(self):
-        for candidate in (ROOT, ROOT / "test_project" / "runs", ROOT / "scripts"):
+        for candidate in (ROOT, ROOT / "demo_project" / "runs", ROOT / "scripts"):
             with self.subTest(candidate=str(candidate)):
                 with self.assertRaises(ValueError):
                     run_onboarding_e2e._guard_output_dir(candidate)
-        self.assertFalse((ROOT / "test_project" / "runs").exists(),
+        self.assertFalse((ROOT / "demo_project" / "runs").exists(),
                          "the guard must refuse without creating the directory")
 
     def test_output_outside_the_checkout_is_allowed(self):
@@ -49,7 +49,7 @@ class RunnerGuardTests(unittest.TestCase):
                 self.assertNotIn("--session-id" if resume else "--resume", command)
 
     def test_fixture_turns_are_ordered_and_complete(self):
-        spec = json.loads((ROOT / "test_project" / SEED / "turns.json").read_text(encoding="utf-8"))
+        spec = json.loads((ROOT / "demo_project" / SEED / "turns.json").read_text(encoding="utf-8"))
         self.assertTrue(spec["trigger"])
         self.assertGreaterEqual(len(spec["turns"]), 5)
         self.assertTrue(spec.get("catch_all"), "a catch-all turn is needed to close the interview")
