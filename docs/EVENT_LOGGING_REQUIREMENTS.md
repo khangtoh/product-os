@@ -10,6 +10,8 @@ ProductOS must leave a machine-readable, Git-versioned account of its commands, 
 
 The journal complements PRODUCT, STATE, and typed records. Those remain authoritative for product facts, current handoff, and decisions; events record observed actions and provenance. Logging a command does not prove it succeeded, and recording an upgrade proposal does not mean it was applied.
 
+Implementation decision, 2026-10-18: use TypeScript/Node.js for the new event writer, CLI and migration engine, with shared versioned runtime validation and thin harness adapters. See the [runtime and portability decision](../plans/product-os-metrics-experiments-plan.md#implementation-language-and-harness-portability). Existing Python checks remain available; neither a new runtime nor complete cross-harness capture is implemented by this requirements document.
+
 ## E1. Committed project-owned journal
 
 - Store the journal at `<project-root>/.product-os/`, inside the adopted product's repository. It belongs to the project, never the installed skill's asset directory. In a monorepo, identify each product scope explicitly; do not mix journals without product/instance identifiers.
@@ -151,7 +153,7 @@ This provenance lets a newer ProductOS assess artifact compatibility and lets an
 
 | Slice | Deliverable and required evidence |
 | --- | --- |
-| Envelope and writer | Versioned schema and stdlib-compatible atomic writer/reader; invalid envelopes fail; concurrent runs preserve both histories; no logger recursion |
+| Envelope and writer | Versioned schema and TypeScript/Node.js atomic writer/reader with runtime validation; invalid envelopes fail; concurrent runs preserve both histories; no logger recursion |
 | Entry/command capture | Wire supported host hooks/wrappers and skill/installer entry paths; successful, failed, unknown-command, interrupted and read-only invocations leave parseable correlated events; unobservable coverage is explicit |
 | Interview/artifact capture | Resume one interview across two runs; parser reports completed/deferred/pending steps and generated artifacts; hashes match actual files and external edits are detected |
 | Git/version checks | Verify effective ignore rules and committed journal alongside product changes; distinguish loaded, installed, instance, record and code versions; no self-referential commit-hash requirement |

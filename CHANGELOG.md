@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Selected [TypeScript/Node.js](plans/product-os-metrics-experiments-plan.md#implementation-language-and-harness-portability) for the planned CLI, event logging, migrations, MCP and measurement runtime, with thin harness adapters and shared runtime validation. Retained existing Python tooling pending verified replacements; this records the implementation decision rather than shipping a new runtime or claiming additional harness support.
+
 - Renamed `test_project/` to [demo_project/](demo_project/README.md), updating maintained documentation and runner/checker paths while preserving captured seed/golden contents and provenance. Added [Demo checks](.github/workflows/demo-checks.yml) for automatic offline/demo validation on pull requests and pushes to `main`, plus a manual credentialed live interview and uploaded reports.
 
 - Specified [event logging and version-aware evolution requirements](docs/EVENT_LOGGING_REQUIREMENTS.md): committed, machine-readable `.product-os/` events for commands, interview progress, artifact provenance, version compatibility, and recoverable migrations. This records requirements only; no logger, command interception, or automatic migration is implemented by this change.

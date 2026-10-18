@@ -16,6 +16,7 @@ Status snapshot: **2026-10-18**. The new event-journal work below is specified o
 | Recurring execution | Runtime contract documented; no runner or registered scheduler is bundled |
 | Structured event journal and version-aware evolution | [Requirements specified](EVENT_LOGGING_REQUIREMENTS.md): committed `.product-os/` events, command/interview/artifact provenance, version detection and compatible migrations; no emitter, capture hooks or migration runner implemented |
 | Automated demo validation | [Demo checks workflow](../.github/workflows/demo-checks.yml) runs the offline suite, captured-demo validation and link checks on PRs and pushes to `main`; a manual live interview requires its configured API credential |
+| New executable runtime and broader harness support | [TypeScript/Node.js selected](../plans/product-os-metrics-experiments-plan.md#implementation-language-and-harness-portability) for new CLI, events, migrations, MCP and metrics capabilities; thin adapters target Claude Code, Codex, Cursor, OpenCode, Gemini CLI and Pi. Existing Python tools remain; the new runtime and additional integrations are not yet implemented |
 | Complete experience on an actual product | Not yet validated as part of this work |
 
 The [onboarding implementation record](ONBOARDING_IMPLEMENTATION.md) captures the completed decisions, implementation, and validation. [Quickstart](QUICKSTART.md) is the adoption interface; this roadmap does not introduce additional commands.
