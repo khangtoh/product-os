@@ -72,6 +72,8 @@ ProductOS defines the memory and operating protocol. Continuous autonomous execu
 
 Planned: [structured event logging and version-aware upgrades](docs/EVENT_LOGGING_REQUIREMENTS.md) will preserve command, interview, and artifact provenance under a Git-tracked `.product-os/`. These are specified requirements; the current release does not yet emit that journal or perform automatic migrations.
 
+New executable capabilities will use [TypeScript/Node.js with thin harness adapters](plans/product-os-metrics-experiments-plan.md#implementation-language-and-harness-portability). Skills remain portable Markdown/YAML; the existing Python installer and checks continue working while the new runtime is developed.
+
 Current release: [0.3.0](CHANGELOG.md). See [customization](docs/CUSTOMIZATION.md) for adapting and upgrading an instance.
 
 The [Demo checks workflow](.github/workflows/demo-checks.yml) automatically validates the demo and offline suite on pull requests and pushes to `main`. A manual option runs a fresh live interview using a configured Anthropic API key; see [demo instructions](demo_project/README.md#automated-runs-in-github-actions).

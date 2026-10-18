@@ -98,7 +98,21 @@ Every experiment has a measurable evaluation contract. Discovery studies can use
 
 ## 5. Local runtime and dashboard
 
-Add one optional Python runtime, fitting the existing Python tooling. Its responsibilities are indexing contracts, collecting observations, validating data, evaluating experiments, and serving HTML plus a small JSON API.
+Add one optional TypeScript/Node.js runtime. Its responsibilities are indexing contracts, collecting observations, validating data, evaluating experiments, and serving HTML plus a small JSON API. This is the selected language for new executable ProductOS capabilities; existing Python installation/checking tools continue working during the transition.
+
+### Implementation language and harness portability
+
+Owner decision, 2026-10-18: use TypeScript for the new CLI, event writer, compatibility/migration engine, MCP client, measurement collector/evaluator, and local HTTP server. Use the official DuckDB Node.js client for native database access. Keep Markdown/YAML as the portable skill and product-context format and JSON as the event/API interchange format.
+
+Use strict TypeScript and validate external data at runtime; static types alone do not validate a repository file, journal event, MCP response, or HTTP request. Define versioned schemas once and share their runtime validation and types across CLI, server, collector and harness adapters. Emit compiled JavaScript for execution and include required templates/assets in the distributable package. Choose and pin supported Node versions and dependency versions when implementing the package; this plan does not create an npm package or claim a published command exists.
+
+Keep the shared operations independent of a harness. Thin adapters map skill discovery, invocation, host tools and available lifecycle/command hooks for Claude Code, Codex, Cursor, OpenCode, Gemini CLI and Pi. These are target integrations, not a claim of existing tested support. Each adapter must declare which operations and automatic event-capture capabilities actually work; ordinary skill installation does not establish full command interception.
+
+Make the skill distribution self-contained, including its bundled blank product templates, and verify discovery/installation through the open Agent Skills ecosystem, including `npx skills`. Reuse that installer where it covers discovery and placement; add ProductOS-specific installation only for required runtime setup or native hooks. Installation must preserve existing product artifacts and intentional local changes.
+
+Retain the current Python regression suite, installer and instance checker initially. Port existing helpers only when an equivalent TypeScript implementation has demonstrated preservation and behavioural parity; the language decision does not authorize replacing captured demo data, changing product-record conventions, or weakening checks. Keep documentation-only adoption usable without installing the optional runtime.
+
+Implement the event writer and a small shared CLI operation first, then demonstrate it through more than one harness before expanding to DuckDB/MCP. Add a capability matrix and contract fixtures for the six target adapters; run live agent trials only with actual harness access and credentials, and report unsupported or untested cases explicitly.
 
 Proposed layout inside an adopted product repository:
 
@@ -193,7 +207,7 @@ Run the repository's required link checks, isolated-template check, and Python t
 
 ## 10. Defaults and remaining integration choices
 
-Recommended defaults: Python runtime, one DuckDB owner, same-origin localhost dashboard, Git-owned definitions, DuckDB-owned observations, aggregate-first ingestion, one primary journey per experiment, existing lifecycle states, and agent-host MCP plus a direct collector adapter.
+Selected defaults: TypeScript/Node.js runtime, strict types plus runtime schema validation, thin harness adapters, one DuckDB owner, same-origin localhost dashboard, Git-owned definitions, DuckDB-owned observations, aggregate-first ingestion, one primary journey per experiment, existing lifecycle states, and agent-host MCP plus a direct collector adapter. Existing Python checks remain in use until a verified replacement exists.
 
 The framework plan can proceed on those defaults. Before the real pilot, establish the first getintro journey, existing telemetry/experiment provider, available MCP server and tool schema, metric semantics and instrumentation, actual rollout authority, and where a continuous runner's database will persist. Those are integration facts to discover, not values the generic template should invent.
 
@@ -205,3 +219,6 @@ The framework plan can proceed on those defaults. Before the real pilot, establi
 - [ProductOS execution procedure](https://github.com/khangtoh/product-os/blob/main/template/product/EXECUTION.md)
 - [DuckDB concurrency](https://duckdb.org/docs/current/connect/concurrency.html)
 - [MCP architecture](https://modelcontextprotocol.io/docs/learn/architecture)
+- [DuckDB Node.js client](https://duckdb.org/docs/current/clients/node_neo/overview)
+- [Agent Skills specification](https://agentskills.io/specification)
+- [Open skills installer](https://github.com/vercel-labs/skills)
