@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Adopt ProductOS around the contracts, code, evidence, and work your team already has. Preserve history and fill the gaps that matter."><title>Bring an existing project into ProductOS. · ProductOS</title><style>
+:root{color-scheme:light;--ink:#192c28;--muted:#53645e;--line:#d7e1da;--paper:#fafbf7;--card:#fff;--accent:#175944;--wash:#edf4ec;--gold:#f6edd6;--code:#142c25}
+*{box-sizing:border-box}
+html{scroll-padding-top:2rem}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:var(--accent);text-underline-offset:.2em}
+a:hover{text-decoration-thickness:2px}
+a:focus-visible,summary:focus-visible{outline:3px solid #af6714;outline-offset:5px}
+.skip{position:absolute;left:1rem;top:-8rem;background:white;padding:1rem;z-index:5}
+.skip:focus{top:1rem}
+.topbar{max-width:1240px;margin:auto;padding:22px 36px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:14px}
+.brand{font-weight:800;letter-spacing:.06em;text-decoration:none}
+.toplinks{display:flex;gap:22px;flex-wrap:wrap}
+.layout{max-width:1240px;margin:auto;display:grid;grid-template-columns:220px minmax(0,1fr);gap:64px;padding:48px 36px 80px}
+aside{align-self:start;position:sticky;top:28px;font-size:14px}
+aside p{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+aside ol{list-style:none;padding:0;margin:0;counter-reset:nav}
+aside li{counter-increment:nav;border-bottom:1px solid var(--line)}
+aside a{display:flex;gap:12px;padding:13px 0;text-decoration:none}
+aside a:before{content:"0" counter(nav);color:var(--muted);font-variant-numeric:tabular-nums}
+.eyebrow{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.13em;color:var(--accent)}
+h1{font-size:clamp(38px,5vw,62px);line-height:1.05;letter-spacing:-.045em;margin:20px 0 24px;max-width:760px}
+h2{font-size:28px;line-height:1.2;letter-spacing:-.025em;margin:0 0 20px}
+h3{font-size:19px;line-height:1.35;margin:27px 0 10px}
+p{margin:0 0 17px}
+.lead{font-size:21px;line-height:1.5;color:var(--muted);max-width:750px}
+.hero{padding-bottom:34px}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+.pill{font-size:12px;border:1px solid var(--line);border-radius:30px;padding:5px 12px;background:var(--card)}
+section{padding:38px 0;border-top:1px solid var(--line)}
+.step{color:var(--accent);font-size:12px;letter-spacing:.1em;font-weight:800;display:block;margin-bottom:10px;text-transform:uppercase}
+.callout{padding:22px 24px;background:var(--wash);border-left:4px solid var(--accent);border-radius:0 10px 10px 0;margin:24px 0}
+.callout p:last-child,.card p:last-child{margin-bottom:0}
+.callout.note{background:var(--gold);border-color:#976520}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:22px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px}
+.card h3{margin-top:0}
+ul,ol{padding-left:24px}
+li{margin-bottom:10px}
+pre{background:var(--code);color:#e1f4e6;border-radius:10px;padding:22px;overflow-x:auto;line-height:1.6;font-size:14px;max-width:100%}
+code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.88em;overflow-wrap:anywhere}
+pre code{font-size:inherit;overflow-wrap:normal}
+p code,li code,td code{background:#e8eee7;padding:2px 5px;border-radius:4px}
+.table-wrap{overflow-x:auto;margin:20px 0}
+table{border-collapse:collapse;width:100%;font-size:15px}
+caption{text-align:left;font-weight:700;margin-bottom:12px}
+th{text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:var(--wash)}
+th,td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+td:first-child{min-width:170px}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 22px;margin:16px 0}
+summary{font-weight:700;cursor:pointer}
+details[open] summary{margin-bottom:16px}
+.example{border:1px solid var(--line);border-radius:12px;padding:24px;background:var(--card);margin:22px 0}
+.example .eyebrow{font-size:11px}
+blockquote{margin:20px 0;padding:0 0 0 22px;border-left:3px solid var(--line);color:var(--muted)}
+.checklist{list-style:none;padding:0}
+.checklist li{position:relative;padding-left:28px}
+.checklist li:before{content:"✓";color:var(--accent);position:absolute;left:0;font-weight:800}
+.footer{border-top:1px solid var(--line);padding-top:28px;font-size:13px;color:var(--muted)}
+.switch{display:block;margin:28px 0 0;padding:24px;border:1px solid var(--line);border-radius:12px;background:var(--card);text-decoration:none;font-weight:700}
+.switch span{display:block;color:var(--muted);font-size:14px;font-weight:400;margin-top:5px}
+@media(max-width:900px){.layout{grid-template-columns:170px minmax(0,1fr);gap:32px;padding-left:24px;padding-right:24px}
+}
+@media(max-width:680px){.topbar{padding:18px 20px}
+.layout{display:block;padding:24px 20px 48px}
+aside{position:static;margin-bottom:36px}
+aside ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:20px}
+aside a{font-size:13px}
+.grid{grid-template-columns:1fr}
+.lead{font-size:19px}
+h1{font-size:42px}
+.hero{padding-bottom:26px}
+section{padding:30px 0}
+th,td{padding:12px 10px}
+}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}
+}
+@media print{body{font-size:10pt;background:white;color:black}
+.topbar,aside,.skip,.switch{display:none}
+.layout{display:block;padding:0;max-width:none}
+.hero{padding-bottom:20px}
+h1{font-size:32pt}
+h2{font-size:18pt}
+.lead{font-size:13pt}
+section{padding:20px 0}
+a{color:inherit;text-decoration:underline}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f1f3f0;color:black;border:1px solid #bbb}
+details{display:block}
+details>*{display:block!important}
+.card,.callout,.example{break-inside:avoid;box-shadow:none}
+.grid{gap:12px}
+h2,h3{break-after:avoid}
+.footer{font-size:9pt}
+}
+</style></head>
+<body><a class="skip" href="#main">Skip to content</a><header class="topbar"><a class="brand" href="index.html">PRODUCT OS / FIELD GUIDES</a><nav class="toplinks" aria-label="Guide navigation"><a href="index.html">All guides</a><a href="new-project.html">New project guide</a><a href="../QUICKSTART.md">Quickstart</a></nav></header><div class="layout"><aside><p>On this page</p><nav aria-label="Contents"><ol><li><a href="#inspect">Inspect the project</a></li><li><a href="#install">Install & start</a></li><li><a href="#reconcile">Resolve the gaps</a></li><li><a href="#merge">Merge the context</a></li><li><a href="#check">Verify adoption</a></li><li><a href="#continue">Resume work</a></li></ol></nav></aside><main id="main"><div class="hero"><p class="eyebrow">Onboarding / Existing project</p><h1>Bring an existing project into ProductOS.</h1><p class="lead">Adopt ProductOS around the contracts, code, evidence, and work your team already has. Preserve history and fill the gaps that matter.</p><div class="pills"><span class="pill">Existing app or product</span><span class="pill">Reuse established context</span><span class="pill">Preserve ongoing work</span></div></div>
+<section id="inspect"><span class="step">01 / Establish the target</span><h2>Start with the product's current truth.</h2><p>Identify the product or app being onboarded, its actual project root, the owner of product direction, and any current ProductOS instance. In a monorepo, do not assume every app shares one vision or product contract.</p><p>Work from the project's normal branch and review process. Check the current working tree and preserve unrelated changes before adding context. Existing instructions still govern inspection and edits.</p>
+<div class="table-wrap"><table><caption>Bring the sources that already guide the team</caption><thead><tr><th scope="col">Source</th><th scope="col">What it can establish</th></tr></thead><tbody><tr><td>Product contracts, briefs, PRDs, and requirements</td><td>Established intent, desired behavior, constraints, and links to maintained specifications.</td></tr><tr><td>Code, tests, and release artifacts</td><td>Implemented behavior and verified checks. Code alone does not prove demand or improved outcomes.</td></tr><tr><td>Roadmaps, issues, and ongoing work</td><td>Current commitments, owners, dependencies, and competing priority signals.</td></tr><tr><td>User research, support notes, and analytics</td><td>Observed problems or results, with provenance, dates, access limits, and measurement caveats.</td></tr><tr><td>Operational and design guidance</td><td>Actual platforms, service context, permission boundaries, accessibility requirements, and design conventions.</td></tr><tr><td>Existing ProductOS records</td><td>Stable IDs, lifecycle conventions, decisions, learning, and any unfinished onboarding checkpoint.</td></tr></tbody></table></div>
+<div class="callout"><p><strong>The adoption rule:</strong> reuse reliable answers, link maintained sources, and interview only for missing or conflicting information. Preserve project facts, local adaptations, IDs, history, and existing operating scope.</p></div>
+<h3>Choose setup, resume, or orientation</h3><p>Use <code>init</code> when adopting ProductOS or completing its brief; <code>resume</code> when an unfinished onboarding checkpoint exists; and <code>orient</code> when a contributor is joining an initialized product. Orientation explains established context and does not reset ownership, priorities, or the interview.</p></section>
+
+<section id="install"><span class="step">02 / Install without replacing context</span><h2>Keep the framework separate from your product.</h2><p>Obtain the framework checkout outside your target project, if you do not already have it. From that checkout, run:</p>
+<pre><code>python3 scripts/install_skill.py --project /absolute/path/to/your-project --agent codex</code></pre>
+<p>Replace the target path with your existing project directory. Select <code>--agent claude</code> for Claude Code or <code>--agent both</code> for both harnesses. The installer uses Python 3's standard library, requires no network access, and installs the skill plus bundled templates. It does not initialize product context.</p>
+<p>The installer refuses an existing skill destination and symlinked skill directories. Preserve local edits and use the <a href="../CUSTOMIZATION.md#update-the-installed-skill">skill update guidance</a> when the skill already exists. Updating a skill is separate from changing or migrating product records.</p>
+<h3>Open the target project in the agent</h3><pre><code>$product-os init</code></pre><p>In Claude Code, use <code>/product-os init</code>. These invocations belong in the agent conversation, not the terminal. Start a new session if the skill is not listed.</p>
+<p>Give the agent the scope and preservation intent:</p><pre><code>Onboard this existing project to ProductOS.
+Inspect the current product contract, requirements, roadmap, evidence,
+and ongoing work first. Reuse reliable answers and preserve history.
+Keep each fact in its authoritative home and link existing specifications.
+Ask me only about material gaps or conflicts, then save the brief and handoff.
+Do not start implementation as part of onboarding.</code></pre>
+<details><summary>Adopt without the installer or with another agent</summary><p>Use the <a href="../QUICKSTART.md#portable-prompt-or-manual-documentation">portable prompt workflow</a>. If no product folder exists, copy only <code>template/product/</code> into the target as <code>product/</code>. If a folder already exists, inspect it and merge only missing, relevant documents. Do not run a blanket copy over applied records or an unrelated directory.</p><p>Open the target project and ask:</p><pre><code>Read product/ONBOARDING.md and guide adoption into this existing project.
+Inspect and preserve the current product context, reuse established facts,
+resolve material gaps with me, and save a checkpoint between interview rounds.</code></pre><p>If an older instance lacks ONBOARDING.md, use the bundled guide or the source template's procedure while preserving the local model. If <code>product/</code> has an unrelated meaning, agree on a suitable context location before writing and adapt all references. See the quickstart for manual skill installation without Python.</p></details></section>
+
+<section id="reconcile"><span class="step">03 / Reconcile what is known</span><h2>Make gaps and conflicting signals explicit.</h2><p>The agent should summarize what the repository establishes and what remains uncertain before asking questions. Use small rounds of two or three related questions. Save supported answers in the canonical files and coverage links, remaining questions, and next topic in STATE after each answered round.</p>
+<div class="table-wrap"><table><caption>Questions that matter for an existing project</caption><thead><tr><th scope="col">Area</th><th scope="col">Resolve only what remains open</th></tr></thead><tbody><tr><td>Intent and audience</td><td>Does the current contract still represent owner direction? Which users and problems have evidence, and which remain hypotheses?</td></tr><tr><td>Workflows and requirements</td><td>Which user tasks matter now? Which behaviors are implemented, unverified, or missing? Where are acceptance criteria maintained?</td></tr><tr><td>Constraints and operations</td><td>What must remain intact? What platforms and tools actually exist? Which operating permissions and access limits already apply?</td></tr><tr><td>Success and evidence</td><td>How is the intended outcome measured? Are definitions and sources trustworthy? Which baselines or observations are unavailable?</td></tr><tr><td>Priorities and starting point</td><td>Which priorities are current? What work is already underway, who owns it, and what dependency determines its next action?</td></tr><tr><td>Contract completeness</td><td>Which required contract fields are missing, including name, promise, Register, users, purpose, platform, boundaries, and navigation?</td></tr></tbody></table></div>
+<p>For example, a roadmap may prioritize acquisition while current owner direction prioritizes retention. Show the competing sources and ask the owner to resolve that material conflict; do not silently choose by document length or recency alone. A user complaint can be evidence without becoming permission to change product direction.</p>
+<div class="example"><p class="eyebrow">Fictional example / PocketGarden</p><h3>Preserve behavior while documenting what is missing.</h3><p>The prototype already saves article links, searches titles, and opens originals. Its requirements say an empty search should explain the result and allow another query. Inspection shows that message is missing; it does not establish whether users can successfully retrieve old articles.</p><p>Record the implementation gap, preserve the owner's protected saving flow, and keep the outcome baseline unknown until observations exist. The demo has a proposed observation metric, not measured results. See <a href="../../demo_project/new-web-app/golden/product/REQUIREMENTS.md">demo requirements</a> and <a href="../../demo_project/new-web-app/golden/product/METRICS.md#metric-01--unassisted-retrieval-success">the proposed metric</a>.</p></div>
+<p>When a decision is deferred, preserve the question, consequence, owner if known, next discovery action, and whether it blocks work. A proposed solution becomes selected direction only after the owner's answer. Save conflicting evidence rather than rewriting history to make every source agree.</p></section>
+
+<section id="merge"><span class="step">04 / Merge the product memory</span><h2>Preserve the authoritative contract.</h2>
+<div class="table-wrap"><table><caption>Use the placement that fits the project</caption><thead><tr><th scope="col">Current situation</th><th scope="col">Onboarding behavior</th></tr></thead><tbody><tr><td>No established product contract</td><td>Create the canonical root PRODUCT.md from the blank blueprint; rewrite supporting links. Make product/PRODUCT.md a navigation pointer.</td></tr><tr><td>Established root PRODUCT.md</td><td>Preserve its location, frontmatter, valid machine islands, useful structure, and unfamiliar sections. Add only supported missing context.</td></tr><tr><td>Populated contract inside product/ or elsewhere</td><td>Keep it canonical unless consolidation is requested. Link to it from local navigation and adapt agent pointers.</td></tr><tr><td>Standalone context repository</td><td>Keep PRODUCT.md at that repository's root. Do not move it to a parent directory or create a self-link.</td></tr><tr><td>Multiple populated contracts or an unrelated product/ folder</td><td>Resolve target and authority before writing. Do not create competing definitions or replace unrelated files.</td></tr><tr><td>Maintained requirements, journey documents, or external trackers</td><td>Link the original sources. Add a concise navigation or summary layer where useful, rather than duplicating maintained details.</td></tr></tbody></table></div>
+<p>Preserve existing record IDs and historical decisions. Local model adaptations continue to govern existing records; adoption does not authorize schema migrations or renumbering. Follow the <a href="../../template/product/MODEL.md">canonical model</a> for new records where it applies.</p><div class="table-wrap"><table><caption>Where onboarding saves the answers</caption><thead><tr><th scope="col">Location</th><th scope="col">What belongs here</th></tr></thead><tbody><tr><td><code>PRODUCT.md</code></td><td>The canonical product contract: identity, users, purpose, boundaries, and navigation. New projects normally place it at the root.</td></tr><tr><td><code>product/PRODUCT.md</code></td><td>For the default new layout, a pointer to the root contract, current state, and roadmap. An established local contract can remain canonical.</td></tr><tr><td><code>product/VISION.md</code></td><td>Lasting ambition and durable principles.</td></tr><tr><td><code>product/REQUIREMENTS.md</code></td><td>Core workflows, functional and quality requirements, acceptance criteria, exclusions, and open decisions. Link existing specifications where they are maintained.</td></tr><tr><td><code>product/STRATEGY.md</code></td><td>Current approach, rationale, assumptions, and what would change the approach.</td></tr><tr><td><code>product/ROADMAP.md</code></td><td>Now / Next / Later outcome priorities and their rationale.</td></tr><tr><td><code>product/STATE.md</code></td><td>Interview coverage and checkpoint, current work, owner, blockers, and the next action.</td></tr><tr><td><code>product/METRICS.md</code></td><td>Measurement definitions when established; unknown baselines remain unknown.</td></tr><tr><td><code>product/operations/</code></td><td>Verified operating context, existing scope, access gaps, and relevant systems.</td></tr><tr><td>Root agent instructions</td><td>A product-context pointer merged into existing instructions, with paths adapted to the actual layout.</td></tr></tbody></table></div>
+<h3>Connect future sessions</h3><p>Merge a context pointer into the existing root agent instructions, preserving unrelated content and avoiding duplicates. Adapt these paths when the contract or context lives elsewhere:</p>
+<pre><code>## Product context
+
+For product work, read PRODUCT.md, product/AGENTS.md, and product/STATE.md
+before making changes. Follow linked vision, requirements, roadmap, and
+work records as needed. Update the affected context after material
+product decisions or results.</code></pre>
+<p>Use the harness's equivalent agent configuration where applicable. A nested AGENTS.md alone may not be read during work elsewhere in the repository. Report exactly which instructions and context documents changed.</p><div class="callout note"><h3>What setup provides today</h3><p>Guided interviewing, Markdown product memory, saved checkpoints, orientation, and a procedure for one bounded action are available. The installer currently uses Python; the documentation model itself needs no runtime.</p><p>Dedicated journey records and validation, a TypeScript CLI, DuckDB metrics collection, an HTML metrics dashboard, an MCP client, committed <code>.product-os/</code> events, and automatic artifact migrations are planned. This guide does not install or activate them. See the <a href="../../plans/product-os-metrics-experiments-plan.md">metrics and experiments plan</a> and <a href="../EVENT_LOGGING_REQUIREMENTS.md">event logging requirements</a>.</p></div></section>
+
+<section id="check"><span class="step">05 / Verify adoption</span><h2>Review the diff and the handoff.</h2><ul class="checklist"><li>The correct product is identified, with one authoritative home for each fact.</li><li>Original contracts, specifications, IDs, history, and local adaptations remain available; unrelated changes are preserved.</li><li>All eight <a href="../../template/product/MODEL.md#onboarding-completion">required brief areas</a> are addressed through reliable sources, owner direction, selected hypotheses, or explicit deferrals.</li><li>Implemented behavior, unverified claims, owner requirements, proposals, and user evidence are distinguishable.</li><li>Roadmap and STATE reflect actual priorities and ongoing work, with owners, blockers, and the next action.</li><li>Existing metric definitions and historical results are preserved. Missing observations are unavailable or unknown, never fabricated zeroes.</li><li>Relative links and agent pointers resolve from the actual contract locations.</li><li>The owner has received a linked summary, a list of material changes, unresolved decisions, and an opportunity to correct misunderstandings.</li></ul>
+<p>Review the documentation changes through the project's normal Git process. Setup does not mark existing outcomes achieved or work complete. An initial brief can be complete while a proposed action remains blocked by access, scope, ownership, or success criteria.</p>
+<div class="callout"><p><strong>If the project is read-only:</strong> the agent should show proposed edits and the unsaved checkpoint, then identify what could not be saved. It must not report completed setup or saved context. A future writable session can apply the proposal and resume.</p></div></section>
+
+<section id="continue"><span class="step">06 / Resume useful work</span><h2>Continue from the current state.</h2><p>An onboarding-only request ends with the saved summary and proposed next action. When you want execution, use <code>$product-os run</code> or <code>/product-os run</code>. The agent should inspect current reality, resume eligible ongoing work before selecting new work, verify within established scope, and save a handoff.</p><div class="table-wrap"><table><caption>Use these inside the target project's agent session</caption><thead><tr><th scope="col">Intent</th><th scope="col">Codex</th><th scope="col">Claude Code</th></tr></thead><tbody><tr><td>Set up or finish the brief</td><td><code>$product-os init</code></td><td><code>/product-os init</code></td></tr><tr><td>Continue an unfinished interview</td><td><code>$product-os resume</code></td><td><code>/product-os resume</code></td></tr><tr><td>Introduce a contributor to saved context</td><td><code>$product-os orient</code></td><td><code>/product-os orient</code></td></tr><tr><td>Carry out the next bounded product action</td><td><code>$product-os run</code></td><td><code>/product-os run</code></td></tr></tbody></table></div>
+<h3>Recover an interrupted adoption</h3><pre><code>$product-os resume</code></pre><p>In Claude Code, use <code>/product-os resume</code>. Continue from STATE's saved coverage and next unresolved topic; do not repeat settled questions. Use <code>orient</code> for a new contributor, rather than restarting the adoption interview.</p>
+<p>For recurring work, see <a href="../AUTOMATION.md">automation</a>. The current skill installs no continuous runner or registered schedule. Product documents and skill updates do not expand release, spending, tool, or service authority.</p><a class="switch" href="new-project.html">Starting with an idea and an empty folder?<span>Use the new-project guide to define the initial brief and first learning goal.</span></a></section><div class="footer"><p>Repository source links require access to the GitHub repository.</p><p>ProductOS onboarding guides · Updated 18 October 2026</p><p>Canonical sources: <a href="../../template/product/ONBOARDING.md">onboarding procedure</a> · <a href="../../template/product/MODEL.md#onboarding-completion">model and completion rules</a> · <a href="../PRODUCT_MD.md">product contract guide</a> · <a href="../QUICKSTART.md">quickstart</a> · <a href="../../skills/product-os/SKILL.md">skill entrypoint</a></p><p>These HTML documents explain the existing method. The linked model remains authoritative for record metadata, lifecycle, and completion. Open a file in a browser to read it; use the browser's Print command for a paper or PDF copy.</p></div></main></div></body></html>

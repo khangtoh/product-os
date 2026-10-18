@@ -1,0 +1,70 @@
+name: Onboarding pages
+
+on:
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'template/product/**'
+      - 'demo_project/new-web-app/golden/product/**'
+      - 'README.md'
+      - 'scripts/build_onboarding_site.mjs'
+      - '.github/workflows/onboarding-pages.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'template/product/**'
+      - 'demo_project/new-web-app/golden/product/**'
+      - 'README.md'
+      - 'scripts/build_onboarding_site.mjs'
+      - '.github/workflows/onboarding-pages.yml'
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the three onboarding HTML pages to GitHub Pages (requires Pages enabled; run from main)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: onboarding-pages-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name != 'workflow_dispatch' }}
+
+jobs:
+  build:
+    name: Build onboarding site
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate and build the three-page site
+        run: node scripts/build_onboarding_site.mjs "$RUNNER_TEMP/product-os-pages"
+      - name: Upload the reviewed site artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ${{ runner.temp }}/product-os-pages
+
+  deploy:
+    name: Publish onboarding site
+    if: github.event_name == 'workflow_dispatch' && inputs.publish && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Read the enabled Pages configuration
+        uses: actions/configure-pages@v5
+      - name: Publish the HTML artifact
+        id: deployment
+        uses: actions/deploy-pages@v4

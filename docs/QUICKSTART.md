@@ -1,5 +1,7 @@
 # Adopt ProductOS
 
+Prefer a browser walkthrough? Start at the [onboarding hub](onboarding/index.html), then choose the HTML guide for a [new project](onboarding/new-project.html) or an [existing project](onboarding/existing-project.html). Download the checkout and open the HTML file locally; these guides explain the same canonical procedure below.
+
 Onboarding turns a conversation into a complete initial product brief, requirements, and a Now / Next / Later roadmap. Start in the actual target project, which may be an empty folder, an existing app, or a dedicated product-context repository.
 
 ## 1. Choose an entry point
