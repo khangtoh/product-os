@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added an [HTML onboarding hub](docs/onboarding/index.html) and a selective three-page GitHub Pages build. The [Onboarding pages workflow](.github/workflows/onboarding-pages.yml) validates and packages the site on PRs and relevant main pushes; publishing requires a separate explicit dispatch from main after Pages is enabled. See [publication instructions](docs/PAGES.md). Source documents stay in GitHub; repository visibility is unchanged.
+
 - Added self-contained HTML onboarding guides for [new projects](docs/onboarding/new-project.html) and [existing projects](docs/onboarding/existing-project.html), with setup commands, fictional workflow examples, canonical file maps, preservation guidance, completion checklists, and current-versus-planned capability notes. Linked them from the README, guides index, and quickstart; the onboarding procedure and record model are unchanged.
 
 - Selected [TypeScript/Node.js](plans/product-os-metrics-experiments-plan.md#implementation-language-and-harness-portability) for the planned CLI, event logging, migrations, MCP and measurement runtime, with thin harness adapters and shared runtime validation. Retained existing Python tooling pending verified replacements; this records the implementation decision rather than shipping a new runtime or claiming additional harness support.

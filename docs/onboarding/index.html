@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Choose your ProductOS onboarding path: start a new project or bring an existing product into a shared operating model.">
+<title>Choose your onboarding path · ProductOS</title>
+<style>
+:root{color-scheme:light;--ink:#192c28;--muted:#53645e;--line:#d7e1da;--paper:#fafbf7;--card:#fff;--accent:#175944;--wash:#edf4ec;--gold:#f6edd6;--code:#142c25}
+*{box-sizing:border-box}
+html{scroll-padding-top:2rem}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:var(--accent);text-underline-offset:.2em}
+a:hover{text-decoration-thickness:2px}
+a:focus-visible,summary:focus-visible{outline:3px solid #af6714;outline-offset:5px}
+.skip{position:absolute;left:1rem;top:-8rem;background:white;padding:1rem;z-index:5}
+.skip:focus{top:1rem}
+.topbar{max-width:1240px;margin:auto;padding:22px 36px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:14px}
+.brand{font-weight:800;letter-spacing:.06em;text-decoration:none}
+.toplinks{display:flex;gap:22px;flex-wrap:wrap}
+.layout{max-width:1240px;margin:auto;display:grid;grid-template-columns:220px minmax(0,1fr);gap:64px;padding:48px 36px 80px}
+aside{align-self:start;position:sticky;top:28px;font-size:14px}
+aside p{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+aside ol{list-style:none;padding:0;margin:0;counter-reset:nav}
+aside li{counter-increment:nav;border-bottom:1px solid var(--line)}
+aside a{display:flex;gap:12px;padding:13px 0;text-decoration:none}
+aside a:before{content:"0" counter(nav);color:var(--muted);font-variant-numeric:tabular-nums}
+.eyebrow{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.13em;color:var(--accent)}
+h1{font-size:clamp(38px,5vw,62px);line-height:1.05;letter-spacing:-.045em;margin:20px 0 24px;max-width:760px}
+h2{font-size:28px;line-height:1.2;letter-spacing:-.025em;margin:0 0 20px}
+h3{font-size:19px;line-height:1.35;margin:27px 0 10px}
+p{margin:0 0 17px}
+.lead{font-size:21px;line-height:1.5;color:var(--muted);max-width:750px}
+.hero{padding-bottom:34px}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+.pill{font-size:12px;border:1px solid var(--line);border-radius:30px;padding:5px 12px;background:var(--card)}
+section{padding:38px 0;border-top:1px solid var(--line)}
+.step{color:var(--accent);font-size:12px;letter-spacing:.1em;font-weight:800;display:block;margin-bottom:10px;text-transform:uppercase}
+.callout{padding:22px 24px;background:var(--wash);border-left:4px solid var(--accent);border-radius:0 10px 10px 0;margin:24px 0}
+.callout p:last-child,.card p:last-child{margin-bottom:0}
+.callout.note{background:var(--gold);border-color:#976520}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:22px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px}
+.card h3{margin-top:0}
+ul,ol{padding-left:24px}
+li{margin-bottom:10px}
+pre{background:var(--code);color:#e1f4e6;border-radius:10px;padding:22px;overflow-x:auto;line-height:1.6;font-size:14px;max-width:100%}
+code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.88em;overflow-wrap:anywhere}
+pre code{font-size:inherit;overflow-wrap:normal}
+p code,li code,td code{background:#e8eee7;padding:2px 5px;border-radius:4px}
+.table-wrap{overflow-x:auto;margin:20px 0}
+table{border-collapse:collapse;width:100%;font-size:15px}
+caption{text-align:left;font-weight:700;margin-bottom:12px}
+th{text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:var(--wash)}
+th,td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+td:first-child{min-width:170px}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 22px;margin:16px 0}
+summary{font-weight:700;cursor:pointer}
+details[open] summary{margin-bottom:16px}
+.example{border:1px solid var(--line);border-radius:12px;padding:24px;background:var(--card);margin:22px 0}
+.example .eyebrow{font-size:11px}
+blockquote{margin:20px 0;padding:0 0 0 22px;border-left:3px solid var(--line);color:var(--muted)}
+.checklist{list-style:none;padding:0}
+.checklist li{position:relative;padding-left:28px}
+.checklist li:before{content:"✓";color:var(--accent);position:absolute;left:0;font-weight:800}
+.footer{border-top:1px solid var(--line);padding-top:28px;font-size:13px;color:var(--muted)}
+.switch{display:block;margin:28px 0 0;padding:24px;border:1px solid var(--line);border-radius:12px;background:var(--card);text-decoration:none;font-weight:700}
+.switch span{display:block;color:var(--muted);font-size:14px;font-weight:400;margin-top:5px}
+@media(max-width:900px){.layout{grid-template-columns:170px minmax(0,1fr);gap:32px;padding-left:24px;padding-right:24px}
+}
+@media(max-width:680px){.topbar{padding:18px 20px}
+.layout{display:block;padding:24px 20px 48px}
+aside{position:static;margin-bottom:36px}
+aside ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:20px}
+aside a{font-size:13px}
+.grid{grid-template-columns:1fr}
+.lead{font-size:19px}
+h1{font-size:42px}
+.hero{padding-bottom:26px}
+section{padding:30px 0}
+th,td{padding:12px 10px}
+}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}
+}
+@media print{body{font-size:10pt;background:white;color:black}
+.topbar,aside,.skip,.switch{display:none}
+.layout{display:block;padding:0;max-width:none}
+.hero{padding-bottom:20px}
+h1{font-size:32pt}
+h2{font-size:18pt}
+.lead{font-size:13pt}
+section{padding:20px 0}
+a{color:inherit;text-decoration:underline}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f1f3f0;color:black;border:1px solid #bbb}
+details{display:block}
+details>*{display:block!important}
+.card,.callout,.example{break-inside:avoid;box-shadow:none}
+.grid{gap:12px}
+h2,h3{break-after:avoid}
+.footer{font-size:9pt}
+}
+
+.hub{max-width:1080px;margin:auto;padding:64px 36px 72px}.hub h1{max-width:800px}.hub .lead{max-width:760px}.paths{margin:36px 0 44px}.path{padding:30px;display:flex;flex-direction:column}.path h2{font-size:28px;margin:16px 0}.path p{color:var(--muted)}.path ul{font-size:15px;margin-bottom:28px}.button{display:block;text-align:center;margin-top:auto;background:var(--accent);color:white;padding:13px 18px;border-radius:7px;text-decoration:none;font-weight:700}.button:hover{background:#103e30}.hub .footer{margin-top:40px}.hub section{padding-top:32px}@media(max-width:680px){.hub{padding:40px 20px}.path{padding:24px}.hub h1{font-size:42px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar"><a class="brand" href="index.html">PRODUCT OS / FIELD GUIDES</a><nav class="toplinks" aria-label="Site navigation"><a href="new-project.html">New project</a><a href="existing-project.html">Existing project</a><a href="../../README.md">Repository</a></nav></header>
+<main id="main" class="hub">
+<p class="eyebrow">Get started with ProductOS</p>
+<h1>Give your product<br>a shared memory.</h1>
+<p class="lead">Connect product intent, requirements, priorities, and learning so the next human or agent can continue with context. Choose the guide that matches your starting point.</p>
+<div class="grid paths">
+<article class="card path" aria-labelledby="new-title">
+<p class="eyebrow">01 / Start from scratch</p>
+<h2 id="new-title">I have an idea<br>or a new project.</h2>
+<p>Define what the product should do, who it should help, and what you need to learn first.</p>
+<ul><li>Set up an empty project and the skill.</li><li>Work through the initial product interview.</li><li>Save requirements, priorities, and a first learning goal.</li></ul>
+<a class="button" href="new-project.html">Start a new project →</a>
+</article>
+<article class="card path" aria-labelledby="existing-title">
+<p class="eyebrow">02 / Adopt into existing work</p>
+<h2 id="existing-title">I already have<br>a product or codebase.</h2>
+<p>Build on your current contracts, code, evidence, and ongoing work while preserving history.</p>
+<ul><li>Inspect and reuse reliable product context.</li><li>Resolve gaps and conflicting direction.</li><li>Connect the documents and leave a useful handoff.</li></ul>
+<a class="button" href="existing-project.html">Onboard an existing project →</a>
+</article>
+</div>
+<section aria-labelledby="result-title"><h2 id="result-title">What you leave onboarding with</h2>
+<div class="table-wrap"><table><thead><tr><th scope="col">Shared context</th><th scope="col">What it makes clear</th></tr></thead><tbody>
+<tr><td>Product contract</td><td>Who the product serves, why it matters, and which boundaries apply.</td></tr>
+<tr><td>Workflows and requirements</td><td>What users need to accomplish and how required behavior can be checked.</td></tr>
+<tr><td>Outcome priorities</td><td>What matters Now, Next, and Later, with the rationale and known dependencies.</td></tr>
+<tr><td>Resumable state</td><td>The next proposed action, its owner, open questions, and what is needed to continue.</td></tr>
+</tbody></table></div>
+<p>The two guides follow the same <a href="../../template/product/ONBOARDING.md">canonical onboarding procedure</a> and <a href="../../template/product/MODEL.md#onboarding-completion">completion rules</a>. A complete brief can still need discovery before implementation.</p>
+</section>
+<div class="callout"><p><strong>Already onboarded?</strong> Use <code>$product-os orient</code> in Codex or <code>/product-os orient</code> in Claude Code to understand the existing product context. Use <code>resume</code> for an unfinished interview and <code>run</code> for the next bounded product action.</p></div>
+<div class="footer"><p>ProductOS onboarding · Updated 18 October 2026</p><p>Both guides work offline and include setup commands, fictional examples, file maps, and completion checklists. Repository source links require access to the GitHub repository. Planned metrics, journey, and event logging capabilities are identified inside the guides.</p><p><a href="../QUICKSTART.md">Quickstart</a> · <a href="../WHAT_IS_PRODUCTOS.md">About the method</a> · <a href="../../README.md">Repository</a></p></div>
+</main>
+</body>
+</html>
