@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added self-contained HTML onboarding guides for [new projects](docs/onboarding/new-project.html) and [existing projects](docs/onboarding/existing-project.html), with setup commands, fictional workflow examples, canonical file maps, preservation guidance, completion checklists, and current-versus-planned capability notes. Linked them from the README, guides index, and quickstart; the onboarding procedure and record model are unchanged.
+
 - Selected [TypeScript/Node.js](plans/product-os-metrics-experiments-plan.md#implementation-language-and-harness-portability) for the planned CLI, event logging, migrations, MCP and measurement runtime, with thin harness adapters and shared runtime validation. Retained existing Python tooling pending verified replacements; this records the implementation decision rather than shipping a new runtime or claiming additional harness support.
 
 - Renamed `test_project/` to [demo_project/](demo_project/README.md), updating maintained documentation and runner/checker paths while preserving captured seed/golden contents and provenance. Added [Demo checks](.github/workflows/demo-checks.yml) for automatic offline/demo validation on pull requests and pushes to `main`, plus a manual credentialed live interview and uploaded reports.

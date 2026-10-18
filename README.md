@@ -10,6 +10,7 @@ Its central convention is **[PRODUCT.md](docs/PRODUCT_MD.md)**: the shared produ
 
 - [What is ProductOS?](docs/WHAT_IS_PRODUCTOS.md) — purpose, principles, and the learning loop.
 - [Quickstart](docs/QUICKSTART.md) — add a clean instance to a new or existing project.
+- HTML onboarding guides: [new project](docs/onboarding/new-project.html) or [existing project](docs/onboarding/existing-project.html) — open in a browser for separate walkthroughs, examples, and completion checklists.
 - [Bare template](template/product/README.md) — copy this folder into your project as `product/`.
 - [Operating guide](docs/OPERATING_GUIDE.md) — how humans and agents work together day to day.
 - [Execution procedure](template/product/EXECUTION.md) — run one bounded action and leave a resumable handoff.

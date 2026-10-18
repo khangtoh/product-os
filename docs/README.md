@@ -1,5 +1,7 @@
 # ProductOS guides
 
+Browser-readable onboarding: [start a new project](onboarding/new-project.html) or [adopt into an existing project](onboarding/existing-project.html). Each HTML guide is self-contained, works offline, and supports browser printing. Download the repository or HTML files to read them in a browser; GitHub's file view shows the source.
+
 Read in order when adopting the method for the first time:
 
 1. [What is ProductOS?](WHAT_IS_PRODUCTOS.md) — the purpose and core concepts.
