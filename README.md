@@ -58,6 +58,7 @@ flowchart LR
 | Location | Purpose |
 | --- | --- |
 | [docs/](docs/README.md) | Guides to the method, contract, adoption, collaboration, and automation |
+| [Metrics and experiments plan](plans/product-os-metrics-experiments-plan.md) | Proposed journey metrics, DuckDB dashboard, experiment evaluation, and MCP collection |
 | [template/product/](template/product/README.md) | A blank, self-contained ProductOS instance |
 | [skills/product-os/](skills/product-os/SKILL.md) | Skill entrypoint for setup and execution; the installer bundles the template as assets |
 | [examples/](examples/README.md) | Explicitly fictional illustrations; never live project data |
