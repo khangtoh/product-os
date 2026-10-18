@@ -1,4 +1,4 @@
-# End-to-end test fixtures
+# Demo project and automated checks
 
 **Fictional example.** Every product detail, person, and answer under this directory is invented to exercise ProductOS's onboarding procedure. None of it is live product evidence or proof that ProductOS improves outcomes. Nothing under this directory is included in the bare template or the installed skill assets.
 
@@ -24,8 +24,8 @@ The brief lives outside `seed/` on purpose. Its facts reach the agent only as co
 python3 -m unittest discover -s scripts -p 'test_*.py' -v
 
 # The checker as a tool.
-python3 scripts/check_instance.py --project test_project/new-web-app/golden \
-    --expect test_project/new-web-app/expect.json
+python3 scripts/check_instance.py --project demo_project/new-web-app/golden \
+    --expect demo_project/new-web-app/expect.json
 
 # A real scripted interview. Opt-in, costs tokens, takes minutes.
 PRODUCT_OS_E2E_LIVE=1 python3 scripts/run_onboarding_e2e.py --seed new-web-app --keep
@@ -33,7 +33,19 @@ PRODUCT_OS_E2E_LIVE=1 python3 scripts/run_onboarding_e2e.py --seed new-web-app -
 
 Runs never happen inside this checkout. The runner copies `seed/` to a temporary directory and refuses an output path inside the framework, because the installer refuses an in-checkout target. That refusal is deliberate and is not fixed by adding a `.gitignore` rule — an ignore rule would hide in-repo output rather than prevent it.
 
-## Rules for these fixtures
+## Automated runs in GitHub Actions
+
+The [Demo checks workflow](../.github/workflows/demo-checks.yml) runs on every pull request and push to `main`. It runs the offline regression suite, validates the captured demo against its seed and expectations, and checks repository and isolated-template links on Python 3.10 and 3.13. Reports are uploaded as workflow artifacts. These checks need no agent credential and do not invoke the paid interview.
+
+For a fresh agent-generated demo, run **Actions → Demo checks → Run workflow** and select `run_live`. Configure the repository's `ANTHROPIC_API_KEY` secret first. The live job runs after the offline checks, uses Claude CLI 2.1.274 (the version recorded by the existing capture), applies the chosen per-turn budget, and uploads its project, transcript and `run.json`, including failure output. It never replaces the committed golden. Manual dispatch becomes available once the workflow is on the default branch. A missing credential is an explicit failure, not a passing live run.
+
+The current live interview can make up to nine calls (seven scripted prompts and two extra nudges); the budget is per turn, not a total-run cap. The job also has a 90-minute timeout. A successful offline run validates existing captured evidence; only the live job exercises a new interview with an actual agent.
+
+## Directory rename and capture preservation
+
+On 2026-10-18, `test_project/` was renamed to `demo_project/`. Source code, maintained documentation and workflow paths use the new name. The seed and captured golden contents, capture digests, timestamp and historical provenance note remain byte-for-byte unchanged. Their historical plain-text references to the former directory are preserved as part of the capture; they are not current executable paths. A future legitimate recapture will use the new name.
+
+## Rules for captured data
 
 **The golden is never hand-edited.** The only sanctioned change is a fresh capture, recorded in `golden_provenance.json`. A golden edited to pass tells you nothing.
 

@@ -7,11 +7,13 @@ record what actually happened, including where the plan turned out to be wrong.
 
 ## Status at handoff
 
+**2026-10-18 update:** fixtures now live under `demo_project/`. The [Demo checks workflow](../.github/workflows/demo-checks.yml) automates offline regression, captured-demo and link validation, with a manual credentialed live interview. The captured seed/golden contents and provenance remain unchanged. The dated snapshot below describes the original onboarding work.
+
 Snapshot: **2026-09-27**. All of it is on the branch `feat/onboarding-e2e-and-execution`, unmerged.
 
 | Piece | State |
 | --- | --- |
-| Fixture seed, brief, scripted turns, expectation spec | Done — [test_project/](../test_project/README.md), seed `new-web-app` |
+| Fixture seed, brief, scripted turns, expectation spec | Done — [demo_project/](../demo_project/README.md), seed `new-web-app` |
 | Instance checker | Done — `scripts/check_instance.py`, 23 checks, rules parsed from MODEL.md |
 | Offline regression tests | Done — 36 tests, green on Python 3.14.7 and 3.9.6, ~1s, no network |
 | Mutation suite | Done — 28 rows covering 19 checks; nothing uncovered |
@@ -42,7 +44,7 @@ These need a person, and none of them are safe for an agent to settle alone.
 
 ## How to resume
 
-Read [the fixture README](../test_project/README.md) first: it records every finding from the live
+Read [the fixture README](../demo_project/README.md) first: it records every finding from the live
 runs with its classification, the two relaxations and the risk each accepts, and the rule that the
 golden is never hand-edited.
 
@@ -109,7 +111,7 @@ Budget with teeth: **~400 lines of checker, ~250 of tests, ~150 of runner.** Pas
 
 ## Fixed decisions
 
-1. **`test_project/` is a committed seed fixture, never the run location.** `install_skill.py:20` refuses any target inside the checkout, and that guard stays — it has its own passing test. The runner copies the seed to a temp dir outside the repo, installs there, runs, asserts.
+1. **`demo_project/` is a committed seed fixture, never the run location.** `install_skill.py:20` refuses any target inside the checkout, and that guard stays — it has its own passing test. The runner copies the seed to a temp dir outside the repo, installs there, runs, asserts.
 2. **Offline and deterministic by default.** `python3 -m unittest discover -s scripts -p 'test_*.py'` stays fast, network-free, and does not need the `claude` CLI. The live run is opt-in via `PRODUCT_OS_E2E_LIVE=1`.
 3. **Scripted input is an ordered list of user turns**, fed one per round regardless of what was asked, ending with a catch-all. Assertions are on saved files, never on dialogue wording.
 
@@ -141,7 +143,7 @@ Its "Saved context and handoff" table is keyed by *place* ("Root PRODUCT", "VISI
 ## File layout
 
 ```
-test_project/
+demo_project/
   README.md                      **Fictional example.** label; what this is; the recapture rule
   new-web-app/
     seed/                        the ONLY subtree copied to the temp target
@@ -173,7 +175,7 @@ The seed is deliberately **not empty** — the walkthrough premises an existing 
 
 The *rules* are universal and belong in code — restating them per fixture guarantees they drift and that a new seed silently omits half of them. Expressing "an empty-bodied table," "this anchor resolves to a heading slug," or "`status` is legal *for this record's type*" declaratively means building a matcher language in JSON, i.e. reimplementing unittest in data. What genuinely varies per seed is data: paths, keyword stems, layout mode. Python 3.9.6 is what's installed, so `json`, not `tomllib`.
 
-`test_project/<seed>/expect.json`:
+`demo_project/<seed>/expect.json`:
 
 ```json
 {
@@ -277,7 +279,7 @@ Rejected: a *hand-written* golden proves only "passes the checker I just wrote" 
 
 Order matters, to avoid circularity: **write the checks from `MODEL.md` first, then capture.** When the capture disagrees with a check, decide deliberately which is wrong and record it — a checker bug gets fixed; an agent bug becomes a finding. Tuning checks until the capture passes would make the suite meaningless.
 
-**How it rots, stated in `test_project/README.md`:**
+**How it rots, stated in `demo_project/README.md`:**
 1. *Template drift.* `golden_provenance.json` records `{captured_at, framework_version, template_sha256, skill_sha256, claude_cli_version, model, seed, turns_sha256, total_cost_usd, num_turns}`, and a test recomputes the digests and **fails hard** on mismatch. Silent staleness is the real risk; make the failure loud. The fix is a recapture or a conscious digest bump with a CHANGELOG line.
 2. *One sample of a nondeterministic process.* It shows one run satisfied the rules; nothing about reliability.
 3. *Goldens invite editing to pass.* The golden is never hand-edited; the only sanctioned change is a recapture, recorded in provenance.
@@ -359,7 +361,7 @@ python3 scripts/run_onboarding_e2e.py --seed new-web-app
 ## Execution order
 
 1. **Recon, before writing code.** Do one throwaway manual `claude -p` run in a temp copy of the seed to confirm the project-local skill is discovered and a trigger phrase routes to `ONBOARDING.md`. *This is the biggest feasibility unknown* — `$product-os init` is Codex syntax, so the working Claude Code trigger has to be established here. Settle it first.
-2. **Fixture**: `new-web-app/seed/`, `test_project/README.md`, `brief.md`, `turns.json`. *Verify:* the installer succeeds on a temp copy; `grep -r PocketGarden template/ skills/` is empty.
+2. **Fixture**: `new-web-app/seed/`, `demo_project/README.md`, `brief.md`, `turns.json`. *Verify:* the installer succeeds on a temp copy; `grep -r PocketGarden template/ skills/` is empty.
 3. **Checker, first pass** — the structural checks plus `CHECKS` and `main()`. *Verify:* against a bare install it reports exactly those errors; `--links-only --project template/product` reports zero, which also validates the link checker against a known-good tree.
 4. **`test_bare_install_fails_checker` only.** *Verify:* the suite runs 7 tests under a second, no network.
 5. **Live runner.** *Verify:* one live run with `--keep --budget-usd 3`; read the tree by hand against `ONBOARDING.md` step 3.
@@ -380,7 +382,7 @@ The point of the goal, and the part that changes ProductOS rather than the test.
    - **ProductOS gap** — the agent followed the guide and still produced a non-conforming instance. **Fix the guide**: `template/product/ONBOARDING.md`, `MODEL.md`, or `skills/product-os/SKILL.md`. This is the category the goal is about.
 3. Re-run. Repeat until zero errors.
 
-**Never loosen a check to go green.** If a check is relaxed, log the reason in `test_project/README.md`. A suite quietly weakened to pass is worse than no suite.
+**Never loosen a check to go green.** If a check is relaxed, log the reason in `demo_project/README.md`. A suite quietly weakened to pass is worse than no suite.
 
 ### Findings to expect, and the likely fixes
 
@@ -397,19 +399,19 @@ python3 -m unittest discover -s scripts -p 'test_*.py' -v
 #   6 installer + ~9 checker + ~40 mutation subtests, OK (skipped=1), under ~2s
 
 # Checker as a tool, against the committed golden
-python3 scripts/check_instance.py --project test_project/new-web-app/golden \
-    --expect test_project/new-web-app/expect.json ; echo "exit=$?"
+python3 scripts/check_instance.py --project demo_project/new-web-app/golden \
+    --expect demo_project/new-web-app/expect.json ; echo "exit=$?"
 #   0 errors, 0 warnings / exit=0
 
 # Prove it is not vacuous: revert the Platform body in a copy
-cp -R test_project/new-web-app/golden "$TMPDIR/pg"
+cp -R demo_project/new-web-app/golden "$TMPDIR/pg"
 python3 - "$TMPDIR/pg/PRODUCT.md" <<'PY'
 import re, sys, pathlib
 p = pathlib.Path(sys.argv[1])
 p.write_text(re.sub(r"(?ms)^## Platform\n\n.*?(?=^## )", "## Platform\n\nunknown\n\n", p.read_text(), count=1))
 PY
 python3 scripts/check_instance.py --project "$TMPDIR/pg" \
-    --expect test_project/new-web-app/expect.json ; echo "exit=$?"
+    --expect demo_project/new-web-app/expect.json ; echo "exit=$?"
 #   exit=1 with a platform_section_standalone error naming PRODUCT.md
 
 # Repo-wide link check (replaces a manual publish step)

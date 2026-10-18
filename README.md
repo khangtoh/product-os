@@ -61,7 +61,7 @@ flowchart LR
 | [template/product/](template/product/README.md) | A blank, self-contained ProductOS instance |
 | [skills/product-os/](skills/product-os/SKILL.md) | Skill entrypoint for setup and execution; the installer bundles the template as assets |
 | [examples/](examples/README.md) | Explicitly fictional illustrations; never live project data |
-| [test_project/](test_project/README.md) | Fictional fixtures for the end-to-end onboarding test |
+| [demo_project/](demo_project/README.md) | Fictional demo, captured onboarding instance, and automated checks |
 | [AGENTS.md](AGENTS.md) | Instructions for maintaining this framework repository |
 | [VERSION](VERSION) | Framework release; changing it on `main` [releases](docs/RELEASING.md) that version |
 
@@ -72,3 +72,5 @@ ProductOS defines the memory and operating protocol. Continuous autonomous execu
 Planned: [structured event logging and version-aware upgrades](docs/EVENT_LOGGING_REQUIREMENTS.md) will preserve command, interview, and artifact provenance under a Git-tracked `.product-os/`. These are specified requirements; the current release does not yet emit that journal or perform automatic migrations.
 
 Current release: [0.3.0](CHANGELOG.md). See [customization](docs/CUSTOMIZATION.md) for adapting and upgrading an instance.
+
+The [Demo checks workflow](.github/workflows/demo-checks.yml) automatically validates the demo and offline suite on pull requests and pushes to `main`. A manual option runs a fresh live interview using a configured Anthropic API key; see [demo instructions](demo_project/README.md#automated-runs-in-github-actions).

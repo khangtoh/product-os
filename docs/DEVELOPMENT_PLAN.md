@@ -15,6 +15,7 @@ Status snapshot: **2026-10-18**. The new event-journal work below is specified o
 | Review, learning, and handling new direction | Described in the operating model; dedicated skill workflows remain to be implemented |
 | Recurring execution | Runtime contract documented; no runner or registered scheduler is bundled |
 | Structured event journal and version-aware evolution | [Requirements specified](EVENT_LOGGING_REQUIREMENTS.md): committed `.product-os/` events, command/interview/artifact provenance, version detection and compatible migrations; no emitter, capture hooks or migration runner implemented |
+| Automated demo validation | [Demo checks workflow](../.github/workflows/demo-checks.yml) runs the offline suite, captured-demo validation and link checks on PRs and pushes to `main`; a manual live interview requires its configured API credential |
 | Complete experience on an actual product | Not yet validated as part of this work |
 
 The [onboarding implementation record](ONBOARDING_IMPLEMENTATION.md) captures the completed decisions, implementation, and validation. [Quickstart](QUICKSTART.md) is the adoption interface; this roadmap does not introduce additional commands.
@@ -41,7 +42,7 @@ The operating behavior already has a foundation: follow the [operating guide](OP
 
 - The skill interface for execution, review, and steering, including whether these use named commands or natural-language routing.
 - The runner, scheduling integration, and observation sources for recurring execution. No vendor or mandatory service has been chosen.
-- The pilot product, its owner, operating scope, and measures of whether ProductOS helps contributors work and resume effectively. The [fixture project](../test_project/README.md) is a test harness, not a pilot: its product is fictional and its answers are scripted.
+- The pilot product, its owner, operating scope, and measures of whether ProductOS helps contributors work and resume effectively. The [fixture project](../demo_project/README.md) is a test harness, not a pilot: its product is fictional and its answers are scripted.
 - Release version and timing for subsequent operating capabilities.
 
 Resolve these when designing the corresponding implementation. They do not prevent documenting or using the current onboarding workflow. Keep documentation adoption portable; optional automation must not become a prerequisite for using the model.

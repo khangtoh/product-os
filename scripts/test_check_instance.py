@@ -25,7 +25,7 @@ from check_instance import (
 )
 from install_skill import ROOT, install
 
-FIXTURES = ROOT / "test_project"
+FIXTURES = ROOT / "demo_project"
 # The mutation suite is written against this seed's layout, so it names the seed explicitly
 # rather than taking the first one discovered: adding a seed must not silently repoint it.
 MUTATION_SEED = "new-web-app"
@@ -232,7 +232,7 @@ class GoldenProvenanceTests(unittest.TestCase):
                     recorded.get(key), tree_digest(root),
                     "the captured golden is stale for {}. Recapture with "
                     "`python3 scripts/run_onboarding_e2e.py --seed {} --capture-golden` and note "
-                    "the reason in test_project/README.md.".format(key, MUTATION_SEED))
+                    "the reason in demo_project/README.md.".format(key, MUTATION_SEED))
 
     def test_provenance_records_how_it_was_produced(self):
         recorded = json.loads(self.provenance.read_text(encoding="utf-8"))

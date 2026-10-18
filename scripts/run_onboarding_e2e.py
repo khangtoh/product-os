@@ -21,7 +21,7 @@ from pathlib import Path
 from check_instance import SKILL_SOURCE, TEMPLATE, check_instance, load_expect, tree_digest
 from install_skill import ROOT, install
 
-FIXTURES = ROOT / "test_project"
+FIXTURES = ROOT / "demo_project"
 # File tools only. Bash is deliberately absent: with --permission-prompts none anything that
 # would prompt is denied, and a denied `ls` once made a trial agent abandon inspection instead
 # of using the file tools. Onboarding only needs to read and write files.
@@ -74,7 +74,7 @@ def capture_golden(project, seed_dir, run_log):
         "note": (
             "Captured from a real scripted run. Never hand-edit the golden; recapture with "
             "scripts/run_onboarding_e2e.py --capture-golden and record the reason in "
-            "test_project/README.md."
+            "demo_project/README.md."
         ),
     }
     (seed_dir / "golden_provenance.json").write_text(json.dumps(provenance, indent=2) + "\n")
