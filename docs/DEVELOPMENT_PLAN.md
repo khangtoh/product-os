@@ -4,7 +4,7 @@ This is the framework's development roadmap, not the roadmap of a product adopti
 
 ## Current state
 
-Status snapshot: **2026-09-26**.
+Status snapshot: **2026-10-18**. The new event-journal work below is specified only; existing capability validation has not been reclassified as demonstrated operation.
 
 | Capability | Status |
 | --- | --- |
@@ -14,6 +14,7 @@ Status snapshot: **2026-09-26**.
 | User-triggered product work | Procedure packaged as [EXECUTION.md](../template/product/EXECUTION.md) and reachable through `run` or natural language; structurally checked but not behaviorally trialled |
 | Review, learning, and handling new direction | Described in the operating model; dedicated skill workflows remain to be implemented |
 | Recurring execution | Runtime contract documented; no runner or registered scheduler is bundled |
+| Structured event journal and version-aware evolution | [Requirements specified](EVENT_LOGGING_REQUIREMENTS.md): committed `.product-os/` events, command/interview/artifact provenance, version detection and compatible migrations; no emitter, capture hooks or migration runner implemented |
 | Complete experience on an actual product | Not yet validated as part of this work |
 
 The [onboarding implementation record](ONBOARDING_IMPLEMENTATION.md) captures the completed decisions, implementation, and validation. [Quickstart](QUICKSTART.md) is the adoption interface; this roadmap does not introduce additional commands.
@@ -24,6 +25,7 @@ The sequence below is a proposed development roadmap reconstructed from the avai
 
 | Piece | Intended behavior | Dependencies | Completion criteria |
 | --- | --- | --- | --- |
+| Event journal and version-aware evolution | Record all ProductOS invocations and dispatched commands, interview checkpoints and artifact changes as parseable events in committed `.product-os/`; retain exact producer/artifact versions; apply known compatible structural upgrades or propose unresolved migrations | [Event requirements](EVENT_LOGGING_REQUIREMENTS.md), schema/writer, actual host capture, version metadata, Git integration and versioned migration definitions | Correlated events survive interruption/merge; steps and artifact hashes match reality; effective Git tracking is verified; old content/events survive a validated idempotent migration; capture and compatibility gaps remain explicit |
 | Validate user-triggered execution | Exercise the packaged procedure on real work, including a fresh-session resume, and correct what the trials expose | The procedure and `run` entry, an initialized product, and actual tools and authorization for the selected action | Real invocations complete a bounded action or leave a specific blocked/waiting handoff; another session resumes without duplicating work; affected records match actual results |
 | Second onboarding seed | Cover the established-contract path, where the rule whose violation destroys user data is "do not promote a populated local contract or replace a root file without direction to consolidate" | The existing fixture layout and checker; a seed with a populated contract, and a preservation check that allows extension while forbidding replacement | A seed whose captured run preserves the original contract's facts and structure; a mutation that overwrites it with the blueprint is rejected |
 | Review and learning | Evaluate results against the original requirements and outcome criteria, then update decisions, learning, and priorities | Execution artifacts, observation sources, and an evaluation question; basic verification and handoff must already work in the first execution workflow | A supported or inconclusive result leads to a recorded decision and appropriate context updates; delivery is not mistaken for outcome validation |

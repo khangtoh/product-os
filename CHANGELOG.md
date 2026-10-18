@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Specified [event logging and version-aware evolution requirements](docs/EVENT_LOGGING_REQUIREMENTS.md): committed, machine-readable `.product-os/` events for commands, interview progress, artifact provenance, version compatibility, and recoverable migrations. This records requirements only; no logger, command interception, or automatic migration is implemented by this change.
 - Added [EXECUTION.md](template/product/EXECUTION.md), a packaged procedure for carrying one bounded action from current product context through verification to a resumable handoff. It applies the existing loop protocol and record model rather than defining a second lifecycle, and adds no record type, state, or metadata field. See the [execution decisions and implementation record](docs/EXECUTION_IMPLEMENTATION.md).
 - Added a `run` entry to the skill, alongside `init`, `resume`, and `orient`, with equivalent natural-language requests routing to the same procedure. `resume` continues an unfinished interview; `run` carries out product work once a brief exists.
 - Added an end-to-end onboarding test: fixtures under [test_project/](test_project/README.md), a deterministic instance checker (`scripts/check_instance.py`), its regression tests, and an opt-in scripted live runner (`scripts/run_onboarding_e2e.py`). The checker parses record types, id forms, and lifecycle states out of the canonical template MODEL.md rather than restating them, so that file stays the single source of truth.

@@ -45,6 +45,8 @@ To upgrade an applied instance:
 
 Do not recopy the blank template over an applied instance. There is no automatic migration in this release. Template release version and per-record `schema_version` are separate: a documentation revision need not change record schema.
 
+The planned [event journal and version-aware evolution](EVENT_LOGGING_REQUIREMENTS.md) will record the loaded framework/package version, instance layout, artifact schema and hashes, and target Git revision under a committed `.product-os/`. It specifies automatic handling of known compatible structural changes and proposed migrations for unresolved changes, preserving local content and historical events. This is a future requirement, not an updater available in the current release; continue using the deliberate upgrade procedure above until an implementation is released.
+
 ### Upgrading the product contract to 0.2.0
 
 Follow [the 0.2 migration guide](MIGRATING_0.2.md). Preserve the applied contract and record history, establish one canonical location, map supported facts into the open-standard headings, and retain ProductOS operating sections. Do not copy the blank blueprint over a populated contract.

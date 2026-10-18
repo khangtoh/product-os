@@ -69,4 +69,6 @@ The template contains no product decisions, evidence, assigned work, or inherite
 
 ProductOS defines the memory and operating protocol. Continuous autonomous execution additionally needs an actual runner, authorized tools, event sources, and working observation. See [automation](docs/AUTOMATION.md).
 
+Planned: [structured event logging and version-aware upgrades](docs/EVENT_LOGGING_REQUIREMENTS.md) will preserve command, interview, and artifact provenance under a Git-tracked `.product-os/`. These are specified requirements; the current release does not yet emit that journal or perform automatic migrations.
+
 Current release: [0.3.0](CHANGELOG.md). See [customization](docs/CUSTOMIZATION.md) for adapting and upgrading an instance.
